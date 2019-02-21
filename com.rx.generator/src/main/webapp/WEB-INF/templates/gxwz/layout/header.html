@@ -1,0 +1,107 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>海口市政务信息共享网站</title>
+</head>
+
+<body>
+	<!-- 公共头部 header -->
+	<div th:fragment="header">
+		<input type="hidden" id="mxxturl" name="mxxturl" th:value="${mxxturl}" />
+
+		<div class="header fn-clear">
+			<div class="headerwrap">
+				<div class="headertool">
+					<div class="header-btn" id="toolnav">
+						<ul>
+							<li class="toolnav-off" onMouseOver="this.className='toolnav-on'" onMouseOut="this.className='toolnav-off'">
+								服务指引
+								<div class="toollist">
+									<a href="#" class="toollist-item" onclick="changegjgxwz()"><img src="theme/gxwz/images/icon_topnar01.png" /><font>国家共享网站</font></a> <a class="toollist-item" th:href="${mxxturl}" target="_blank"><img
+											src="theme/gxwz/images/icon_topnar02.png" /><font>共享目录系统</font></a>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="header-login" th:if="${userid eq ''}">
+						<a href="###" onclick="login()">登录</a>
+					</div>
+					<div class="header-login" th:unless="${userid eq ''}">
+						<a href="###" onclick="logout()">退出</a>
+					</div>
+				</div>
+				<div class="logo">
+					<img src="theme/gxwz/images/pic_header_logo3.png" />
+				</div>
+			</div>
+		</div>
+		<!--header end-->
+		<!--nav-->
+		<div class="nav fn-clear">
+			<div class="navwrap">
+				<ul id="bodyHeards">
+					<li>
+						<a href="javascript:void(0)" onclick="clickmenus('getGxwzIndex',this)" class="current" id="getGxwzIndex">首 页</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)" onclick="clickmenus('jkfw',this)">接口服务</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)" onclick="clickmenus('getMLFW',this)" id="getMLFW">目录服务</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)" onclick="clickmenus('analysis',this)">协同分析</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)" onclick="clickmenus('getCms_index?type=gxcx',this)" id="gxcx">共享成效</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)" onclick="clickmenus('getCms_index',this)" id="xxfw">信息服务</a>
+					</li>
+					<li th:if="${isWzgjAdmin == 'true'}">
+						<a href="sysmanage">网站管理</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script type="text/javascript">
+			/*<![CDATA[*/
+			function showmenus() {
+				var menus = 'getGxwzIndex';
+				load(menus);
+			}
+
+			function load(href) {
+				$("#bodys").load(href);
+			}
+
+			function clickmenus(href, obj) {
+				$(obj).parent().parent().find('a').prop('class', '');
+				$(obj).prop('class', "current");
+				$("#bodys").load(href);
+			}
+			function login() {
+				window.location.href = 'loginpage';
+			}
+
+			//退出
+			function logout() {
+				window.location.href = 'loginout';
+			}
+			function changegjgxwz() {
+				window.open("http://data.cegn.cn/dataweb/", "top");
+			}
+			function changemlxt() {
+				var redirectUrl = $("#mxxturl").val();
+				redirectUrl = escape(redirectUrl);
+				window.open(redirectUrl, "top");
+				;
+			}
+			/*]]>*/
+		</script>
+	</div>
+</body>
+</html>

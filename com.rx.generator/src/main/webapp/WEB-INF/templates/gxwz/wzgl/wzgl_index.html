@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>海口市政务信息共享网站</title>
+		<link href="theme/gxwz/css/base.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" href="theme/gxwz/css/function.css" />
+		<link href="theme/gxwz/css/main_style.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" href="/theme/gxwz/css/detail_style.css" />
+	</head>
+
+	<body>
+			 
+			 <input  id="xxfw_" type="hidden"  value=""/>
+			 
+			<!--pagebanner-->
+			<div class="pagebanner  fn-clear"  id="list_rightwrap2">
+				<div class="pagebannerwrap">
+					<div class="crumb"> 您的位置: 首 页 > <span id="bodyTitle"  th:text="${bodyTitle}">目录服务</span> </div>
+					<div class="f-tac"  >
+						<div class="banner-search"><span><input type="text" class=""  id="infolinkTitle"  value="请输入查询关键词" onfocus="if (value =='请输入查询关键词'){value =''}" onblur="if (value ==''){value='请输入查询关键词'}" /></span>
+							<a href="###"  id="searchButtons" ><img src="theme/gxwz/images/icon_search.png" /></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="pageer fn-clear"  id="detail_rightwrap"  style="display: none;" >
+			</div>
+			
+			<div class="pageer fn-clear"  id="list_rightwrap1"   >
+				<div class="pagewrap">
+					<div class="leftwrap" style="margin-top: -80px;">
+						<div class="navwrapper">
+							<div id="sidebar2" class="slideTxtBox" >
+								<!--注意使用了id-->
+								<div id="sidebar-wrapper">
+									<ul id="main-nav">
+										<li>
+											<a href="javascript:void(0)" class="nav-top-item current" id="allContent"><span>全部内容目录</span></a>
+											<ul id="ulLever1">
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<!--nav end-->
+					</div>
+
+					<div class="rightwrap"  id="contensBody">
+						<div class="rlist-top">
+							<table>
+								<colgroup>
+									<col width="660"> </col>
+									<col width="120"> </col>
+									<col width="120"> </col>
+								</colgroup>
+								<tr>
+									<td class=" fn-text-right" id="td_toalcount"></td>
+									<td class="fn-text-center">
+										<a href="###" id="cmsSortASC"   >创建时间升序</a>
+									</td>
+								</tr>
+							</table>
+						</div>
+						
+						<div class="article-wrap">
+							<div class="article-tab">
+								<div class="hd mg-b2" >
+								<span class="arrow"><a class="next"></a><a class="prev"></a></span>
+									<ul>
+										<li onclick="changetypeDiv(4);" class="on">已发布</li>
+										<!-- <li onclick="changetypeDiv(3);" >待审核</li> -->
+										<li onclick="changetypeDiv(1);" >草稿箱</li>
+									</ul>
+									<div class="f-fr">
+										<a href="javascript:void(0);" class="btn-tab" onclick="qiyong(4);">启用</a>
+										<a href="javascript:void(0);" class="btn-tab" onclick="qiyong(1);">停用</a>
+										<a href="javascript:void(0);" class="btn-tab" onclick="add();">新增</a>
+										<a href="javascript:void(0);" class="btn-tab" onclick="qiyong(0);">删除</a>
+										
+									</div>
+								</div>
+								<div class="bd">
+									<div class="slidecont">
+										<div class="article-content">
+											<ul id="grid4">
+											</ul>
+										</div>
+										<div id="listpage4">
+											
+										</div>
+									</div>
+									<!-- <div class="slidecont">
+										<div class="article-content">
+											<ul id="grid3">
+											</ul>
+										</div>
+										<div id="listpage3">
+											
+										</div>
+									</div> -->
+									<div class="slidecont">
+										<div class="article-content">
+											<ul id="grid2">
+											</ul>
+										</div>
+										<div id="listpage2">
+											
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		
+		
+		<script type="text/javascript" src="theme/gxwz/js/jquery-1.11.0.min.js"></script>
+				<script type="text/javascript" src="/theme/gxwz/js/wzgl/wzgl_list.js"></script>
+					<script type="text/javascript" src="theme/gxwz/js/page.js"></script>			
+		<script type="text/javascript">
+		 $(function() {
+				ulLever1();
+			})  
+			</script>
+			
+		<div id="supperSlide">	
+			<script type="text/javascript" src="/theme/gxwz/js/simpla.jquery.configuration.js"></script>
+			<script type="text/javascript" src="/theme/gxwz/js/base.menu.js"></script>
+			<script type="text/javascript" src="/theme/gxwz/js/jquery.SuperSlide.2.1.1.js" charset="utf-8"></script>
+		</div>
+		<script type="text/javascript">
+		jQuery(".article-tab").slide({
+			trigger: "click"
+			})
+		</script>	
+	</body>
+
+</html>

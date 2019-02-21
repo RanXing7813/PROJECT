@@ -1,0 +1,96 @@
+
+<div class="pagebanner fn-clear ">
+	<div class="pagebannerwrap fn-clear">
+		<div class="crumb">您的位置: 首 页 > 协同分析</div>
+		<div class="detail-wrap fn-clear">
+			<!--  = 内容区 =  -->
+			<div class="xtfx-dt1">
+				<ul>
+					<li>
+						<div class="title">目录总数</div>
+						<div class="num mg-t2" th:text="${data.yfbCount}">0</div>
+					</li>
+					<li>
+						<div class="title">接口总数</div>
+						<div class="num mg-t2" th:text="${data.csbCount}">0</div>
+					</li>
+					<li>
+						<div class="title">整体挂接率</div>
+						<div class="num mg-t2" th:text="${data.ygjP}">0%</div>
+					</li>
+					<li>
+						<div class="title">交换数据总量</div>
+						<div class="num mg-t2" th:text="${data.ljjhCount}">0</div>
+					</li>
+
+				</ul>
+			</div>
+			<div class="at-wrap fn-clear mg-t3">
+				<h1 class="titstyle1">资源编目与挂接情况</h1>
+				<div class="pd-l8 pd-r8 mg-t6">
+					<div class="f-cb">
+						<p class="textstyle1 f-fl">资源编目与挂接情况对比</p>
+						<a href="#" class="btn-more f-fr" onclick="infoclassStaticsMore()">查看全部</a>
+					</div>
+					<div class="f-tac mg-t4" id="divChart_class" style="width: 1080px; height: 256px;"></div>
+				</div>
+				<h1 class="titstyle1 mg-t6">接口注册与调用情况</h1>
+				<div class="pd-l8 pd-r8 mg-t6">
+					<div class="f-cb">
+						<p class="textstyle1 f-fl">国家部委接口和省级接口发布情况对比</p>
+						<a href="#" class="btn-more f-fr" onclick="listService()">查看全部</a>
+					</div>
+					<div class="f-cb mg-t4">
+						<div class="f-fl mg-r8" style="width: 360px; height: 304px;" id="divChart"></div>
+						<div class="table-form3 f-fl" style="width: 660px;">
+							<table>
+								<tr>
+									<th>序号</th>
+									<th>接口名称</th>
+									<th>提供部门</th>
+									<th>调用次数</th>
+								</tr>
+								<tr th:each="item,rowStat:${data.sListtop5}">
+									<td th:text="${rowStat.count}"></td>
+									<td th:text="${item.api_chname}"></td>
+									<td th:text="${item.owner_attr}"></td>
+									<td th:text="${item.invokenum}"></td>
+								</tr>
+							</table>
+
+						</div>
+					</div>
+				</div>
+				<h1 class="titstyle1 mg-t6">共享申请与提供情况</h1>
+				<div class="pd-l8 pd-r8 mg-t6">
+					<div class="f-cb">
+						<p class="textstyle1 f-fl">部门发布资源和申请资源对比</p>
+						<a href="#" class="btn-more f-fr" onclick="listInfoClassMore()">查看全部</a>
+					</div>
+					<div class="f-cb mg-t4">
+						<div class="f-fl mg-r8" style="width: 360px; height: 283px;" id="divChart_shared"></div>
+						<div class="table-form3 f-fl" style="width: 660px;">
+							<table>
+								<tr>
+									<th>序号</th>
+									<th>资源名称</th>
+									<th>提供部门</th>
+									<th>申请部门数</th>
+								</tr>
+								<tr th:each="item,rowStat:${data.iListtop5}">
+									<td th:text="${rowStat.count}"></td>
+									<td th:text="${item.INFONAME}"></td>
+									<td th:text="${item.DEPTNAME}"></td>
+									<td th:text="${item.APPLY_COUNT}"></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!--  ==========  -->
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="/theme/gxwz/js/xtfx/xtfx.js"></script>

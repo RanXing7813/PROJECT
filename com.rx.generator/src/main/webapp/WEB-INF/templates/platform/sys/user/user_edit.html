@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>用户管理-用户编辑</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=8"/>
+<meta http-equiv="Expires" content="0"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Cache-control" content="no-cache"/>
+<meta http-equiv="Cache" content="no-cache"/>ble" content="yes" />
+<meta name="format-detection" content="telephone=no" />
+<link rel="stylesheet" href="/theme/plugins/layui/css/layui.css" media="all" />
+<style type="text/css">
+.layui-form-item .layui-inline {
+	width: 33.333%;
+	float: left;
+	margin-right: 0;
+}
+
+@media ( max-width :1240px) {
+	.layui-form-item .layui-inline {
+		width: 100%;
+		float: none;
+	}
+}
+</style>
+</head>
+<body class="childrenBody">
+	<form class="layui-form" action="/platform/sys/user_save" method="post">
+		<input type="hidden" name="id" th:value="${user.id}"/>
+		<input type="hidden" name="tel" th:value="${user.tel}"/>
+		<input type="hidden" name="ustate" th:value="${user.ustate}" />
+		<input type="hidden" name="createtime" th:value="${user.createtime}"/>
+		<input type="hidden" name="password" th:value="${user.password}"/>
+		<div class="layui-form-item">
+			<label class="layui-form-label">登录名</label>
+			<div class="layui-input-block">
+				<input type="text" id="loginname" name="loginname" class="layui-input " lay-verify="required|lname" placeholder="" th:value="${user.loginname}" readonly="readonly"/>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">姓名</label>
+			<div class="layui-input-block">
+				<input type="text" name="username" class="layui-input " lay-verify="required|length32" th:value="${user.username}"/>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">所属部门</label>
+			<div class="layui-input-block">
+				<input type="hidden" id="deptid" name="deptid" class="layui-input " lay-verify="" placeholder="" th:value="${user.deptid}" />
+				<input type="text" id="deptname" name="deptname" class="layui-input " lay-verify="required" placeholder="" th:value="${user.deptname}" />
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">手机号</label>
+			<div class="layui-input-block">
+				<input type="text" name="phone" class="layui-input " lay-verify="required|phone" th:value="${user.phone}"/>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">邮箱</label>
+			<div class="layui-input-block">
+				<input type="text" name="email" class="layui-input " lay-verify="required|email" th:value="${user.email}"/>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">排序号</label>
+			<div class="layui-input-block">
+				<input type="text" name="uindex" class="layui-input " lay-verify="required|number" th:value="${user.uindex}"/>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">备注</label>
+			<div class="layui-input-block">
+				<textarea name="remark" placeholder="备注" class="layui-textarea" lay-verify="length256" th:text="${user.remark}"></textarea>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button class="layui-btn" lay-submit="" lay-filter="addUser">保存</button>
+				<button type="button" class="layui-btn layui-btn-warm closeCurPage">关闭</button>
+			</div>
+		</div>
+	</form>
+	<script type="text/javascript" src="/theme/platform/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/theme/plugins/layui/layui.js"></script>
+	<script type="text/javascript" src="/theme/platform/js/sysuser/user_edit.js"></script>
+	<script type="text/javascript" src="/theme/platform/js/modules.js"></script>
+</body>
+</html>

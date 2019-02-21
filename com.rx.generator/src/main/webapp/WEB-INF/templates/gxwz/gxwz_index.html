@@ -1,0 +1,281 @@
+<div class="index-banner">
+	<div class="title f-tac">规范资源共享&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;畅享协同服务</div>
+	<div class="searchwrap mg-t2">
+		<input type="text" name="" id="input_qwjs" maxlength="64" value="" placeholder="请输入您想搜索的目录" />
+		<a href="#" class="searchbtn" onclick="qwjs();" id="a_link_qwjs"></a>
+	</div>
+	<div class="banner-dt1">
+		<div class="block block1">
+			<h1 class="text1 pd-t4">
+				已发布共享目录<em class="text3 mg-l1">（条）</em>
+			</h1>
+			<h2 class="text2" id="h_yfbgxml"></h2>
+		</div>
+		<div class="block block2">
+			<h1 class="text1 pd-t4" id="zygjl_name">资源挂接率</h1>
+			<h2 class="text2" id="zygjl"></h2>
+		</div>
+		<div class="block block3">
+			<h1 class="text1 pd-t4" id="zcxtyy_name">
+				支撑主题应用<em class="text3 mg-l1">（个）</em>
+			</h1>
+			<h2 class="text2" id="zcxtyy"></h2>
+		</div>
+		<div class="block block4">
+			<h1 class="text1 pd-t4" id="h_ljjhsjl_name">
+				累计交换数据量<em class="text3 mg-l1">（条）</em>
+			</h1>
+			<h2 class="text2" id="h_ljjhsjl"></h2>
+		</div>
+	</div>
+</div>
+<div class="index-panel">
+	<div class="page-wrap index-ml">
+		<div class="f-cb">
+			<div class="ml-mldh">
+				<div class="ml-title">目录导航</div>
+				<div class="slideMlBox mg-t8">
+					<div class="hd">
+						<ul>
+							<li class="on">基础信息资源</li>
+							<li>主题信息资源</li>
+							<li>市级部门信息资源</li>
+						</ul>
+					</div>
+					<div class="bd">
+						<div class="slidecont">
+							<div class="slidec1" id="div_jcxxzy"></div>
+						</div>
+						<div class="slidecont">
+							<div class="slidec2">
+								<div class="parbd" id="div_ztxxzy"></div>
+								<div class="parhd">
+									<ul id="ul_ztxxzy_page">
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="slidecont">
+							<div class="slidec3">
+								<div class="parbd" id="div_bmzyxx"></div>
+								<div class="parhd">
+									<ul id="ul_bmzyxx_page">
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ml-mldt">
+				<div class="ml-title">目录动态</div>
+				<div class="slideMlBox mg-t8">
+					<div class="hd">
+						<ul class="size2">
+							<li class="on">最新</li>
+							<li>最热</li>
+						</ul>
+					</div>
+					<div class="bd">
+						<div class="newslist">
+							<ul id="ul_newslist">
+
+							</ul>
+						</div>
+						<div class="newslist">
+							<ul id="ul_hotlist">
+
+							</ul>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<!-- table 数据过长省略  需要给td列固定一个宽度生效  -->
+	<style>
+.table-form2 table {
+	table-layout: fixed;
+}
+
+.table-form2 td {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+</style>
+
+	<div class="index-bm">
+		<!--全省政务信息资源编目情况-->
+		<div class="ml-title mg-t14 mg-b8">全市政务信息资源编目情况</div>
+		<div class="slideMlBox">
+			<div class="hd" style="width: 480px; margin: 0 auto;">
+				<ul class="size2">
+					<li>目录分布</li>
+					<li>目录统计</li>
+				</ul>
+			</div>
+			<div class="bd bg2">
+				<!--市级部门-->
+				<div class="slidec4">
+					<div class="parhd f-tac mg-b4">
+						<ul>
+							<li class="on">市级部门</li>
+							<li>区县政府</li>
+						</ul>
+					</div>
+					<div class="parbd">
+						<div class="slidecont2 f-cb">
+							<div class="f-fl mg-r8" style="width: 785px;">
+								<div class="m-title2">部门目录情况分布图</div>
+								<div class="mg-t4" id="bmml_fb_sj_echart">
+									<!-- <img src="theme/images/index_chart1.png" /> -->
+								</div>
+							</div>
+							<div class="f-fl" style="width: 340px;">
+								<div class="m-title2">部门目录分布情况</div>
+								<div class="mg-t4">
+									<div class="table-form2">
+										<table id="bmml_fb_sj_list">
+											<tr>
+												<th>序号</th>
+												<th>名称</th>
+												<th>数量</th>
+											</tr>
+										</table>
+										<a href="javascript:void(0)" class="more mg-t2" onclick="getBmfb_Bmml_Morelist({type:'fb_sj'})">查看更多</a>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="slidecont2 f-cb">
+							<div class="f-fl mg-r8" style="width: 785px;">
+								<div class="m-title2">区县目录情况分布图</div>
+								<div class="mg-t4" id="bmml_fb_ds_echart">
+									<!-- <img src="theme/images/index_chart1.png" /> -->
+								</div>
+							</div>
+							<div class="f-fl" style="width: 340px;">
+								<div class="m-title2">区县目录分布情况</div>
+								<div class="mg-t4">
+									<div class="table-form2">
+										<table id="bmml_fb_ds_list">
+											<tr>
+												<th>序号</th>
+												<th>名称</th>
+												<th>数量</th>
+											</tr>
+										</table>
+										<a href="javascript:void(0)" class="more mg-t2" onclick="getBmfb_Bmml_Morelist({type:'fb_ds'})">查看更多</a>
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+				<!---->
+				<!--地市政府-->
+				<div class="slidec4">
+					<div class="parhd f-tac mg-b4">
+						<ul>
+							<li class="on">市级部门</li>
+							<li>区县政府</li>
+						</ul>
+					</div>
+					<div class="parbd">
+						<div class="slidecont2 f-cb">
+							<div class="f-fl mg-r8" style="width: 785px;">
+								<div class="m-title2">部门目录情况统计图</div>
+								<div class="mg-t4" id="bmml_tj_sj_echart"></div>
+							</div>
+							<div class="f-fl" style="width: 340px;">
+								<div class="m-title2">部门目录统计情况</div>
+								<div class="mg-t4">
+									<div class="table-form2">
+										<table id="bmml_tj_sj_list">
+											<tr>
+												<th>序号</th>
+												<th>名称</th>
+												<th>数量</th>
+											</tr>
+										</table>
+										<a href="javascript:void(0)" class="more mg-t2" onclick="getBmfb_Bmml_Morelist({type:'tj_sj'})">查看更多</a>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<div class="slidecont2 f-cb">
+							<div class="f-fl mg-r8" style="width: 785px;">
+								<div class="m-title2">区县目录情况统计图</div>
+								<div class="mg-t4" id="bmml_tj_ds_echart"></div>
+							</div>
+							<div class="f-fl" style="width: 340px;">
+								<div class="m-title2">区县目录统计情况</div>
+								<div class="mg-t4">
+									<div class="table-form2">
+										<table id="bmml_tj_ds_list">
+											<tr>
+												<th>序号</th>
+												<th>名称</th>
+												<th>数量</th>
+											</tr>
+										</table>
+										<a href="javascript:void(0)" class="more mg-t2" onclick="getBmfb_Bmml_Morelist({type:'tj_ds'})">查看更多</a>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+
+					</div>
+				</div>
+				<!---->
+			</div>
+		</div>
+	</div>
+
+</div>
+<script type="text/javascript" src="theme/gxwz/js/jquery-1.11.0.min.js"></script>
+<script src="theme/gxwz/js/jquery.SuperSlide.2.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="theme/gxwz/js/simpla.jquery.configuration.js"></script>
+<script type="text/javascript" src="theme/gxwz/js/base.menu.js"></script>
+<script type="text/javascript" src="/theme/gxwz/js/gxwz_index.js"></script>
+<script type="text/javascript" src="theme/gxwz/js/echarts.min.js"></script>
+<script type="text/javascript" src="/theme/gxwz/js/echarts/gxwz_index_echarts.js"></script>
+<script type="text/javascript">
+	//查看 工作动态
+	function codeEdit(obj) {
+		var id = obj["id"];
+		$("#xxfw_").val(id);
+		window.open("index", id);
+	}
+	//跳转信息服务
+	$("#toXXFW").click(function() {
+		$('#xxfw').click();
+	});
+	/* 	 $(".slidec2").slide({
+			titCell: ".parhd ul li",
+			mainCell: ".parbd",
+			effect: "left",
+		});	
+		$(".slidec3").slide({
+				titCell: ".parhd ul li",
+				mainCell: ".parbd",
+				effect: "left",
+			});
+			$(".slidec4").slide({
+				titCell: ".parhd ul li",
+				mainCell: ".parbd",
+			});
+
+			$(".slideMlBox").slide();  */
+</script>

@@ -13,7 +13,7 @@
   
   <modules>
 	<module>com.rx.basejar</module>
-	<module>com.rx.testproject</module>
+	<module>com.rx.generator</module>
   </modules>
   
   

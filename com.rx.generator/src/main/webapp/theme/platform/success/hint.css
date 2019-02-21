@@ -1,0 +1,62 @@
+@charset "UTF-8";
+/* CSS Document */
+body,html{
+	margin:0;
+	padding:0;
+	font-family: "Microsoft Yahei",sans-serif !important;
+	font-family:"微软雅黑","宋体";
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	background:#fafafa url(。/images/bg_main.png) repeat ;
+	height:100%;	
+	overflow-x:hidden;
+	}
+.hintWrap{width:98%; margin:80px auto;}
+.infoWrap{width:530px; margin:0 auto;}
+
+/*欢迎页*/
+.reportInfo{width:223px; height:223px; background:#48b0f7; margin:50px 20px 0; text-align:center;}
+.reportInfo h1{color:#fff; font-size:20px; line-height:36px; padding:10px 0; text-align:center; border-bottom:#3aa0f5 2px solid;}
+.reportInfo p{font-size:72px; color:#fff; text-align:center; margin:5px 0;}
+
+.shenheInfo{width:223px; height:223px; background:#10cfbd; margin:50px 20px 0; text-align:center;}
+.shenheInfo h1{color:#fff; font-size:20px; line-height:36px; padding:10px 0; text-align:center; border-bottom:#0dc5b0 2px solid;}
+.shenheInfo p{font-size:72px; color:#fff; text-align:center; margin:5px 0;}
+
+.bohuiInfo{width:223px; height:223px; background:#dd8c76; margin:50px 20px 0; text-align:center;}
+.bohuiInfo h1{color:#fff; font-size:20px; line-height:36px; padding:10px 0; text-align:center; border-bottom:#d6755e 2px solid;}
+.bohuiInfo p{font-size:72px; color:#fff; text-align:center; margin:5px 0;}
+
+/*成功页*/
+.success{margin:50px 0 0 0;}
+.success img{width:79px; height:79px; float:right; margin:10px 30px 0 0;}
+.successCont{width:520px; height:100px; float:right;}
+.successCont h2{color:#0051b0; font-size:50px;}
+.successCont p{color:#5d5d5d; font-size:18px; line-height:36px;}
+.btn{
+	display:inline-block;
+	/*color:#324756;*/
+	line-height:1.8em;
+	font-size:14px; 
+    vertical-align:middle;
+	cursor:pointer;
+	word-break:keep-all;
+			/* Gecko browsers */
+-moz-border-radius: 2px; 
+/* Webkit browsers */
+-webkit-border-radius: 2px; 
+/* W3C syntax - likely to be standard so use for future proofing */
+border-radius:2px;
+	margin:2px 4px ;
+
+	}
+.btn-hint{
+	color:#fff;
+	background:#54a3c5;
+	padding:5px 0;
+	width:180px;
+	margin:60px auto 0;
+	text-align:center;
+	font-size:16px;
+	display:block;
+	}
+.btn-hint:hover{opacity:0.8;}

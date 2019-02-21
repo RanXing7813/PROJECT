@@ -1,0 +1,43 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>海口市政务信息共享网站</title>
+<link href="theme/gxwz/css/base.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="theme/gxwz/css/detail_style.css" />
+<link rel="stylesheet" type="text/css" href="theme/gxwz/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="theme/gxwz/css/unicorn.main.css" />
+</head>
+<body class="">
+	<div class="pagebanner fn-clear " style="background: none;">
+		<div class="detail-wrap" style="margin-top: 40px;">
+			<div class="at-wrap f-cb">
+				<!--主体内容区-->
+				<div class="text_main">
+					<h4 style="font-size: 30px;">信息提示</h4>
+					<div class="txt" style="height: 400px;">
+						<div class="row-fluid">
+							<div class="span12">
+								<div>
+									<div class="widget-content" style="border: 0px;">
+										<div class="error_ex">
+											<h1 th:text="${statusCode}"></h1>
+											<h4 th:text="${diyMsg}"></h4>
+											<p th:text="${exceptionMessage}"></p>
+											<a class="btn btn-warning btn-big" href="/" style="margin-top: 50px;">返回首页</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--主体内容区-->
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="theme/gxwz/js/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="theme/gxwz/js/simpla.jquery.configuration.js"></script>
+	<script type="text/javascript" src="theme/gxwz/js/base.menu.js"></script>
+</body>
+</html>

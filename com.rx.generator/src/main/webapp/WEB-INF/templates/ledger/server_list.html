@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>台账列表</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-control" content="no-cache" />
+<meta http-equiv="Cache" content="no-cache" />
+<link rel="stylesheet" href="/theme/layuiadmin/layui/css/layui.css" media="all" />
+<link rel="stylesheet" href="/theme/layuiadmin/style/admin.css" media="all" />
+<link rel="stylesheet" href="/theme/platform/css/user_defined.css" media="all" />
+</head>
+<body>
+
+	<form id="search_form" action="/ledger/ledger_server_list" method="post">
+
+		<input type="hidden" id="currentpage" name="currentpage" th:value="${page.currentpage}" />
+		<input type="hidden" id="pagesize" name="pagesize" th:value="${page.pagesize}" />
+		<input type="hidden" id="datacount" name="datacount" th:value="${page.datacount}" />
+		<div class="layui-fluid">
+			<div class="layui-row layui-col-space15">
+				<div class="layui-col-md12">
+					<div class="layui-card">
+						<div class="layui-card-header">
+							<span class="layui-breadcrumb" lay-separator=">"><a style="padding-left: 10px;"><cite>当前位置：</cite><cite>台账列表</cite></a> </span>
+						</div>
+						<div class="layui-form layui-card-header layuiadmin-card-header-auto">
+							<div class="layui-form-item">
+								<div class="layui-inline">
+									<label class="layui-form-label">请输入</label>
+									<div class="layui-input-inline">
+										<input type="text" name="search" placeholder="请输入关键字" autocomplete="off" class="layui-input" th:value="${search}" />
+									</div>
+								</div>
+								<div class="layui-inline">
+									<button class="layui-btn layuiadmin-btn-list">
+										<i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+									</button>
+								</div>
+							</div>
+						</div>
+						<div class="layui-card-body">
+							<div class="layui-form layui-border-box layui-table-view">
+								<div class="layui-table-tool">
+									<div class="layui-table-tool-temp">
+										<div class="layui-btn-container"  style="display: none;">
+											<button type="button" class="layui-btn layui-btn-normal layui-btn-sm newsAdd_btn">
+												<i class="layui-icon layui-icon-add-1"></i>新增信息
+											</button>
+											<button type="button" class="layui-btn layui-btn-normal layui-btn-sm batchFb">
+												<i class="layui-icon layui-icon-add-circle"></i>批量发布
+											</button>
+											<button type="button" class="layui-btn layui-btn-danger layui-btn-sm batchDel">
+												<i class="layui-icon layui-icon-delete"></i>批量删除
+											</button>
+										</div>
+									</div>
+									<div class="layui-table-tool-self" style="display: none;">
+										<div class="layui-inline" title="筛选列" lay-event="LAYTABLE_COLS">
+											<i class="layui-icon layui-icon-cols"></i>
+										</div>
+										<div class="layui-inline" title="导出" lay-event="LAYTABLE_EXPORT">
+											<i class="layui-icon layui-icon-export"></i>
+										</div>
+										<div class="layui-inline" title="打印" lay-event="LAYTABLE_PRINT">
+											<i class="layui-icon layui-icon-print"></i>
+										</div>
+									</div>
+								</div>
+								<div class="layui-table-box">
+									<div class="layui-table-body layui-table-main">
+										<table cellspacing="0" cellpadding="0" border="0" class="layui-table" style="width: 100%">
+											<thead>
+												<tr>
+													<th style="width: 80px;"><span><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" id="allChoose" /></span></th>
+													<th style="width: 200px;"><span>名称</span></th>
+													<th style="max-width: 200px;"><span>适用场景</span></th>
+													<th><span>前置机IP/远程端口</span></th>
+													<th><span>前置机用户名/密码</span></th>
+													<th><span>数据库类型</span></th>
+													<th><span>数据库IP/端口</span></th>
+													<th><span>数据库用户名/密码</span></th>
+													<th><span>数据库名称</span></th>
+													<th><span>SID(Oracle)</span></th>
+													<th style="width: 120px;"><span>更新时间</span></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="info,iterStat:${list}">
+													<td><span><input type="checkbox" name="checked" lay-skin="primary" lay-filter="choose" th:value="${info.id}" /></span></td>
+													<td><span th:text="${info.ledgername}"></span></td>
+													<td><span th:text="${info.purpose}"></span></td>
+													<td><span th:text="${info.sip}+'/'+${info.steleport}"></span></td>
+													<td><span th:text="${info.slname}+'/'+${info.slpw}"></span></td>
+													<td><span th:text="${info.dbtype}"></span></td>
+													<td><span th:text="${info.dbip}+'/'+${info.dpport}"></span></td>
+													<td><span th:text="${info.dbname}+'/'+${info.dbsid}"></span></td>
+													<td><span th:text="${info.dblname}"></span></td>
+													<td><span th:text="${info.dblpw}"></span></td>
+													<td><span th:text="${#dates.format(info.utime, 'yyyy-MM-dd')}"></span></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<!--  -->
+								<div class="layui-table-page" id="page"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<script type="text/javascript" src="/theme/layuiadmin/layui/layui.js"></script>
+	<script type="text/javascript" src="/theme/platform/js/ledger/server_list.js"></script>
+	<script type="text/javascript" src="/theme/platform/js/common.js"></script>
+	<!-- 分页、补充空行、全选、取消全选 -->
+</body>
+</html>

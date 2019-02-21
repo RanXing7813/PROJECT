@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>海口市政务信息共享网站</title>
+		<link href="theme/gxwz/css/base.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" href="theme/gxwz/css/function.css" />
+		<link href="theme/gxwz/css/main_style.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" href="theme/gxwz/css/detail_style.css" />
+	</head>
+
+	<body class="">
+		
+		
+		<div class="pagebanner fn-clear ">
+			<div class="pagebannerwrap fn-clear">
+				<div class="crumb"> 您的位置: 首 页 > <span id="bodyTitle"  th:text="${bodyTitle}">目录服务</span> </div>
+			</div>
+			<div class="detail-wrap">
+				<div class="at-wrap f-cb">
+					<!--主体内容区-->
+					<div class="text_main">
+						<h4 th:text="${dto.infolinkTitle}">北京市经济和信息化委员会(北京市国防科学技术工业办公室)主要职责</h4>
+						<div class="text_ly">
+							<span  >发布时间：<span th:text="${dto.createdTime}">2016-06-20</span></span><span th:unless="${dto.infolinkOrigin} eq '' or ${dto.infolinkOrigin} eq null" th:text="信息来源： +${dto.infolinkOrigin}">信息来源：北京市经济和信息化委员会</span>
+						</div>
+						<div class="txt">
+						  	<div class="article">
+                                       <p style="text-indent:1em;"> <span th:unless="${dto.summary} eq '' or ${dto.summary} eq null" th:text="信息摘要：+ ${dto.summary}"></span></p> <br/>
+                        	</div>
+                        	 <div class="article" id="container" >
+                                    	 
+                        	 </div>		
+						
+						</div>
+					</div>
+					<div class="downtxt" th:if="${dto.fileList.size()>0}">
+						<span class="fj">【附件】</span>
+						<p th:each="product:${dto.fileList}">
+							<a href="javascript:void(0);" class="clor"><font th:text="${product.file_name}+.+${product.file_type}">政务信息资源共享管理办法</font></a>
+							<input type='hidden' name='fileIds'    th:value="${product.file_id}" />
+							<a  th:href="@{'files/download?file_id='+${product.file_id}}" class=" downclick">【下载】</a>
+						</p>
+					</div>
+					
+					<!--主体内容区-->
+				</div>
+			</div>
+			
+			
+		</div>
+		
+		<script type="text/javascript" src="theme/gxwz/js/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="theme/gxwz/js/simpla.jquery.configuration.js"></script>
+		<script type="text/javascript" src="theme/gxwz/js/base.menu.js"></script>
+		<script src="theme/gxwz/js/jquery.SuperSlide.2.1.1.js" type="text/javascript" charset="utf-8"></script>
+		<script src="theme/gxwz/js/DatePicker/WdatePicker.js" type="text/javascript" charset="utf-8"></script>
+		<script th:inline="javascript">
+			var contents = /*[[${dto.content}]]*/;	
+			$("#container").html(contents);
+			
+			$("#xxfw").parent().parent().find('a').prop('class',"");
+			$("#xxfw").prop('class',"current");;
+			
+			$(".btn-fold").click(function() {
+				if($(this).hasClass("bggrey")) {
+					$(this).removeClass("bggrey").text("展开");
+				} else {
+					$(this).addClass("bggrey").text("收起");
+				}
+				$(this).parents(".foldpanel").find(".panelbd").slideToggle();
+			})
+		</script>
+	</body>
+
+</html>

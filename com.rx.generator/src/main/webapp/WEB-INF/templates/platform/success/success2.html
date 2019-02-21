@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title> </title>
+<link th:href="@{/theme/platform/success/base.css}" rel="stylesheet" type="text/css" />
+<link th:href="@{/theme/platform/success/hint.css}" rel="stylesheet" type="text/css" />
+<script th:src="@{/theme/gxwz/js/jquery-1.11.0.min.js}"></script>
+<script th:src="@{/theme/layuiadmin/layui/lay/modules/layer.js}"></script>
+ 
+
+
+<style>
+
+.hintWrap{width:98%; margin:80px auto;}
+.infoWrap{width:800px; margin:0 auto;}
+
+</style>
+</head>
+
+<body>
+
+<div class="hintWrap">
+	<div class="fn-text-left"></div>
+    <div class="fn-clear infoWrap">
+    	<div class="success fn-clear">
+           <div class="successCont"  >
+           	<h2>操作成功啦！</h2>
+            	<p>欢迎继续使用,</p><p id="setTime">3</p>秒后自动关闭!
+           </div>
+           <img th:src="@{/theme/platform/success/images/ico-success.png}"/>
+       </div>
+       <br/>
+       <button class="btn btn-hint" onClick="closedWindow();">确定</button>
+    </div>
+</div>
+
+<script th:inline="javascript" type="text/javascript">
+/*<![CDATA[*/  
+function closedWindow(){
+	var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+	parent.layer.close(index); //再执行关闭  
+}
+
+var error_ = /*[[${error}]]*/
+if(error_){
+	$('.success').html('<div style="text-align: center; padding: 11% 0;"> <i class="layui-icon" style="line-height: 6rem;font-size: 2rem;color: #ff5722;">'+error_+
+	     '</i><p style="font-size: 20px; font-weight: 300; color: #999;">'+error_+'</p> </div>');
+}else{
+	var count = 3 ;
+	 setInterval(function () {
+		count--;
+		$('#setTime').html(count);
+		if(count==0||count=='0'){
+			closedWindow();
+		}
+	 },1000);
+}
+
+	 
+	  /*]]>*/
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<div class="pagebanner  fn-clear">
+	<div class="pagebannerwrap">
+		<div class="crumb">您的位置: 首 页 > 接口服务</div>
+		<!--<div class="banner-title"></div>-->
+		<div class="f-tac">
+			<div class="banner-search">
+				<input type="hidden" id="jktype" tx:value="${data.jktype}" /> <span><input type="text"
+					id="search" class="" value="请输入查询关键词" maxlength="64" onfocus="if (value =='请输入查询关键词'){value =''}"
+					onblur="if (value ==''){value='请输入查询关键词'}" /></span> <a href="###" onclick="jkfwsearch()"><img
+					src="theme/gxwz/images/icon_search.png" /></a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="pageer fn-clear">
+	<div class="pagewrap">
+		<div class="leftwrap" style="margin-top: -80px;">
+			<div class="navwrapper">
+				<div id="sidebar2">
+					<!--注意使用了id-->
+					<div id="sidebar-wrapper">
+						<ul id="main-nav">
+							<li><a href="javascript:void(0)" class="nav-top-item current"><span>全部接口</span></a>
+								<ul>
+									<li><a href="javascript:void(0)" class="submenu-item current" id="gjpt" onclick="jkfw('1','gjpt')">国家部委服务接口</a></li>
+									<li><a href="javascript:void(0)" class="submenu-item" id="ctgc" onclick="jkfw('1','ctgc')">海口市服务接口</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!--nav end-->
+		</div>
+
+		<div class="rightwrap">
+			<div class="rlist-top">
+				<table>
+					<colgroup>
+						<col>
+						</col>
+						<col width="100">
+						</col>
+					</colgroup>
+					<tr>
+						<td class=" fn-text-right" id="searchTitle">国家部委服务接口</td>
+						<td class=" fn-text-right" id="total"></td>
+					</tr>
+				</table>
+			</div>
+			<div class="rlist-content" id="rlist-content">
+				<div class="rlist-ml fn-clear">
+					<div class="rlist-ml-title">
+						<h4>教育部_高校学位_学位信息查询接口</h4>
+					</div>
+					<div class="rlist-ml-info" style="width: 860px; height: auto; min-height: 80px;">
+						<table>
+							<col width="300"></col>
+							<col></col>
+							<tr>
+								<td>所属目录：高等教育学历信息</td>
+								<td>提供部门：教育部</td>
+							</tr>
+							<tr>
+								<td>版本号：V2.0</td>
+								<td>发布时间：2018-02-12 09:10:23</td>
+							</tr>
+							<tr>
+								<td colspan="2">接口描述：对2008年9月1日之后各学位授予单位授予的博士、硕士、学士学位信息查询服务</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="rlist-pagenar">
+				<div class="pagination" id="listpage"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript"  src="theme/gxwz/js/simpla.jquery.configuration.js"></script>
+<script src="theme/gxwz/js/page_xtfx.js"></script>
+<script src="theme/gxwz/js/jkfw/jkfw.js"></script>

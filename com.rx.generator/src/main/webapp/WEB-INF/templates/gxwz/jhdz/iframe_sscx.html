@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>海口市政务信息共享网站</title>
+		<link rel="stylesheet" type="text/css" href="theme/gxwz/css/function.css" />
+		<link rel="stylesheet" type="text/css" href="theme/gxwz/css/base.css" />
+		<link rel="stylesheet" type="text/css" href="theme/gxwz/css/main_style.css" />
+		<link rel="stylesheet" type="text/css" href="theme/gxwz/css/detail_style.css" />
+	</head>
+	<body>
+		<div id="foldDiv">
+			<!--折叠面板1-->
+			<div class="foldpanel" th:each="mapobj:${maplist.list}">
+				<div class="panelhd">
+					<em th:text="${mapobj.tablechname}"></em>
+					<a href="javascipt:void(0);" class="btn-fold bggrey" th:if="${mapobjStat.count eq 1}">收起</a>
+					<a href="javascipt:void(0);" class="btn-fold" th:if="${mapobjStat.count gt 1}">查看</a>
+				</div>
+				<div th:class="${mapobjStat.count gt 1} ? 'panelbd f-dn' : 'panelbd' ">
+					<div class="panel-title1"><img class="f-vam mg-r1" src="/theme/gxwz/images/cir1.png" /><em class="f-vam">发送方</em></div>
+					<div class="f-cb mg-t2">
+						<div class="jhdz-dt1 f-fl" th:each="obj:${mapobj.fsflist}">
+							<p class="mg-t1" th:text="${obj.deptname}"></p>
+							<p class="mg-t1" th:text="${#numbers.formatInteger(obj.countnumber,1,'COMMA')}"></p>
+						</div>
+					</div>
+					<div class="panel-title1 mg-t2"><img class="f-vam mg-r1" src="/theme/gxwz/images/cir2.png" /><em class="f-vam">中心库</em></div>
+					<div class="f-cb mg-t2">
+						<div class="jhdz-dt1 f-fl" th:each="obj:${mapobj.zxflist}">
+							<p class="mg-t3" th:text="${#numbers.formatInteger(obj.countnumber,1,'COMMA')}"></p>
+						</div>
+					</div>
+					<div class="panel-title1 mg-t2"><img class="f-vam mg-r1" src="/theme/gxwz/images/cir3.png" /><em class="f-vam">接收方</em></div>
+					<div class="f-cb mg-t2">
+						<div class="jhdz-dt1 f-fl mg-r2" th:each="obj:${mapobj.jsflist}">
+							<p class="mg-t1" th:text="${obj.deptname}"></p>
+							<p class="mg-t1" th:text="${#numbers.formatInteger(obj.countnumber,1,'COMMA')}"></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--折叠面板1end-->
+		</div>
+		<script type="text/javascript" src="/theme/gxwz/js/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="theme/gxwz/js/layer/layer.js" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(".btn-fold").click(function() {
+				if($(this).hasClass("bggrey")) {
+					$(this).removeClass("bggrey").text("展开");
+				} else {
+					$(this).addClass("bggrey").text("收起");
+				}
+				$(this).parents(".foldpanel").find(".panelbd").slideToggle();
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>海口市政务信息共享网站</title>
+<link href="theme/gxwz/css/base.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="theme/gxwz/css/function.css" />
+<link href="theme/gxwz/css/main_style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="theme/gxwz/css/detail_style.css" />
+</head>
+<body>
+	<input type="hidden" id="infosortId" th:value="${infosortId}" />
+	<input id="xxfw_" type="hidden" value="" />
+
+	<!--pagebanner-->
+	<div class="pagebanner  fn-clear" id="list_rightwrap2">
+		<div class="pagebannerwrap">
+			<div class="crumb">
+				您的位置: 首 页 > <span id="bodyTitle" th:text="${bodyTitle}">共享成效</span>
+			</div>
+			<!--<div class="banner-title"></div>-->
+			<div class="f-tac" id="searchbutton">
+				<div class="banner-search">
+					<span><input type="text" class="" id="infolinkTitle"
+						value="请输入查询关键词" onfocus="if (value =='请输入查询关键词'){value =''}"
+						onblur="if (value ==''){value='请输入查询关键词'}" /></span> <a href="###"
+						id="searchButtons"><img src="theme/gxwz/images/icon_search.png" /></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="pageer fn-clear" id="detail_rightwrap"
+		style="display: none;"></div>
+	<div class="pageer fn-clear" id="list_rightwrap1">
+		<div class="pagewrap">
+			<div class="leftwrap" style="margin-top: -80px;">
+				<div class="navwrapper">
+					<div id="sidebar2">
+						<!--注意使用了id-->
+						<div id="sidebar-wrapper">
+							<ul id="main-nav">
+								<li><a href="javascript:void(0)"
+									class="nav-top-item no-submenu"><span>堵点问题疏解</span></a></li>
+								<li><a href="javascript:void(0)"
+									class="nav-top-item no-submenu"><span>典型应用案例</span></a></li>
+								<li><a href="javascript:void(0)"
+									class="nav-top-item no-submenu" onclick="getGXYYZC()"><span>共享应用支撑</span></a></li>
+								<li><a href="javascript:void(0)"
+									class="nav-top-item no-submenu"><span>需求开发概况</span></a></li>
+								<li><a href="javascript:void(0)"
+									class="nav-top-item no-submenu" onclick="getMLTBTJ()"><span>目录填报统计</span></a></li>
+								<li><a href="javascript:void(0)"
+									class="nav-top-item no-submenu" onclick="getZYSYTJ()"><span>资源使用统计</span></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!--nav end-->
+			</div>
+			<div class="rightwrap" id="rightwrapid">
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="theme/gxwz/js/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript"
+		src="theme/gxwz/js/simpla.jquery.configuration.js"></script>
+	<script type="text/javascript" src="theme/gxwz/js/base.menu.js"></script>
+	<script src="/theme/gxwz/js/page.js"></script>
+	<script src="/theme/gxwz/js/gxcx/gxcx_index.js"></script>
+</body>
+
+</html>

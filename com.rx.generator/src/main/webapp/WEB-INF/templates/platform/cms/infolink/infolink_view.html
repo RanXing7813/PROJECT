@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>内容管理-查看信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=8"/>
+<meta http-equiv="Expires" content="0"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Cache-control" content="no-cache"/>
+<meta http-equiv="Cache" content="no-cache"/>
+<link rel="stylesheet" href="/theme/plugins/layui/css/layui.css" />
+<style type="text/css">
+.layui-form-item .layui-inline {
+	width: 33.333%;
+	float: left;
+	margin-right: 0;
+}
+
+@media ( max-width :1240px) {
+	.layui-form-item .layui-inline {
+		width: 100%;
+		float: none;
+	}
+}
+</style>
+</head>
+<body class="childrenBody">
+	<form class="layui-form" action="">
+		<input type="hidden" id="infosortid" name="infosortid" th:value="${infosortid}" />
+		<input type="hidden" id="infolinkid" name="infolinkid" th:value="${info.infolinkid}" />
+		<input type="hidden" id="deptid" name="deptid" th:value="${info.deptid}" />
+		<input type="hidden" id="createdtime" name="createdtime" th:value="${info.createdtime}" />
+		<input type="hidden" id="updatetime" name="updatetime" th:value="${info.updatetime}" />
+		<input type="hidden" id="infolinkstate" name="infolinkstate" th:value="${info.infolinkstate}" />
+		<input type="hidden" id="summary" name="summary" th:value="${info.summary}" />
+		<input type="hidden" id="userid" name="userid" th:value="${info.userid}" />
+		<input type="hidden" id="remark" name="remark" th:value="${info.remark}" />
+		<input type="hidden" id="deleteflog" name="deleteflog" th:value="${info.deleteflog}" />
+
+		<div class="row">
+			<div class="sysNotice col">
+				<table class="layui-table">
+					<colgroup>
+						<col width="180" />
+						<col />
+					</colgroup>
+					<tbody>
+						<tr>
+							<th>标题</th>
+							<td th:text="${info.infolinktitle}"></td>
+						</tr>
+						<tr>
+							<th>关键字</th>
+							<td th:text="${info.keyword}"></td>
+						</tr>
+						<tr>
+							<th>来源</th>
+							<td th:text="${info.infolinkorigin}"></td>
+						</tr>
+						<tr>
+							<th>信息类型</th>
+							<td th:switch="${info.infolinktype}"><p th:case="'0'">
+									<span>普通信息</span>
+								</p>
+								<p th:case="'1'">
+									<span>外部链接</span>
+								</p></td>
+						</tr>
+						<tr>
+							<th>链接地址</th>
+							<td th:text="${info.infolinkurl}"></td>
+						</tr>
+						<tr>
+							<th>内容</th>
+							<td><input type="hidden" id="content" name="content" th:value="${info.content}" />
+								<script id="editor" type="text/plain" style="width: 96%; height: 300px;"></script></td>
+						</tr>
+						<tr>
+							<th>附件</th>
+							<td>
+								<div class="layui-upload">
+									<div class="layui-upload-list">
+										<table class="layui-table">
+											<tbody id="fileList">
+												<tr th:each="f,iterStat:${flist}">
+													<td th:text="${f.fname}"></td>
+													<td><a class="layui-btn layui-btn-danger download" target="_top" th:href="@{'/file/download?fid='+${f.fid}}">下载</a></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button type="button" class="layui-btn layui-btn-warm closeCurPage">关闭</button>
+			</div>
+		</div>
+	</form>
+	<script type="text/javascript" src="/theme/platform/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/theme/plugins/layui/layui.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/theme/plugins/ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/theme/plugins/ueditor/ueditor.all.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/theme/plugins/ueditor/lang/zh-cn/zh-cn.js"></script>
+	<script type="text/javascript" src="/theme/platform/js/cms/infolink_view.js"></script>
+</body>
+</html>

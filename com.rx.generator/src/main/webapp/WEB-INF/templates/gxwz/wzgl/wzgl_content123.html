@@ -1,0 +1,147 @@
+    <link href="theme/gxwz/plugins/umeditor-1.2.3/themes/default/_css/umeditor.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="/theme/gxwz/plugins/umeditor-1.2.3/third-party/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/theme/gxwz/plugins/umeditor-1.2.3/umeditor.config.js"></script>
+    <script type="text/javascript" src="/theme/gxwz/plugins/umeditor-1.2.3/lang/zh-cn/zh-cn.js"></script>  
+       <script type="text/javascript" charset="utf-8" src="/theme/gxwz/plugins/umeditor-1.2.3/_examples/editor_api.js"></script>
+    <style  >
+        h1{
+            font-family: "微软雅黑";
+            font-weight: normal;
+        }
+    </style>
+
+		<div class="article-wrap mg-t4">
+				<div class="table-form">
+					<form id="form-wizard"  method="post"  class="vpostForm"
+										modelAttribute="dto" th:object="${dto}"  > 
+										
+										<input type="hidden"  th:field="*{infosortId}"   th:value="${dto.infosortId}"/>
+										<input type="hidden"  th:field="*{infolinkId}"   th:value="${dto.infolinkId}"  />
+										<input type="hidden"  th:field="*{deptId}"  	 th:value="${deptId}"/>
+										<input type="hidden"  th:field="*{deleteFlog}"   th:value="${deleteFlog}"/>
+										
+								<table style="width:100%">
+									<colgroup>
+										<col width="160" />
+										<col width="420" />
+										<col width="160" />
+									</colgroup>
+									<tbody>
+										<tr>
+											<th class="f-tar">编辑标题</th>
+											<td>
+												<input class="ipt-text wid80" type="text" 
+												 datatype="*2-100"   nullmsg="必填"  errormsg="昵称至少2个字符,最多100个字符！" 
+												 th:field="*{infolinkTitle}" th:value="${dto.infolinkTitle}"  /><!-- th:field="*{infolinkTitle}" th:value="${dto.infolinkTitle}" -->
+											</td>
+											<td ><div class="Validform_checktip">必填,2-100长度</div></td>
+										</tr>
+										<tr>
+											<th class="f-tar">消息来源</th>
+											<td>
+												<input  class="ipt-text wid80"   type="text"    maxlength="200"  
+												 datatype="*0-100"      errormsg="最多100个字符！" 
+												 th:value="${dto.infolinkOrigin}"  th:field="*{infolinkOrigin}"/> 
+											</td>
+											<td ><div class="Validform_checktip">0-100长度</div></td>
+										</tr>
+										<tr>
+											<th class="f-tar">摘要</th>
+											<td>
+												<textarea rows="2"  style="border: 1px solid #e9e9e9;" th:field="*{summary}"  maxlength="500"  class="wid80" 
+												 datatype="*0-250"     errormsg="最多250个字符！" 
+												 th:value="${dto.summary}">  </textarea>
+											</td>
+											<td ><div class="Validform_checktip">0-250长度</div></td>
+										</tr>
+										<tr>
+											<th class="f-tar">关键字</th>
+											<td>
+												<input class="ipt-text wid80" type="text" th:field="*{keyword}" th:value="${dto.keyword}"  />
+											</td>
+											<td ><div class="Validform_checktip"></div></td>
+										</tr>
+										<tr>
+											<th class="f-tar">排序</th>
+											<td>
+												<input class="ipt-text wid80" type="text" th:field="*{index_}" th:value="${dto.index_}" 
+												 datatype="n1-10"   nullmsg="必填"  errormsg="至少1个字符,最多10个字符！" 
+												 />
+											</td>
+											<td ><div class="Validform_checktip">正整数1-10长度</div></td>
+										</tr>
+										<tr>
+											<th class="f-tar">编辑内容</th>
+											<td colspan='2'>
+												<textarea style="width:100%;resize: none;"    id="container"   ></textarea>
+												<input type="hidden" style="height:20px"  th:field="*{content_}"   th:value="${dto.content_}" />
+											</td>
+										</tr>
+										<tr>
+											<th class="f-tar"  > <a href='javascript:void(0)' style="text-decoration: underline;color:blue;" onclick="uploadLayui()">上传附件 </a> </th>
+											<td colspan='2'> 
+														<table id="parentUploadTd"   class="table  widget-titlebor " style="border-collapse: collapse;table-layout:fixed" >
+															<tr><td>文件名称</td><td  width="11%">操作</td></tr>
+
+															 <tr th:each="product:${dto.fileList}">
+																<td  th:text="${product.file_name}+.+${product.file_type}"></td>
+																<td><input type='hidden' name='fileIds'   th:value="${product.file_id}" /><a href='javascript:void(0)' th:onclick="'javascript:delupload(\''+${product.file_id}+'\', this)'"  >删除</a></td>
+											 				</tr>
+														</table>
+												
+											<!-- 	
+											 <div class="downtxt" th:if="${dto.fileList !=null and  dto.fileList.size()>0}">
+													<span class="fj">【附件】</span>
+													<p th:each="product:${dto.fileList}">
+														<a href="javascript:void(0);" class="clor"><font th:text="${product.file_name}+.+${product.file_type}">政务信息资源共享管理办法</font></a>
+														<input type='hidden' name='fileIds'    th:value="${product.file_id}" />
+														<a  th:href="@{'DownLoadServlet?filename='+${product.file_save_name}}" class=" downclick">【下载】</a>
+													</p>
+												</div>  -->
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								
+								
+								
+								<div class="at-wrap f-cb">
+									<div class="f-tac mg-t8 mg-b8">
+									   	<div style="display:none;"><input type="submit" id="next"  value="暂存" /></div>
+										<a   href="javascript:void(0);"  class="btn-submit  mg-r8" style="color: #fff;" onclick="submitInfo();" >暂存</a> 
+										<a   href="javascript:void(0);"  class="btn-submit  mg-r8" style="color: #fff;" onclick="submitInfoTJ();" >提交</a> 
+										<a class="btn-submit" href="javascript:void(0);" style="color: #fff;" onclick="backInfo();">返回</a>
+									</div>
+								</div>
+					</form>
+									
+					<!-- 富文本编辑器  -->
+					<div class="tab-pane fade" id="ios">
+						<div class="widget-box">
+							<div class="widget-title">
+								<h5></h5>
+							</div>
+							<form id="form-wizard" class="form-horizontal" method="post">
+								<div class="widget-content nopadding">
+									<script type="text/plain"   >
+ 									</script>
+								</div>
+							</form>
+						</div>
+					</div> 
+			</div>
+		</div>
+
+<form class="edui-image-form" method="post" enctype="multipart/form-data" target="up" action="imageUp?editorid=container">
+<input style="filter: alpha(opacity=0);" class="edui-image-file" type="file"
+ hidefocus="" name="upfile" accept="image/gif,image/jpeg,image/png,image/jpg,image/bmp" />
+ <button type="submit">111</button>
+ </form>
+<script src="/theme/gxwz/js/wzgl/init_editor2.js"></script> 
+<!--表单验证样式-->
+<script src="/theme/gxwz/js/Validform/jsnew/jquery-migrate-1.1.1.min.js"></script> 
+<script src="/theme/gxwz/js/Validform/jsnew/Validform_v5.3_min.js"></script>
+ <!--js-->
+<link rel="stylesheet" href="/theme/gxwz/plugins/layui/css/layui.css" />
+<script type="text/javascript" src="/theme/gxwz/plugins/layui/layui.js"></script>		
+

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>角色管理-角色编辑</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=8"/>
+<meta http-equiv="Expires" content="0"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Cache-control" content="no-cache"/>
+<meta http-equiv="Cache" content="no-cache"/>
+<link rel="stylesheet" href="/theme/plugins/layui/css/layui.css" media="all" />
+<style type="text/css">
+.layui-form-item .layui-inline {
+	width: 33.333%;
+	float: left;
+	margin-right: 0;
+}
+
+@media ( max-width :1240px) {
+	.layui-form-item .layui-inline {
+		width: 100%;
+		float: none;
+	}
+}
+</style>
+</head>
+<body class="childrenBody">
+	<form class="layui-form" action="/platform/sys/role_save" method="post">
+		<input type="hidden" name="id" th:value="${role.id}" />
+		<input type="hidden" name="flag" th:value="${role.flag}" />
+		<input type="hidden" name="usrecount" th:value="${role.usrecount}" />
+		<div class="layui-form-item">
+			<label class="layui-form-label">角色名称</label>
+			<div class="layui-input-block">
+				<input type="text" id="roleName" name="roleName" class="layui-input " lay-verify="required|length32" th:value="${role.roleName}" />
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">备注</label>
+			<div class="layui-input-block">
+				<textarea name="roleDescription" placeholder="备注" class="layui-textarea" lay-verify="length32" th:text="${role.roleDescription}"></textarea>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button class="layui-btn" lay-submit="" lay-filter="addRole">保存</button>
+				<button type="button" class="layui-btn layui-btn-warm closeCurPage">关闭</button>
+			</div>
+		</div>
+	</form>
+	<script type="text/javascript" src="/theme/platform/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/theme/plugins/layui/layui.js"></script>
+	<script type="text/javascript" src="/theme/platform/js/sysrole/role_add.js"></script>
+</body>
+</html>

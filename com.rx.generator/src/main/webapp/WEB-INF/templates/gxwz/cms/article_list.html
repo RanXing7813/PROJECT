@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="utf-8" />
+<title>海口市政务信息共享网站</title>
+<link href="theme/gxwz/css/base.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="theme/gxwz/css/function.css" />
+<link href="theme/gxwz/css/main_style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="theme/gxwz/css/detail_style.css" />
+</head>
+<body>
+
+	<input type="hidden" id="infosortId" th:value="${infosortId}" />
+	<input id="xxfw_" type="hidden" value="" />
+
+	<!--pagebanner-->
+	<div class="pagebanner  fn-clear" id="list_rightwrap2">
+		<div class="pagebannerwrap">
+			<div class="crumb">
+				您的位置: 首 页 > <span id="bodyTitle" th:text="${bodyTitle}">目录服务</span>
+			</div>
+			<!--<div class="banner-title"></div>-->
+			<div class="f-tac" id="searchbutton">
+				<div class="banner-search">
+					<span><input type="text" class="" id="infolinkTitle" value="请输入查询关键词" onfocus="if (value =='请输入查询关键词'){value =''}" onblur="if (value ==''){value='请输入查询关键词'}" /></span> <a href="###" id="searchButtons"><img
+							src="theme/gxwz/images/icon_search.png" /></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="pageer fn-clear" id="detail_rightwrap" style="display: none;"></div>
+
+	<div class="pageer fn-clear" id="list_rightwrap1">
+		<div class="pagewrap">
+			<div class="leftwrap" style="margin-top: -80px;">
+				<div class="navwrapper">
+					<div id="sidebar2" class="slideTxtBox">
+						<!--注意使用了id-->
+						<div id="sidebar-wrapper">
+							<ul id="main-nav" name="ulLever1">
+								<!--  -->
+
+							</ul>
+						</div>
+					</div>
+				</div>
+				<!--nav end-->
+			</div>
+
+			<div class="rightwrap" id="rightwrapid">
+				<div class="rlist-top">
+					<table>
+						<colgroup>
+							<col width="660">
+							</col>
+							<col width="120">
+							</col>
+							<col width="120">
+							</col>
+						</colgroup>
+						<tr>
+							<td class=" fn-text-right" id="td_toalcount"></td>
+							<td class="fn-text-center"><a href="###" id="cmsSortASC">创建时间升序</a></td>
+							<!-- <td class="fn-text-center">
+										<a href="###">申请次数升序</a>
+									</td> -->
+						</tr>
+					</table>
+				</div>
+				<div class="article-content">
+					<ul id="grid">
+					</ul>
+				</div>
+				<div class="rlist-pagenar" id="listpage"></div>
+			</div>
+		</div>
+	</div>
+	<script src="/theme/gxwz/js/page.js"></script>
+	<script src="/theme/gxwz/js/cms/article_list.js"></script>
+
+	<div id="supperSlide">
+		<script type="text/javascript" src="/theme/gxwz/js/simpla.jquery.configuration.js"></script>
+		<script type="text/javascript" src="/theme/gxwz/js/base.menu.js"></script>
+		<script type="text/javascript" src="/theme/gxwz/js/jquery.SuperSlide.2.1.1.js" charset="utf-8"></script>
+	</div>
+
+	<script src="/theme/gxwz/js/gxcx/gxcx_index.js"></script>
+	<script src="/theme/gxwz/ajaxSetup.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+.arr-cl{
+	width:20px;
+	float:right;
+	}	
+.arr-up{
+	width:12px;
+	height:6px;
+	display:block;
+	margin-top:10px;
+	background: url(../img/new/arrow_up.png) no-repeat center;
+	}	
+.arr-up2{
+	width:12px;
+	height:6px;
+	display:block;
+	margin-top:10px;
+	background: url(../img/new/arrow_up2.png) no-repeat center;
+	}
+.arr-down{
+	width:12px;
+	height:6px;
+	display:block;
+	margin-top:5px;
+	background: url(../img/new/arrow_down.png) no-repeat center;
+	}	
+.arr-down2{
+	width:12px;
+	height:6px;
+	display:block;
+	margin-top:5px;
+	background: url(../img/new/arrow_down2.png) no-repeat center;
+	}		
+.arr-up:hover,.arr-up2:hover,.arr-down:hover,.arr-down2:hover{
+	cursor:pointer;
+	}	

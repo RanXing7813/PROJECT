@@ -1,0 +1,38 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="pragma" content="no-cache"/>
+<meta http-equiv="cache-control" content="no-cache"/>
+<meta http-equiv="expires" content="0"/> 
+<title>海口市政务信息共享网站</title>
+	<link rel="stylesheet" type="text/css" href="theme/gxwz/css/function.css" />
+	<link rel="stylesheet" type="text/css" href="theme/gxwz/css/base.css" />
+	<link rel="stylesheet" type="text/css" href="theme/gxwz/css/main_style.css" />
+	<link rel="stylesheet" type="text/css" href="theme/gxwz/css/detail_style.css" />
+	<link rel="stylesheet" type="text/css" href="theme/gxwz/css/index_style.css" />
+	<link rel="stylesheet" type="text/css" href="theme/gxwz/css/select.css" />
+	
+	
+	<script type="text/javascript" src="theme/gxwz/js/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="theme/gxwz/js/simpla.jquery.configuration.js"></script>
+	<script type="text/javascript" src="theme/gxwz/js/base.menu.js"></script>
+	<script type="text/javascript" src="theme/gxwz/js/jquery.SuperSlide.2.1.1.js"  charset="utf-8"></script>
+	<script type="text/javascript" src="theme/gxwz/js/DatePicker/WdatePicker.js" charset="utf-8"></script>
+	<script type="text/javascript" src="theme/gxwz/js/layer/layer.js" charset="utf-8"></script>
+	<script type="text/javascript" src="theme/gxwz/js/echarts.min.js"></script>
+<body>
+	
+	<div id="header" th:include="gxwz/layout/header::header"></div>
+	<!--pagebanner-->
+	<div id="content" th:include="gxwz/layout/body::body"></div>
+	<script  type="text/javascript">
+		/*<![CDATA[*/
+		    showmenus();
+		/*]]>*/
+	</script>
+	<!--footer-->
+	<div id="footer" th:include="gxwz/layout/footer::footer"></div>
+</body>
+</head>
+</html>

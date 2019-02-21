@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>管理平台-服务器信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=8"/>
+<meta http-equiv="Expires" content="0"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Cache-control" content="no-cache"/>
+<meta http-equiv="Cache" content="no-cache"/>
+<link rel="stylesheet" href="/theme/plugins/layui/css/layui.css" />
+<link rel="stylesheet" href="/theme/platform/css/main.css" />
+</head>
+<body class="childrenBody">
+	<div class="panel_box row">
+		<div class="panel col" id="main_one" style="width: 33%; height: 400px; float: left"></div>
+		<div class="panel col" id="main_two" style="width: 33%; height: 400px; float: left"></div>
+		<div class="panel col" id="main_three" style="width: 33%; height: 400px; float: left"></div>
+	</div>
+	<div class="panel_box row">
+		<div id="main" style="width: 100%; height: 400px; float: left; display: none;"></div>
+	</div>
+	<div class="row">
+		<div class="sysNotice col">
+			<blockquote class="layui-elem-quote title">服务器信息</blockquote>
+			<table class="layui-table">
+				<colgroup>
+					<col width="180" />
+					<col />
+				</colgroup>
+				<tbody>
+					<tr>
+						<th>IP地址</th>
+						<td th:text="${map.hostIp}"></td>
+					</tr>
+					<tr>
+						<th>主机名</th>
+						<td th:text="${map.hostName}"></td>
+					</tr>
+					<tr>
+						<th>操作系统的名称</th>
+						<td th:text="${map.osName}"></td>
+					</tr>
+					<tr>
+						<th>操作系统的构架</th>
+						<td th:text="${map.arch}"></td>
+					</tr>
+					<tr>
+						<th>操作系统的版本</th>
+						<td th:text="${map.osVersion}"></td>
+					</tr>
+					<tr>
+						<th>处理器个数</th>
+						<td th:text="${map.processors}"></td>
+					</tr>
+					<tr>
+						<th>Java的运行环境版本</th>
+						<td th:text="${map.javaVersion}"></td>
+					</tr>
+					<tr>
+						<th>Java的安装路径</th>
+						<td th:text="${map.javaHome}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="sysNotice col" th:each="disk,iterStat:${diskList}">
+			<blockquote class="layui-elem-quote title" th:text="${disk.diskName}"></blockquote>
+			<table class="layui-table">
+				<colgroup>
+					<col width="180" />
+					<col />
+				</colgroup>
+				<tbody>
+					<tr>
+						<th>格式</th>
+						<td th:text="${disk.diskType}"></td>
+					</tr>
+					<tr>
+						<th>总大小</th>
+						<td th:text="${disk.diskTotal}"></td>
+					</tr>
+					<tr>
+						<th>已用</th>
+						<td th:text="${disk.diskUse}"></td>
+					</tr>
+					<tr>
+						<th>空闲</th>
+						<td th:text="${disk.diskFree}"></td>
+					</tr>
+					<tr>
+						<th>已用百分比</th>
+						<td th:text="${disk.diskUsage}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="/theme/plugins/layui/layui.js"></script>
+	<script type="text/javascript" src="/theme/plugins/echarts/echarts-all.js"></script>
+	<script type="text/javascript" src="/theme/platform/js/momitor/momitor.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<!-- <head th:include="thymeleaf/commonTemplates/common::commonHead"  ></head> -->
+<head>
+<title>信息列表</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-control" content="no-cache" />
+<meta http-equiv="Cache" content="no-cache" />
+<link rel="stylesheet" th:href="@{/theme/layuiadmin/layui/css/layui.css}" href="/theme/layuiadmin/layui/css/layui.css" media="all" />
+<link rel="stylesheet" th:href="@{/theme/layuiadmin/style/admin.css}" href="/theme/layuiadmin/style/admin.css" media="all" />
+<link rel="stylesheet" th:href="@{/theme/layuiadmin/layui/font/font_ali/iconfont.css}"  href="/theme/layuiadmin/layui/font/font_ali/iconfont.css" media="all"/>
+<script  type="text/javascript"  th:href="@{/theme/layuiadmin/layui/layui.js}"  src="/theme/layuiadmin/layui/layui.js"></script>
+
+</head>
+<body layadmin-themealias="default" style="">
+  
+  <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+      <div class="layui-col-md12">
+        <div class="layui-card">
+          <div class="layui-card-header" >
+          	<span   ><a style="padding-left: 10px;"><cite>当前位置：</cite><cite>模板管理</cite></a>   </span>
+          </div>
+          <div class="layui-card-body">
+          	<!--搜索div-->
+            <div class="test-table-reload-btn" style="margin-bottom: 10px;">
+                <div class="layui-form ">
+ 				<input type="hidden" name="userid" id="userid" th:value="${session.user.id}"  class="layui-input" />
+              		
+					  <div class="layui-form-item">
+					 	 <div class="layui-inline">
+			               <label class="layui-form-label">筛选所有人</label>
+						    <div class="layui-input-block">
+						      <input type="checkbox" name="isMyDatas"  value="0" id="isMyDatas" lay-skin="switch" lay-filter="isMyDatas" lay-text="所有人|仅自己" />
+						    </div>
+						    </div>
+			              <div class="layui-inline">
+				            <label class="layui-form-label">查询：</label>
+				            <div class="layui-input-inline">
+				              <input type="text" name="model_info_table_name" id="model_info_table_name" placeholder="请输入" autocomplete="off" class="layui-input" />
+				            </div>
+				          </div>
+			               <button class="layui-btn" id="search" data-type="reload">搜索</button>
+             		</div>
+        			
+             	</div>
+            </div>
+           
+           <!--数据table-->
+           <table class="layui-hide" id="Layui-table-toolbar" lay-filter="Layui-table-toolbar"></table>
+           
+           <!--table工具栏                 <button class="layui-btn layui-btn-sm" lay-event="opendgviewDowload"><i class="layui-icon iconfont icon-yunduanxiazai"></i>下载模板</button>
+           -->
+           <script type="text/html" id="Layui-table-toolbar-toolbarDemo">
+              <div class="layui-btn-container">
+                <button class="layui-btn layui-btn-sm" lay-event="opendgviewAdd"><i class="layui-icon layui-icon-add-circle"></i>新增</button>
+                <button class="layui-btn layui-btn-sm" lay-event="opendgviewPush"><i class="layui-icon iconfont icon-release-1-copy "></i>发布</button>
+                <button class="layui-btn layui-btn-sm" lay-event="opendgviewBack"><i class="layui-icon iconfont icon-cancel "></i>撤销</button>
+                <button class="layui-btn layui-btn-sm" lay-event="opendgviewDel"><i class="layui-icon layui-icon-delete"></i>删除</button>
+              </div>
+           </script>
+          
+           <!--table行按钮    <a  class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail"><i class="layui-icon layui-icon-search"></i>查看</a>-->
+           <script type="text/html" id="Layui-table-toolbar-barDemo">
+				<a  class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">	 <i class="layui-icon  iconfont icon-tianxie "></i>编辑</a>
+				<a  class="layui-btn layui-btn-normal layui-btn-xs" lay-event="sys">	 <i class="layui-icon  iconfont icon-icon_shezhi "></i>设置字段</a>
+				<a  class="layui-btn layui-btn-normal layui-btn-xs" lay-event="opendgviewDowload">	 <i class="layui-icon  iconfont icon-yunduanxiazai "></i>下载模板</a>
+ 			</script>
+            
+           <!--table数据模板-->
+           <script type="text/html" id="isreleaseTpl">
+		   </script>
+			
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<script th:inline="javascript" type="text/javascript">
+/*<![CDATA[*/  
+//don't move this
+  var linkListS = /*[[@{/platform/model/data_list_json}]]*/ ;
+  var linkAddS = /*[[@{/platform/model/data_edit}]]*/ ;
+  
+  var linkSysS = /*[[@{/platform/sys/column_list}]]*/ ;
+  
+  var linkPushS = /*[[@{/platform/model/data_push}]]*/ ;
+  var linkBackS = /*[[@{/platform/model/data_back}]]*/ ;
+  var linkDelS = /*[[@{/platform/model/data_del}]]*/ ;
+  
+  var linkCheckS = /*[[@{/platform/model/data_check}]]*/ ;
+  var userid_ = '';
+
+  /*]]>*/
+  </script>
+  
+  <script  type="text/javascript"  th:href="@{/theme/platform/js/model/model_data_list.js?v=2}" 
+   src="/theme/platform/js/model/model_data_list.js?v=2"></script>
+  
+</body></html> 

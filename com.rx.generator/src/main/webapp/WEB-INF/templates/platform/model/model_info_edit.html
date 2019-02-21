@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<!-- <head th:include="thymeleaf/commonTemplates/common::commonHead"  ></head> -->
+<head>
+<title>信息列表</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-control" content="no-cache" />
+<meta http-equiv="Cache" content="no-cache" />
+<link rel="stylesheet" th:href="@{/theme/layuiadmin/layui/css/layui.css}" href="/theme/layuiadmin/layui/css/layui.css" media="all" />
+<link rel="stylesheet" th:href="@{/theme/layuiadmin/style/admin.css}" href="/theme/layuiadmin/style/admin.css" media="all" />
+<link rel="stylesheet" th:href="@{/theme/layuiadmin/layui/font/font_ali/iconfont.css}"  href="/theme/layuiadmin/layui/font/font_ali/iconfont.css" media="all"/>
+<script  type="text/javascript"  th:href="@{/theme/layuiadmin/layui/layui.js}"  src="/theme/layuiadmin/layui/layui.js"></script>
+
+</head>
+<body layadmin-themealias="default" style="">
+ 
+  <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+      <div class="layui-col-md12">
+        <div class="layui-card">
+          <div class="layui-card-header" >
+          	<span   ><a style="padding-left: 10px;"><cite>当前位置：</cite><cite>数据表管理 - 新增编辑</cite></a>   </span>
+          </div>
+          <div class="layui-card-body">
+ 
+				<form class="layui-form" id="formInput"  lay-filter="example"
+						 action="/platform/modInfo/info_tableName_edit_save" method="post">
+				
+				  <input type="hidden"  th:value="${dto.id_table_name}"  id="id_table_name" name="id_table_name" />
+				
+				  <div class="layui-form-item">
+				    <label class="layui-form-label">数据表名称</label>
+				    <div class="layui-input-block">
+				        <input th:if="${dto.id_table_name == null or dto.id_table_name == ''}"  type="text"   name="table_name" th:value="${dto.table_name}"  lay-verify="table_name" autocomplete="off" placeholder="请输入信息类表名称  注意区分大小写" class="layui-input"/>
+				        <input th:if="${dto.id_table_name != null and dto.id_table_name != ''}" type="hidden" name="table_name" th:value="${dto.table_name}"  lay-verify="table_name" autocomplete="off" placeholder="请输入信息类表名称  注意区分大小写" class="layui-input"/>
+				   		<div class="layui-form-mid layui-word-aux" th:if="${dto.id_table_name != null and dto.id_table_name != ''}"   readonly="readonly"     th:text="${dto.table_name}" >
+    					</div>
+				   
+				    </div>
+				  </div>
+				  <div class="layui-form-item">
+				    <label class="layui-form-label">数据表中文名称</label>
+				    <div class="layui-input-block">
+				      <input type="text" name="table_cname" th:value="${dto.table_cname}" lay-verify="table_cname" placeholder="请输入" autocomplete="off" class="layui-input"/>
+				    </div>
+				  </div>
+				 <!--<div class="layui-form-item layui-form-text">
+				   <label class="layui-form-label">编辑器</label>
+				   <div class="layui-input-block">
+				     <textarea class="layui-textarea layui-hide" name="content" lay-verify="content" id="LAY_demo_editor"></textarea>
+				   </div>
+				 </div>-->
+				  <div class="layui-form-item">
+				    <div class="layui-input-block">
+				      <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+				      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+				      <button type="button" class="layui-btn layui-btn-warm closeCurPage">关闭</button>
+
+				    </div>
+				  </div>
+				</form>
+			
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+          
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script th:inline="javascript" type="text/javascript">
+/*<![CDATA[*/  
+
+/*]]>*/
+</script>
+
+<script th:inline="javascript" type="text/javascript">
+/*<![CDATA[*/  
+//don't move this
+  var linkSubmitS = /*[[@{/platform/modInfo/info_tableName_edit_save}]]*/ ;
+/*]]>*/
+</script>
+  <script  type="text/javascript"  th:href="@{/theme/platform/js/model/model_info_edit.js?v=1}"  src="/theme/platform/js/model/model_info_edit.js"></script>
+
+</body></html> 

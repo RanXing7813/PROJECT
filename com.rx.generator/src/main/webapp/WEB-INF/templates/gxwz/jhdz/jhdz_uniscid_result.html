@@ -1,0 +1,76 @@
+<!--折叠面板1-->
+<div>
+	<p>
+		<span>市场主体编号：</span>
+		<span th:text="${fsfentityno}"></span>
+		<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;企业名称：</span>
+		<span th:text="${fsfentname}"></span>
+		<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;经营状态：</span>
+		<span th:text="${fsfopstate}"></span>
+	</p>
+</div>
+<div class="foldpanel" th:each="mapobj:${findbase}">
+	<div class="panelhd">
+		<em th:text="${mapobj.tablechname}"></em>
+		<a href="javascipt:void(0);" class="btn-fold bggrey" th:if="${mapobjStat.count eq 1}">收起</a>
+		<a href="javascipt:void(0);" class="btn-fold" th:if="${mapobjStat.count gt 1}">查看</a>
+	</div>
+	<div th:class="${mapobjStat.count gt 1} ? 'panelbd f-dn' : 'panelbd' ">
+		<div class="rlist-top" style="height:100%;width:100%;">
+			<table>
+				<colgroup>
+					<col width=""> </col>
+					<col width=""> </col>
+					<col width=""> </col>
+					<col width=""> </col>
+					<col width=""> </col>
+					<col width=""> </col>
+					<col width=""> </col>
+				</colgroup>
+				<thead>
+					<tr>
+						<td style="border-bottom: 1px solid #e1e1e1;"></td>
+						<td class="fn-text-center" colspan="2" style="border-bottom: 1px solid #e1e1e1;">发送方</td>
+						<td class="fn-text-center" colspan="2" style="border-bottom: 1px solid #e1e1e1;">信息中心</td>
+						<td class="fn-text-center" colspan="2" style="border-bottom: 1px solid #e1e1e1;">接收方</td>
+					</tr>
+					<tr>
+						<td class="fn-text-center" style="border-bottom: 1px solid #e1e1e1;">主键</td>
+						<td class="fn-text-center" style="border-bottom: 1px solid #e1e1e1;">有效性标识</td>
+						<td class="fn-text-center" style="border-bottom: 1px solid #e1e1e1;">数据更新时间</td>
+						<td class="fn-text-center" style="border-bottom: 1px solid #e1e1e1;">有效性标识</td>
+						<td class="fn-text-center" style="border-bottom: 1px solid #e1e1e1;">数据更新时间</td>
+						<td class="fn-text-center" style="border-bottom: 1px solid #e1e1e1;">有效性标识</td>
+						<td class="fn-text-center" style="border-bottom: 1px solid #e1e1e1;">数据更新时间</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="listobj:${mapobj.list}" th:if="${listobj.ISVALID1 eq ''}">
+						<td class="fn-text-center" style="border: 1px solid #e1e1e1;" colspan="7" th:text="${listobj.ID}"></td>
+					</tr>
+					<tr th:each="listobj:${mapobj.list}" th:unless="${listobj.ISVALID1 eq ''}">
+						<td style="border-bottom: 1px solid #e1e1e1;" th:text="${listobj.ID}"></td>
+						<td style="border-bottom: 1px solid #e1e1e1;" th:text="${listobj.ISVALID1}"></td>
+						<td style="border-bottom: 1px solid #e1e1e1;" th:text="${listobj.TONGJIDATE1}"></td>
+						<td style="border-bottom: 1px solid #e1e1e1;" th:text="${listobj.ISVALID2}"></td>
+						<td style="border-bottom: 1px solid #e1e1e1;" th:text="${listobj.TONGJIDATE2}"></td>
+						<td style="border-bottom: 1px solid #e1e1e1;" th:text="${listobj.ISVALID3}"></td>
+						<td style="border-bottom: 1px solid #e1e1e1;" th:text="${listobj.TONGJIDATE3}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<!--折叠面板1end-->
+		
+<script type="text/javascript">
+	$(".btn-fold").click(function() {
+		if($(this).hasClass("bggrey")) {
+			$(this).removeClass("bggrey").text("展开");
+		} else {
+			$(this).addClass("bggrey").text("收起");
+		}
+		$(this).parents(".foldpanel").find(".panelbd").slideToggle();
+	})
+</script>

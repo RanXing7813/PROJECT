@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm/orm_2_1.xsd">
+
+	<entity class="cn.com.taiji.platform.entity.SysUser" />
+	<entity class="cn.com.taiji.platform.entity.SysDept" />
+	<entity class="cn.com.taiji.platform.entity.SysMenu" />
+	<entity class="cn.com.taiji.platform.entity.SysRole" />
+	<entity class="cn.com.taiji.platform.entity.RoleUser" />
+	<entity class="cn.com.taiji.platform.entity.RoleMenu" />
+	<entity class="cn.com.taiji.platform.entity.DeptUser" />
+	<entity class="cn.com.taiji.platform.entity.UploadFile" />
+	<entity class="cn.com.taiji.platform.entity.CmsInfoLink" />
+	<entity class="cn.com.taiji.platform.entity.CmsRelation" />
+	<entity class="cn.com.taiji.platform.entity.CmsInfoSort" />
+	<entity class="cn.com.taiji.platform.entity.ModelSysTable" />
+	<entity class="cn.com.taiji.platform.entity.ModelSysExport" />
+	<entity class="cn.com.taiji.platform.entity.ModelImput" />
+	<entity class="cn.com.taiji.platform.entity.ModelData" />
+	<entity class="cn.com.taiji.platform.entity.ModelPush" />
+	<entity class="cn.com.taiji.platform.entity.ModelDataDept" />
+</entity-mappings>

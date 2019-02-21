@@ -1,0 +1,138 @@
+<input type="hidden"   th:value="${id}"  id="index_mlfw_id"/>
+<input type="hidden"   th:value="${levelcode}"  id="index_mlfw_levelcode"/>
+<input type="hidden"   th:value="${catalogname}"  id="index_mlfw_catalogname"/>
+<input type="hidden"   th:value="${parentId}"  id="index_mlfw_parentId"/>
+<input type="hidden"   th:value="${qwjsval}"  id="index_mlfw_qwjsval"/>
+<input type="hidden"   th:value="${qwblval}"    id="index_mlfw_qwblval"/>
+<input type="hidden"    th:value="${pageTurn}"   id="index_mlfw_pageTurn"/>
+<div class="pagebanner  fn-clear">
+	<div class="pagebannerwrap">
+		<div class="crumb">您的位置: 首 页 > 目录服务</div>
+		<!--<div class="banner-title"></div>-->
+		<div class="f-tac">
+			<div class="banner-search">
+				<span><input  id="input_search"    type="text" class="" value="请输入查询关键词"
+					onfocus="if (value =='请输入查询关键词'){value =''}"
+					onblur="if (value ==''){value='请输入查询关键词'}" /></span> <a
+					href="javascript:void(0)" onclick="getinfoclassSearch('search');"><img
+					src="theme/gxwz/images/icon_search.png" /></a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="pageer fn-clear">
+	<div class="pagewrap">
+		<div class="leftwrap" style="margin-top: -80px;">
+			<div class="navwrapper">
+				<div id="sidebar2">
+					<!--注意使用了id-->
+					<div id="sidebar-wrapper">
+						<ul id="main-nav">
+							<li><a href="javascript:void(0)"  onclick="getCataList('all')" class="nav-top-item current"><span>全部资源目录</span></a>
+								<ul  id="ul_qbzyml">
+										<li>
+											<a  id="li_curr_jc"   href="javascript:void(0)"    onclick="getJBXXL('jc','1','基础数据资源目录')"
+												class="submenu-item current">基础资源目录</a>
+											<ul id="ul_tree_jc"></ul>
+										</li>
+										<li>
+												<a    id="li_curr_zt"  href="javascript:void(0)"   onclick="getJBXXL('zt','2','主题信息资源目录')"  
+												class="submenu-item">主题信息资源目录</a>
+												<ul id="ul_tree_zt">
+												</ul>
+											</li>
+											<li>
+												<a  id="li_curr_bm"  href="javascript:void(0)"    onclick="getJBXXL('bm','3','部门信息资源目录');"   class="submenu-item">部门信息资源目录</a>
+												<ul id="ul_tree_bm">
+												</ul>
+											</li>
+								</ul>
+						</li>
+						<!-- <li><a href="javascript:void(0)"
+							class="nav-top-item no-submenu "><span>共享目录</span></a></li>
+						<li><a href="javascript:void(0)"
+							class="nav-top-item no-submenu"><span>开放目录</span></a></li> -->
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!--nav end-->
+		</div>
+
+		<div class="rightwrap">
+			<div class="rlist-top">
+				<table>
+					<colgroup>
+                    	<col width=""> </col>
+						<col width=""> </col>
+						<col width=""> </col>
+						<col width="120"> </col>
+						<col width="120"> </col>
+                    </colgroup>
+					<!-- <tr>
+						<td><select name="" class="ipt-select style2">
+								<option value="">请选择</option>
+						</select> <select name="" class="ipt-select style2">
+								<option value="">请选择</option>
+						</select> <select name="" class="ipt-select style2">
+								<option value="">请选择</option>
+						</select> <select name="" class="ipt-select style2">
+								<option value="">请选择</option>
+						</select></td> 
+						<td class=" fn-text-right" id="td_toalcount"></td>
+						<td class="fn-text-center"><a href="javascript:void(0)"
+							onclick="getinfoclassSearch('catalog_table_lasttime','sort');">更新时间升序</a></td>
+						<td class="fn-text-center"><a href="javascript:void(0)"
+							onclick="getinfoclassSearch('apply_count','sort');">申请次数升序</a></td>
+					</tr>-->
+					<tr class="alt-row">
+						<td>
+							<label class="mg-r1">
+								<input type="radio" checked="checked" name="gxfstype" value="0" class="f-vam" onclick="getinfoclassSearch('search');"/><span class="f-vam mg-l1">全部</span>
+							</label>
+							<label class="mg-r1">
+								<input type="radio" name="gxfstype" value="1" class="f-vam" onclick="getinfoclassSearch('search');"/><span class="f-vam mg-l1">数据库</span>
+							</label>
+							<label class="mg-r1">
+								<input type="radio" name="gxfstype" value="2" class="f-vam" onclick="getinfoclassSearch('search');"/><span class="f-vam mg-l1">文件</span>
+							</label>
+							<label class="mg-r1">
+								<input type="radio" name="gxfstype" value="3" class="f-vam" onclick="getinfoclassSearch('search');"/><span class="f-vam mg-l1">接口</span>
+							</label>
+							<label class="mg-r1">
+								<input type="radio" name="gxfstype" value="4" class="f-vam" onclick="getinfoclassSearch('search');"/><span class="f-vam mg-l1">其它</span>
+							</label>
+						</td>
+						<td>
+							<label class="mg-r1">
+								<input type="radio" checked="checked" name="ishangontype" value="0" class="f-vam" onclick="getinfoclassSearch('search');"/><span class="f-vam mg-l1">全部</span>
+							</label>
+							<label class="mg-r1">
+								<input type="radio" name="ishangontype" value="1" class="f-vam" onclick="getinfoclassSearch('search');"/><span class="f-vam mg-l1">已挂接</span>
+							</label>
+							<label class="mg-r1">
+								<input type="radio" name="ishangontype" value="2" class="f-vam" onclick="getinfoclassSearch('search');"/><span class="f-vam mg-l1">未挂接</span>
+							</label>
+						</td>
+						<td class=" fn-text-right" id="td_toalcount"></td>
+						<td class="fn-text-center"><a href="javascript:void(0)"
+							onclick="getinfoclassSearch('UPDATETIME','sort');">更新时间升序</a></td>
+						<td class="fn-text-center"><a href="javascript:void(0)"
+							onclick="getinfoclassSearch('apply_count','sort');">申请次数升序</a></td>
+					</tr>
+				</table>
+			</div>
+			<div class="rlist-content" id="div_infoclass_list">
+			</div>
+			<div class="rlist-pagenar" id="listpage"></div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="theme/gxwz/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="/theme/gxwz/js/mlfw/fwml_list.js"></script>
+<script type="text/javascript"  src="/theme/gxwz/js/page.js"></script>
+<script src="theme/gxwz/js/jquery.SuperSlide.2.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="theme/gxwz/js/simpla.jquery.configuration.js"></script>
+<script type="text/javascript" src="theme/gxwz/js/base.menu.js"></script>
+<script type="text/javascript" src="theme/gxwz/ajaxSetup.js"></script>
