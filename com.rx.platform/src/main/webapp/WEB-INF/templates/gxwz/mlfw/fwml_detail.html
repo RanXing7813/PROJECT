@@ -1,0 +1,284 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>海口市政务信息共享网站</title>
+<link href="theme/gxwz/css/base.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="theme/gxwz/css/function.css" />
+<link href="theme/gxwz/css/main_style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="theme/gxwz/css/detail_style.css" />
+</head>
+
+<body class="">
+	<!--pagebanner-->
+	<input type="hidden" id="infoclass_id" th:value="${info.ID}" />
+	<input type="hidden" id="infoclass_name" th:value="${info.INFONAME}"/>
+	<input type="hidden" id="infocode" th:value="${info.INFOCODE}" />
+	<div class="pagebanner fn-clear " style="background: none">
+		<div class="pagebannerwrap fn-clear">
+			<div class="detail-wrap fn-clear">
+				<!--  = 顶部信息 =  -->
+				<div class="detail-topdata mg-b2 fn-clear">
+					<div class="topdata-pic f-fl mg-r4 pd-t1">
+						<img src="theme/gxwz/images/detail/topdata-pic.png" />
+					</div>
+					<h1 class="topdata-tit">
+						<span th:text="${info.INFONAME}"></span><em class="mg-l2">[<span
+							th:text="${info.SHARETYPE}"></span>]
+						</em>
+					</h1>
+					<div class="topdata-cont f-fl mg-r2">
+						<div class="topdata-tb f-fl">
+							<table>
+								<colgroup>
+								</colgroup>
+								<tr>
+									<td>信息资源格式：<span th:text="${info.INFOFORMAT}"></span></td>
+									<td>共 享 方 式 ：<span th:text="${info.SHAREWAY}"></span><span th:if="${info.SHAREMODETYPENAME != null}" th:text="'('+${info.SHAREMODETYPENAME}+')'"></span></td>
+									<td>更 新 周 期 ：<span th:text="${info.UPDATECYCLE}"></span></td>
+								</tr>
+								<tr>
+									<td>资 源 状 态：<span style="color: #53bf8a;" th:text="${info.HITCH_STATUS}"></span></td>
+									<td>当 前 数 据 量：<span th:text="${info.EXCHANGE_COUNT}"></span></td>
+									<td>最近更新时间：<span th:text="${info.CATALOG_TABLE_LASTTIME}"></span></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div class="topdata-menu f-fl">
+						<a th:href="${mxxturl}" class="menublock s1 f-fl" target="_blank"><span>申请共享</span></a> 
+						<a href="javascript:;"   onclick="getSubscribe()" class="menublock s2 active f-fl"><span>订阅</span></a> 
+						<a href="files/download?file_id=39c98072c5754a8086a23e099779b6df" class="menublock s3 f-fl"><span>共享指南</span></a>
+					</div>
+				</div>
+				<!--  ==========  -->
+				<!--  = 内容区 =  -->
+				<div class="tab-normal fn-clear">
+					<ul>
+						<li class="active"><a href="javascript:void(0)">基本信息</a></li>
+						<li><a href="javascript:void(0)" onclick="go()">信息项信息</a></li>
+						<li th:if="${info.SHAREMODETYPEID=='5f61e7899866477bbc1c477aa76f9565'}"><a href="javascript:void(0)" onclick="jkgo()">接口信息</a></li>
+					</ul>
+				</div>
+				<div class="at-wrap fn-clear">
+					<h1 class="titstyle1">信息资源摘要</h1>
+					<div class="pd-l8 pd-r8 mg-t6">
+						<div class="at-cont">
+							<p class="textstyle1" th:text="${info.INFLSUMMARY}"></p>
+						</div>
+					</div>
+					<h1 class="titstyle1 mg-t6" style="display: none;">信息资源关联应用</h1>
+					<div class="pd-l8 pd-r8 mg-t6 f-cb" style="display: none;">
+						<div class="detail-dt1 f-fl">
+							<table>
+								<tr>
+									<td colspan="2" class="greybg">该信息类共关联业务事项有<br /> <em>8</em>项
+									</td>
+								</tr>
+								<tr>
+									<td>前置关系事项<br /> <em>2</em>项
+									</td>
+									<td>后置关系事项<br /> <em>6</em>项
+									</td>
+								</tr>
+							</table>
+						</div>
+						<div class="f-fr">
+							<img src="theme/gxwz/images/detail/detail-chart1.png" />
+						</div>
+					</div>
+					<h1 class="titstyle1 mg-t6">共享统计</h1>
+					<div class="pd-l8 pd-r8 mg-t6 f-cb f-pr ">
+						<div class="detail-record" style="position: absolute; right: 40px; top: -60px">
+							<ul>
+								<li>
+									<div class="hd">访问量</div>
+									<div class="bd" style="color: #638ca6;">
+										<span th:if="${#lists.isEmpty(info.VISIT_COUNT)}">0</span>
+										<span th:if="${not #lists.isEmpty(info.VISIT_COUNT)}" th:text="${info.VISIT_COUNT}">0</span>
+									</div>
+								</li>
+								<li class="mg-l4">
+									<div class="hd">订阅量</div>
+									<div class="bd" style="color: #53bf8a;">
+										<span th:if="${#lists.isEmpty(info.SUBSCRIBE_COUNT)}">0</span>
+										<span th:if="${not #lists.isEmpty(info.SUBSCRIBE_COUNT)}" th:text="${info.SUBSCRIBE_COUNT}">0</span>
+									</div>
+								</li>
+								<li class="mg-l4">
+									<div class="hd">申请量</div>
+									<div class="bd" style="color: #e8b71a;">
+										<span th:if="${#lists.isEmpty(info.APPLY_COUNT)}">0</span>
+										<span th:if="${not #lists.isEmpty(info.APPLY_COUNT)}" th:text="${info.APPLY_COUNT}">0</span>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="mg-b4">
+							<div class="ipt-datetime">
+								<input class="f-fwb" onClick="WdatePicker()" type="text" id="btime" value=""
+									onFocus="WdatePicker({readOnly:true,maxDate:'#F{$dp.$D(\'etime\')}'})" />
+							</div>
+							至
+							<div class="ipt-datetime">
+								<input class="f-fwb" onClick="WdatePicker()" type="text" id="etime" value=""
+									onclick="WdatePicker({readOnly:true, minDate:'#F{$dp.$D(\'btime\')}'})" />
+							</div>
+							<span
+								style="background: #1781e0; color: #ffffff; font-size: 20px; font-weight: bold; margin-left: 20px; padding: 5px;"><a
+								href="javascript:;" onclick="getTaskTypeInfo()" style="color: white;">&nbsp;&nbsp;查询&nbsp;&nbsp;</a></span>
+						</div>
+						<div class="fn-clear" id="divChart" style="width: 1020px; height: 256px;"></div>
+
+					</div>
+				</div>
+				<!--  ==========  -->
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="theme/gxwz/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="theme/gxwz/js/simpla.jquery.configuration.js"></script>
+<script type="text/javascript" src="theme/gxwz/js/base.menu.js"></script>
+<script type="text/javascript" src="theme/gxwz/js/echarts.min.js"></script>
+<script type="text/javascript" src="theme/gxwz/js/DatePicker/WdatePicker.js" charset="utf-8"></script>
+<script type="text/javascript" src="/theme/gxwz/js/login/login.js"></script>
+<script type="text/javascript" src="theme/gxwz/js/layer/layer.js" charset="utf-8"></script>
+<script type="text/javascript" src="/theme/gxwz/js/iframe_alert.js"></script>
+<script type="text/javascript">
+	$(function() {
+		getTaskTypeInfo();
+	});
+
+	function go() {
+		var infoclass_id = $("#infoclass_id").val();
+		window.location.href = 'viewCatalogItem?id=' + infoclass_id;
+	}
+	function jkgo() {
+		var infoclass_id = $("#infoclass_id").val();
+		window.location.href = 'viewCatalogJK?id=' + infoclass_id;
+	}
+
+	function getTaskTypeInfo() {
+
+		var infocode = $("#infocode").val();
+		var btime = $("#btime").val();
+		var etime = $("#etime").val();
+
+		$.ajax({
+			url : "catalogStatistics",
+			dataType : "json",
+			data : {
+				infocode : infocode,
+				btime : btime,
+				etime : etime
+			},
+			type : "post",
+			success : function(result) {
+				$("#btime").val(result.btime);
+				$("#etime").val(result.etime);
+				show_chart(eval(result.xdata), eval(result.applydata),
+						eval(result.subscribedata), eval(result.visitdata),result.start);
+			},
+			error : function(result) {
+			}
+		});
+	}
+
+	function show_chart(xdata, applydata, subscribedata, visitdata,start) {
+		// 基于准备好的dom，初始化echarts实例
+		var myChart = echarts.init(document.getElementById('divChart'));
+		// 指定图表的配置项和数据
+		// 指定图表的配置项和数据
+		var option = {
+			backgroundColor : '#edf5fc',
+			color : [ '#00EEA7', '#638ca6', '#e8b71a'],
+			title : {
+				text : '',
+				x : 'center',
+				y : 'left'
+			},
+			grid : {
+				x : 80,
+				y : 25,
+				x2 : 10,
+				y2 : 85,
+				borderWidth : 1
+			},
+			tooltip : {
+				trigger : 'item',
+			//formatter : "{a} <br/>{b} : {c} ({d}%)"
+			},
+			dataZoom : {
+				show : true,
+				start : start
+			},
+			legend : {
+				data : [ '访问量', '订阅量', '申请量' ]
+			},
+			toolbox : {
+				show : false
+			},
+			calculable : true,
+			xAxis : [ {
+				type : 'category',
+				boundaryGap : false,
+				axisLabel : {
+					interval : 0,
+					rotate : 30
+				},
+				data : xdata
+			} ],
+			yAxis : [ {
+				type : 'value',
+				axisLabel : {
+					formatter : '{value}'
+				}
+			} ],
+			series : [ {
+				name : '访问量',
+				type : 'line',
+				data : visitdata
+			}, {
+				name : '订阅量',
+				type : 'line',
+				data : subscribedata
+			}, {
+				name : '申请量',
+				type : 'line',
+				data : applydata
+			} ]
+		};
+
+		// 使用刚指定的配置项和数据显示图表。
+		myChart.setOption(option);
+	}
+	
+	//订阅
+	function getSubscribe(){
+		var infoclassId = $("#infoclass_id").val();
+		var infoclassname = $("#infoclass_name").val();
+		$.ajax({
+			url : "getSubscribe",
+			dataType : "json",
+			data:{"infoclassId":infoclassId,"infoclassname":infoclassname},
+			type : "post",
+			success : function(result) {
+				if(result.istrue == "nologin"){
+					var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+					parent.layer.close(index);
+					alert("您尚未登录或者登录已超时，请重新登录！");
+					parent.login();
+				}else if(result.istrue == "true"){
+					alert("订阅成功！");
+				}else{
+					alert("该信息类已在目录系统成功订阅！");
+				}
+			},
+			error : function(result) {
+				console.log(result);
+			}
+		});
+	}
+</script>
+</html>

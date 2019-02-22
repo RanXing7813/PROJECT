@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>在线用户列表</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-control" content="no-cache" />
+<meta http-equiv="Cache" content="no-cache" />
+<link rel="stylesheet" href="/theme/layuiadmin/layui/css/layui.css" media="all" />
+<link rel="stylesheet" href="/theme/layuiadmin/style/admin.css" media="all" />
+<link rel="stylesheet" href="/theme/platform/css/user_defined.css" media="all" />
+</head>
+<body>
+
+	<form id="search_form" action="/platform/onlines" method="post">
+
+		<input type="hidden" id="currentpage" name="currentpage" th:value="${page.currentpage}" />
+		<input type="hidden" id="pagesize" name="pagesize" th:value="${page.pagesize}" />
+		<input type="hidden" id="datacount" name="datacount" th:value="${page.datacount}" />
+		<div class="layui-fluid">
+			<div class="layui-row layui-col-space15">
+				<div class="layui-col-md12">
+					<div class="layui-card">
+						<div class="layui-card-header">
+							<span class="layui-breadcrumb" lay-separator=">"><a style="padding-left: 10px;"><cite>当前位置：</cite><cite>系统管理</cite></a> <a><cite>系统监控</cite></a> <a><cite>在线用户列表</cite></a> </span>
+						</div>
+						<div class="layui-card-body">
+							<div class="layui-form layui-border-box layui-table-view">
+								<div class="layui-table-box">
+									<div class="layui-table-body layui-table-main">
+										<table cellspacing="0" cellpadding="0" border="0" class="layui-table" style="width: 100%">
+											<thead>
+												<tr>
+													<th style="width: 80px;"><span>序号</span></th>
+													<th><span>用户名</span></th>
+													<th><span>登录名</span></th>
+													<th><span>单位名称</span></th>
+													<th><span>上线时间</span></th>
+													<th><span>最后访问时间</span></th>
+													<th><span>IP</span></th>
+													<th style="width: 150px;"><span>操作</span></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="u,iterStat:${list}">
+													<td><span th:text="${iterStat.index+1}"></span></td>
+													<td><span th:text="${u.username}"></span></td>
+													<td><span th:text="${u.loginname}"></span></td>
+													<td><span th:text="${u.deptname}"></span></td>
+													<td><span th:text="${u.creationTime}"></span></td>
+													<td><span th:text="${u.lastAccessTime}"></span></td>
+													<td><span th:text="${u.ip}"></span></td>
+													<td><span>
+															<button type="button" class="layui-btn layui-btn-danger layui-btn-xs kickout" title="强制退出" style="cursor: pointer;" th:attr="alt=${u.id}"><i class="layui-icon layui-icon-delete"></i>强制退出</button>
+													</span></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<!--  -->
+								<div class="layui-table-page" id="page"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<script type="text/javascript" src="/theme/layuiadmin/layui/layui.js"></script>
+	<script type="text/javascript" src="/theme/platform/js/momitor/user_onlines_list.js?t=1001"></script>
+	<script type="text/javascript" src="/theme/platform/js/common.js"></script>
+	<!-- 分页、补充空行、全选、取消全选 -->
+</body>
+</html>

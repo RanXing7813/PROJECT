@@ -1,0 +1,67 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>海口市政务信息共享网站</title>
+<link href="theme/gxwz/css/base.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="theme/gxwz/css/function.css" />
+<link href="theme/gxwz/css/main_style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="theme/gxwz/css/detail_style.css" />
+</head>
+
+<body class="">
+	<!--pagebanner-->
+	<input type="hidden" id="pageSize" th:value="${data.pageSize}" />
+	<input type="hidden" id="page" th:value="${data.page}" />
+	<input type="hidden" id="total" th:value="${data.total}" />
+	<div class="pagebanner fn-clear " style="background: none">
+		<div class="pagebannerwrap fn-clear">
+			<div class="detail-wrap fn-clear">
+				<!--  = 内容区 =  -->
+				<div class="at-wrap" style="padding: 10px 10px;">
+					<div class="table-normal">
+						<table>
+							<tr>
+								<th>序号</th>
+								<th>部门名称</th>
+								<th>目录数</th>
+								<th>挂接数</th>
+							</tr>
+							<tr th:each="item,rowStat:${data.list}">
+								<td th:text="${rowStat.count}"></td>
+								<td th:text="${item.deptname}"></td>
+								<td th:text="${item.infocount}"></td>
+								<td th:text="${item.gjcount}"></td>
+							</tr>
+						</table>
+					</div>
+				 	<div class="pagination" id="listpage"></div>
+				</div>
+				<!--  ==========  -->
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="theme/gxwz/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="theme/gxwz/js/simpla.jquery.configuration.js"></script>
+<script type="text/javascript" src="theme/gxwz/js/base.menu.js"></script>
+<script src="/theme/gxwz/js/page_xtfx.js"></script>
+<script type="text/javascript">
+	/*<![CDATA[*/
+	
+		
+	$(function() {
+		var pageSize = $("#pageSize").val();
+		var total = $("#total").val();
+		var page = $("#page").val();
+		var pageoption=PageButten(parseInt(page),parseInt(total),parseInt(pageSize));
+		$("#listpage").html(pageoption);
+	});	
+		
+	function go(page) {
+		var pageSize = $("#pageSize").val();
+		window.location.href = 'infoclassStaticsList?pageSize='+pageSize+'&page=' + page;
+	}
+	/*]]>*/
+</script>
+</html>

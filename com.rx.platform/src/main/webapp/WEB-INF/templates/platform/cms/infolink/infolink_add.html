@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>内容管理-新增信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=8"/>
+<meta http-equiv="Expires" content="0"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Cache-control" content="no-cache"/>
+<meta http-equiv="Cache" content="no-cache"/>
+<link rel="stylesheet" href="/theme/plugins/layui/css/layui.css" />
+<style type="text/css">
+.layui-form-item .layui-inline {
+	width: 33.333%;
+	float: left;
+	margin-right: 0;
+}
+
+@media ( max-width :1240px) {
+	.layui-form-item .layui-inline {
+		width: 100%;
+		float: none;
+	}
+}
+</style>
+</head>
+<body class="childrenBody">
+	<form class="layui-form" action="/platform/cms/infolink_save">
+		<input type="hidden" id="infosortid" name="infosortid" th:value="${infosortid}" />
+		<input type="hidden" id="infolinkid" name="infolinkid" th:value="${info.infolinkid}" />
+		<input type="hidden" id="deptid" name="deptid" th:value="${info.deptid}" />
+		<input type="hidden" id="createdtime" name="createdtime" th:value="${info.createdtime}" />
+		<input type="hidden" id="updatetime" name="updatetime" th:value="${info.updatetime}" />
+		<input type="hidden" id="infolinkstate" name="infolinkstate" th:value="${info.infolinkstate}" />
+		<input type="hidden" id="summary" name="summary" th:value="${info.summary}" />
+		<input type="hidden" id="userid" name="userid" th:value="${info.userid}" />
+		<input type="hidden" id="remark" name="remark" th:value="${info.remark}" />
+		<input type="hidden" id="deleteflog" name="deleteflog" th:value="${info.deleteflog}" />
+		<div class="layui-form-item">
+			<label class="layui-form-label"><span style="color: red;">*</span>标题</label>
+			<div class="layui-input-block">
+				<input type="text" name="infolinktitle" lay-verify="required|length128" autocomplete="off" placeholder="" class="layui-input" th:value="${info.infolinktitle}" />
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">关键字</label>
+			<div class="layui-input-block">
+				<input type="text" name="keyword" lay-verify="length64" autocomplete="off" placeholder="" class="layui-input" th:value="${info.keyword}"/>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label"><span style="color: red;">*</span>来源</label>
+			<div class="layui-input-block">
+				<input type="text" name="infolinkorigin" lay-verify="required|length64" autocomplete="off" placeholder="" class="layui-input" th:value="${info.infolinkorigin}"/>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label"><span style="color: red;">*</span>信息类型</label>
+			<div class="layui-input-block" th:switch="${info.infolinktype}">
+				<p th:case="'0'">
+					<input type="radio" name="infolinktype" value="0" title="普通信息" lay-filter="infolinktype" checked="checked"/>
+					<input type="radio" name="infolinktype" value="1" title="外部链接" lay-filter="infolinktype"/>
+				</p>
+				<p th:case="'1'">
+					<input type="radio" name="infolinktype" value="0" title="普通信息" lay-filter="infolinktype" />
+					<input type="radio" name="infolinktype" value="1" title="外部链接" lay-filter="infolinktype" checked="checked"/>
+				</p>
+				
+			</div>
+		</div>
+		<div class="layui-form-item" id="urlDiv">
+			<label class="layui-form-label"><span style="color: red;" id="urlLable">*</span>链接地址</label>
+			<div class="layui-input-block">
+				<input type="text" name="infolinkurl" autocomplete="off" placeholder="" class="layui-input"  th:value="${info.infolinkurl}"/>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">内容</label>
+			<div class="layui-input-block">
+				<input type="hidden" id="content" name="content" th:value="${info.content}" />
+				<script id="editor" type="text/plain" style="width: 96%; height: 300px;"></script>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">附件</label>
+			<div class="layui-input-block">
+				<div class="layui-upload">
+					<button type="button" class="layui-btn layui-btn-normal upolad" >请选择文件</button>
+					<div class="layui-upload-list">
+						<table class="layui-table">
+							<thead>
+								<tr>
+									<th>文件名</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody id="fileList">
+								<tr th:each="f,iterStat:${flist}">
+									<td th:text="${f.fname}"></td><td><a class="layui-btn layui-btn-danger delf" th:attr="alt=${f.fid}">删除</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button class="layui-btn" lay-submit="" lay-filter="addNews">保存为草稿</button>
+				<button class="layui-btn" lay-submit="" lay-filter="publish">保存并发布</button>
+				<button type="button" class="layui-btn layui-btn-warm closeCurPage">关闭</button>
+			</div>
+		</div>
+	</form>
+	<script type="text/javascript" src="/theme/platform/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/theme/plugins/layui/layui.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/theme/plugins/ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/theme/plugins/ueditor/ueditor.all.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/theme/plugins/ueditor/lang/zh-cn/zh-cn.js"></script>
+	<script type="text/javascript" src="/theme/platform/js/modules.js"></script>
+	<script type="text/javascript" src="/theme/platform/js/cms/infolink_add.js"></script>
+</body>
+</html>

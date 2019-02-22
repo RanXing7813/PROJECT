@@ -1,0 +1,100 @@
+		
+		
+<style>
+.downtxt p {
+    width: 100%;
+    margin: 0px auto;
+    padding: 10px 0 5px 0;
+    border-bottom: 1px dashed #ccc;
+    overflow: hidden;
+}
+</style>
+
+		
+		<div class="article-wrap mg-t4">
+				<div class="table-form">
+					<div class="at-wrap f-cb">
+								<!--主体内容区-->
+								<div class="text_main">
+									<h4 th:text="${dto.infolinkTitle}">北京市经济和信息化委员会(北京市国防科学技术工业办公室)主要职责</h4>
+									<div class="text_ly">
+										<span  >发布时间：<span th:text="${dto.createdTime}">2016-06-20</span></span><span th:unless="${dto.infolinkOrigin} eq '' or ${dto.infolinkOrigin} eq null" th:text="信息来源： +${dto.infolinkOrigin}">信息来源：北京市经济和信息化委员会</span>
+									</div>
+									<div class="txt">
+									  	<div class="article">
+			                                       <p style="text-indent:1em;"> <span th:unless="${dto.summary} eq '' or ${dto.summary} eq null" th:text="信息摘要：+ ${dto.summary}"></span></p> <br/>
+			                        	</div>
+			                        	
+			                        	 <div class="article" id="container" th:utext="${dto.content}"></div>
+									
+									</div>
+								</div>
+								<form	action=""  method="POST">
+									<div class="downtxt" th:if="${dto.fileList !=null and  dto.fileList.size()>0}">
+										<span class="fj">【附件】</span>
+										<p th:each="product:${dto.fileList}">
+											<a th:attr="href='javascript:downLoadServlet(\'DownLoadServlet?file_id='+${product.file_id}+'\');'" class="clor"><font th:text="${product.file_name}+.+${product.file_type}">政务信息资源共享管理办法</font></a>
+											<input type='hidden' name='fileIds'    th:value="${product.file_id}" />
+											<a  th:attr="href='javascript:downLoadServlet(\'DownLoadServlet?file_id='+${product.file_id}+'\');'" class=" downclick delete">【下载】</a><!--  th:href="@{'DownLoadServlet?filename='+${product.file_save_name} }"   -->
+										</p>
+<!-- 								th:onclick="downLoadServlet(\'+${product.file_save_name}+\')" -->
+									</div>   
+									
+								
+									<input type='hidden' id="DELETE" />
+								</form>
+								
+								<!--主体内容区-->
+					</div>			
+								<div class="at-wrap f-cb">
+									<div class="f-tac mg-t8 mg-b8">
+										<a class="btn-submit" href="javascript:void(0);" style="color: #fff;" onclick="backInfo();">返回</a>
+									</div>
+								</div> 
+							
+				</div>
+		</div>
+<script th:inline="javascript">
+/*<![CDATA[*/
+	//为编辑栏赋值 
+	var contents = /*[[${dto.content}]]*/;
+	$("#container").html(contents);
+	//$("#container").html($("#container").text());
+
+
+   function downLoadServlet(name){
+	  	 name = name.replace('+','%2B');
+		  $("form").attr("action", name).submit();	
+		 return false;
+	 }
+/*]]>*/
+</script>	
+<!--表单验证样式-->
+ <!--js-->
+<script type="text/javascript"  >
+function backInfo(){
+		map.filter = null;
+		 $.ajax({
+	          url : "toWzgl_list",
+	          async:false,//同步
+	          data:{
+	          },
+	          type:"POST",
+	          success: function(result) {
+	        	  $('#contensBody').html(result);
+	        	  go(map.page, map.name  );
+	          }
+		 });
+	   if(map.typeDiv == 4){
+		   jQuery(".article-tab").slide({
+			 	trigger: "click",
+				defaultIndex:0
+			})
+	   }else{ 
+		   jQuery(".article-tab").slide({
+			 	trigger: "click",
+				defaultIndex:1
+			})
+	   }
+}
+</script>

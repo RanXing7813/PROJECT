@@ -7,6 +7,8 @@
 		<artifactId>King_rx</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
+	
+	
   <artifactId>com.rx.generator</artifactId>
   <name>com.rx.generator</name>
   <url>http://maven.apache.org</url>
@@ -25,9 +27,11 @@
     
      <dependency>
       <groupId>com.rx</groupId>
-      <artifactId>com.rx.basejar</artifactId>
+      <artifactId>com.rx.platform</artifactId>
        <version>0.0.1-SNAPSHOT</version>
     </dependency>
     
   </dependencies>
+  
+  <version>0.0.1-SNAPSHOT</version>
 </project>

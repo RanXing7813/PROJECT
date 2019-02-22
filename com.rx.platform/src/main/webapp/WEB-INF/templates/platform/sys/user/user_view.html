@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>用户管理-用户查看</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=8"/>
+<meta http-equiv="Expires" content="0"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Cache-control" content="no-cache"/>
+<meta http-equiv="Cache" content="no-cache"/>
+<link rel="stylesheet" href="/theme/plugins/layui/css/layui.css" media="all" />
+<link rel="stylesheet" href="/theme/platform/css/main.css" />
+<style type="text/css">
+.layui-form-item .layui-inline {
+	width: 33.333%;
+	float: left;
+	margin-right: 0;
+}
+
+@media ( max-width :1240px) {
+	.layui-form-item .layui-inline {
+		width: 100%;
+		float: none;
+	}
+}
+</style>
+</head>
+<body class="childrenBody">
+
+	<div class="row">
+		<div class="sysNotice col"></div>
+		<div class="sysNotice col">
+			<table class="layui-table">
+				<colgroup>
+					<col width="180" />
+					<col />
+				</colgroup>
+				<tbody>
+					<tr>
+						<th>登录名</th>
+						<td th:text="${user.loginname}"></td>
+					</tr>
+					<tr>
+						<th>用户名</th>
+						<td th:text="${user.username}"></td>
+					</tr>
+					<tr>
+						<th>手机号</th>
+						<td th:text="${user.phone}"></td>
+					</tr>
+					<tr>
+						<th>邮箱</th>
+						<td th:text="${user.email}"></td>
+					</tr>
+					<tr>
+						<th>备注</th>
+						<td th:text="${user.remark}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<script type="text/javascript" src="/theme/platform/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/theme/plugins/layui/layui.js"></script>
+	<script type="text/javascript">
+		function gb() {
+			var $ = layui.jquery;
+			var layer = parent.layer == undefined ? layui.layer : parent.layer;
+			layer.closeAll("iframe");
+			parent.location.reload();//刷新父页面
+		}
+	</script>
+</body>
+</html>

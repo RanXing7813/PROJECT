@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>platform后台管理</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=8"/>
+<meta http-equiv="Expires" content="0"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<meta http-equiv="Cache-control" content="no-cache"/>
+<meta http-equiv="Cache" content="no-cache"/>
+<link rel="stylesheet" th:href="@{/theme/plugins/layui/css/layui.css}" media="all" />
+<script type="text/javascript" th:src="@{/theme/plugins/layui/layui.js}"></script>
+</head>
+<body class="childrenBody">
+	<div style="text-align: center; padding: 11% 0;">
+		<i class="layui-icon" style="line-height: 5rem; font-size: 5rem; color: #393D50;" th:text="${diyMsg}"></i>
+		<p style="font-size: 20px; font-weight: 300; color: #999;" th:text="${exceptionMessage}"></p>
+	</div>
+	<div style="text-align: center;">
+		<a class="layui-btn layui-btn-normal newsAdd_btn" style="text-align: center;"  onclick="gb()">关&nbsp;&nbsp;&nbsp;&nbsp;闭</a>
+	</div>
+	<script type="text/javascript">
+		function gb() {
+			var $ = layui.jquery;
+			var layer = parent.layer == undefined ? layui.layer : parent.layer;
+			layer.closeAll("iframe");
+			parent.location.reload();//刷新父页面
+		}
+	</script>
+</body>
+</html>

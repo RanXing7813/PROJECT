@@ -1,0 +1,161 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>海口市政务信息共享网站</title>
+<link href="theme/gxwz/css/base.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="theme/gxwz/css/function.css" />
+<link href="theme/gxwz/css/main_style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="theme/gxwz/css/detail_style.css" />
+</head>
+
+<body class="">
+	<!--pagebanner-->
+	<input type="hidden" id="infoclass_id" th:value="${info.id}" />
+	<div class="pagebanner fn-clear " style="background: none">
+		<div class="pagebannerwrap fn-clear">
+			<div class="detail-wrap fn-clear">
+				<!--  = 顶部信息 =  -->
+				<div class="detail-topdata mg-b2 fn-clear">
+					<div class="table-form mg-t6">
+						<table>
+							<colgroup>
+								<col width="120" />
+								<col width="420" />
+								<col width="120" />
+							</colgroup>
+							<tr>
+								<th class="f-tar" colspan="4" style="text-align: left;">信息类</th>
+							</tr>
+							<tr>
+								<th class="f-tar">信息类名称</th>
+								<td th:text="${info.infoname}" style="font-weight:normal;"></td>
+								<th class="f-tar">资源分类</th>
+								<td th:text="${info.infotypename}" style="font-weight:normal;"></td>
+							</tr>
+							<tr>
+								<th class="f-tar">信息类提供方</th>
+								<td th:text="${info.providezgname}" style="font-weight:normal;"></td>
+								<th class="f-tar">信息资源格式</th>
+								<td th:text="${info.formattypename}" style="font-weight:normal;"></td>
+							</tr>
+							<tr>
+								<th class="f-tar">信息类摘要</th>
+								<td colspan="3" th:text="${info.infoabstracts}" style="font-weight:normal;"></td>
+							</tr>
+						</table>
+					</div>
+					<div class="table-form mg-t6">
+						<table>
+							<colgroup>
+								<col width="60" />
+								<col width="60" />
+								<col width="240" />
+								<col width="120" />
+								<col width="120" />
+								<col width="120" />
+								<col width="120" />
+								<col width="120" />
+								<col width="" />
+							</colgroup>
+							<tr>
+								<th><input type="checkbox" checked="checked"/></th>
+								<th>主键</th>
+								<th>名称</th>
+								<th>类别</th>
+								<th>类型</th>
+								<th>长度</th>
+								<th>值域</th>
+								<th>排序值</th>
+								<th>说明</th>
+							</tr>
+							<tr th:each="item:${info.list}">
+								<td><input type="checkbox" name="ids" th:value="${item.id}" checked="checked"/></td>
+								<td th:text="${item.isprimary}" style="font-weight:normal;"></td>
+								<td th:text="${item.xxxmc}" style="font-weight:normal;"></td>
+								<td th:text="${item.metacode_dis}" style="font-weight:normal;"></td>
+								<td th:text="${item.datatype}" style="font-weight:normal;"></td>
+								<td th:text="${item.datasize}" style="font-weight:normal;"></td>
+								<td th:text="${item.ranges}" style="font-weight:normal;"></td>
+								<td th:text="${item.indexnum}" style="font-weight:normal;"></td>
+								<td th:text="${item.description}" style="font-weight:normal;"></td>
+							</tr>
+						</table>
+					</div>
+					<div class="table-form mg-t6">
+						<table>
+							<colgroup>
+								<col width="120" />
+								<col width="420" />
+								<col width="120" />
+							</colgroup>
+							<tr>
+								<th class="f-tar" colspan="4" style="text-align: left;">资源共享申请</th>
+							</tr>
+							<tr>
+								<th class="f-tar">申请人</th>
+								<td><input class="f-fwb" type="text" name="" id="" value="" style="border: 1px solid #e9e9e9;width: 90%"/></td>
+								<th class="f-tar">申请部门</th>
+								<td><input class="f-fwb" type="text" name="" id="" value="" style="border: 1px solid #e9e9e9;width: 90%"/></td>
+							</tr>
+							<tr>
+								<th class="f-tar">数据用途</th>
+								<td colspan="3"><input class="f-fwb" type="text" name="" id="" value="" style="border: 1px solid #e9e9e9;width: 90%"/></td>
+							</tr>
+							<tr>
+								<th class="f-tar">申请原因</th>
+								<td colspan="3">
+									<textarea class="f-fwb" type="text" name="" id="" value="" rows="2" style="border: 1px solid #e9e9e9;width: 90%"></textarea>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div class="f-tac mg-t8 mg-b8">
+						<a class="btn-submit mg-r8" href="#">保&nbsp;&nbsp;存</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript" src="theme/gxwz/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="theme/gxwz/js/simpla.jquery.configuration.js"></script>
+<script type="text/javascript" src="theme/gxwz/js/base.menu.js"></script>
+<script type="text/javascript" src="/theme/gxwz/js/login/login.js"></script>
+<script type="text/javascript" src="theme/gxwz/js/layer/layer.js" charset="utf-8"></script>
+<script type="text/javascript" src="/theme/gxwz/js/iframe_alert.js"></script>
+<script type="text/javascript">
+	/*<![CDATA[*/
+	// 共享申请
+	function getSubscribe() {
+		var infoclassId = $("#infoclass_id").val();
+		var infoclassname = $("#infoclass_name").val();
+		$.ajax({
+			url : "getSubscribe",
+			dataType : "json",
+			data : {
+				"infoclassId" : infoclassId,
+				"infoclassname" : infoclassname
+			},
+			type : "post",
+			success : function(result) {
+				if (result.istrue == "nologin") {
+					var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+					parent.layer.close(index);
+					alert("您尚未登录或者登录已超时，请重新登录！");
+					parent.login();
+				} else if (result.istrue == "true") {
+					alert("订阅成功！");
+				} else {
+					alert("该信息类已在目录系统成功订阅！");
+				}
+			},
+			error : function(result) {
+				console.log(result);
+			}
+		});
+	}
+	/*]]>*/
+</script>
+</html>

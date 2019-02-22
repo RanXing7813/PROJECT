@@ -13,9 +13,6 @@ import org.apache.log4j.Logger;
 
 import com.szmirren.entity.GeneratorContent;
 
-import freemarker.template.Configuration;
-import freemarker.template.DefaultObjectWrapper;
-import freemarker.template.Template;
 /**
  * 创建文件的 的工具
  * 

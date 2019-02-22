@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>海口市政务信息共享网站</title>
+		<link rel="stylesheet" type="text/css" href="theme/gxwz/css/function.css" />
+		<link rel="stylesheet" type="text/css" href="theme/gxwz/css/base.css" />
+		<link rel="stylesheet" type="text/css" href="theme/gxwz/css/main_style.css" />
+		<link rel="stylesheet" type="text/css" href="theme/gxwz/css/detail_style.css" />
+		<link rel="stylesheet" type="text/css" href="/theme/gxwz/css/index_style.css" />
+		<style>
+			.bluecolor {
+				background: #1781e0;
+			}
+			.bluefontcolor{
+				color: #fff;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="foldpanel">
+			<input type="hidden" id="ywlx" th:value="${ywlx}"/>
+			<input type="hidden" id="fsfdept" th:value="${fsfdept}"/>
+			<input type="hidden" id="jsfdept" th:value="${jsfdept}"/>
+			<div class="panelhd">
+				<em>数据发送方</em>
+			</div>
+			<div class="panelbd">
+				<div class="f-cb mg-t2" id="fsflist">
+					<span th:each="fsfobj:${fsfdeptlist}">
+						<div class="jhdz-dt1 f-fl bluecolor" th:id="${'fsf_'+fsfobj.dept}"  th:onclick="'changeDept(1,\''+${'fsf_'+fsfobj.dept}+'\')'" th:if="${#strings.containsIgnoreCase(fsfdept,fsfobj.dept)}">
+							<p>
+								<a href="#" class="bluefontcolor" style="font-size: 16px;" th:text="${fsfobj.deptname}"></a>
+								<input type="hidden" name="fsfdeptcode" th:value="${fsfobj.dept}"/>
+								<input type="hidden" name="fsfdeptname" th:value="${fsfobj.deptname}"/>
+							</p>
+						</div>
+						<div class="jhdz-dt1 f-fl" th:id="${'fsf_'+fsfobj.dept}" th:onclick="'changeDept(1,\''+${'fsf_'+fsfobj.dept}+'\')'" th:unless="${#strings.containsIgnoreCase(fsfdept,fsfobj.dept)}">
+							<p><a href="#" style="font-size: 16px;" th:text="${fsfobj.deptname}"></a></p>
+							<input type="hidden" name="" th:value="${fsfobj.dept}"/>
+							<input type="hidden" name="" th:value="${fsfobj.deptname}"/>
+						</div>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="foldpanel">
+			<div class="panelhd">
+				<em>数据接收方</em>
+			</div>
+			<div class="panelbd">
+				<div class="f-cb mg-t2" id="jsflist">
+					<span th:each="jsfobj:${jsfdeptlist}">
+						<div class="jhdz-dt1 f-fl bluecolor" th:id="${'jsf_'+jsfobj.dept}" th:onclick="'changeDept(2,\''+${'jsf_'+jsfobj.dept}+'\')'"  th:if="${#strings.containsIgnoreCase(jsfdept,jsfobj.dept)}">
+							<p>
+								<a href="#" class="bluefontcolor" style="font-size: 16px;" th:text="${jsfobj.deptname}"></a>
+								<input type="hidden" name="jsfdeptcode" th:value="${jsfobj.dept}"/>
+								<input type="hidden" name="jsfdeptname" th:value="${jsfobj.deptname}"/>
+							</p>
+						</div>
+						<div class="jhdz-dt1 f-fl" th:id="${'jsf_'+jsfobj.dept}" th:onclick="'changeDept(2,\''+${'jsf_'+jsfobj.dept}+'\')'" th:unless="${#strings.containsIgnoreCase(jsfdept,jsfobj.dept)}">
+							<p>
+								<a href="#" style="font-size: 16px;" th:text="${jsfobj.deptname}"></a>
+								<input type="hidden" name="" th:value="${jsfobj.dept}"/>
+								<input type="hidden" name="" th:value="${jsfobj.deptname}"/>
+							</p>
+						</div>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="f-tac mg-b8">
+			<a class="btn-submit mg-r8" href="javascript:void(0)" id="savabutten">保&nbsp;&nbsp;&nbsp;&nbsp;存</a>
+		</div>
+		<script type="text/javascript" src="/theme/gxwz/js/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="/theme/gxwz/js/jhdz/iframe_dept.js"></script>
+	</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>菜单管理-菜单编辑</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=8" />
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-control" content="no-cache" />
+<meta http-equiv="Cache" content="no-cache" />
+<link rel="stylesheet" href="/theme/layuiadmin/layui/css/layui.css" media="all" />
+<link rel="stylesheet" href="/theme/platform/css/user_defined.css" media="all" />
+<style type="text/css">
+.layui-form-item .layui-inline {
+	width: 33.333%;
+	float: left;
+	margin-right: 0;
+}
+
+@media ( max-width :1240px) {
+	.layui-form-item .layui-inline {
+		width: 100%;
+		float: none;
+	}
+}
+</style>
+</head>
+<body class="childrenBody">
+	<form class="layui-form" action="/platform/sys/menu_save" method="post">
+		<input type="hidden" name="id" value="" />
+		<input type="hidden" name="state" value="1" />
+		<input type="hidden" name="isparent" value="0" />
+		<input type="hidden" name="level" value="" />
+		<div class="layui-form-item">
+			<label class="layui-form-label">
+				<span style="color: red">*</span>菜单名称
+			</label>
+			<div class="layui-input-block">
+				<input type="text" name="menuName" class="layui-input " lay-verify="required|length32" value="测试" />
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">
+				<span style="color: red">*</span>请求方法
+			</label>
+			<div class="layui-input-block">
+				<input type="text" name="requestUrl" class="layui-input " lay-verify="required|length32" value="/platform/sys/role_list" />
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">
+				<span style="color: red">*</span>上级菜单
+			</label>
+			<div class="layui-input-block">
+				<input type="hidden" id="parentId" name="parentId" class="layui-input " lay-verify="" placeholder="" value="1" />
+				<input type="text" id="parentMenuName" name="parentMenuName" class="layui-input " lay-verify="required" placeholder="" value="根节点" />
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">
+				<span style="color: red">*</span>排序号
+			</label>
+			<div class="layui-input-block">
+				<input type="text" name="orderNo" class="layui-input " lay-verify="required|number" value="1000" />
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">
+				<span style="color: red">*</span>菜单图标
+			</label>
+			<div class="layui-input-block">
+				<input type="text" id="menuIcon" name="menuIcon" class="layui-input " lay-verify="required|length64" />
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">
+				已选图标
+			</label>
+			<div class="layui-input-block">
+				<label class="layui-form-label">
+					<i id="selectedIcon"></i>
+				</label>
+			</div>
+		</div>
+		<hr/>
+		<div class="layui-form-item">
+			<label class="layui-form-label">可选图标</label>
+			<div class="main markdown">
+				<span th:each="icon,iterStat:${iconsList}" th:class="'iconfont '+${icon.icons_name}"></span>
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button class="layui-btn" lay-submit="" lay-filter="addMenu">保存</button>
+				<button type="button" class="layui-btn layui-btn-warm closeCurPage">关闭</button>
+			</div>
+		</div>
+	</form>
+	<script type="text/javascript" src="/theme/platform/js/jquery.min.js"></script>
+	<script src="/theme/layuiadmin/layui/layui.js"></script>
+	<script type="text/javascript" src="/theme/platform/js/sysmenu/menu_add.js?t=990fd"></script>
+	<script type="text/javascript" src="/theme/platform/js/modules.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<div class="rlist-top">	
+							<table>
+								<colgroup>
+									<col width="660"> </col>
+									<col width="120"> </col>
+									<col width="120"> </col>
+								</colgroup>
+								<tr>
+									<td class=" fn-text-right" id="td_toalcount"></td>
+									<td class="fn-text-center">
+										<a href="###" id="cmsSortASC"   >创建时间升序</a>
+									</td>
+								</tr>
+							</table>
+						</div>
+						
+						<div class="article-wrap">
+							<div class="article-tab">
+								<div class="hd mg-b2" >
+									<ul>
+										<li onclick="changetypeDiv(4);" class="on">已发布</li>
+										<!-- <li onclick="changetypeDiv(3);" >待审核</li> -->
+										<li onclick="changetypeDiv(1);" >草稿箱</li>
+									</ul>
+									<div class="f-fr">
+										<a href="javascript:void(0);" class="btn-tab" onclick="codeLook();">预览</a>
+										<a href="javascript:void(0);" class="btn-tab" onclick="qiyong(4);">启用</a>
+										<a href="javascript:void(0);" class="btn-tab" onclick="qiyong(1);">停用</a>
+										<a href="javascript:void(0);" class="btn-tab" onclick="add();">新增</a>
+										<a href="javascript:void(0);" class="btn-tab" onclick="qiyong(0);">删除</a>
+										
+									</div>
+								</div>
+								<div class="bd">
+									<div class="slidecont">
+										<div class="article-content">
+											<ul id="grid4">
+											</ul>
+										</div>
+										<div id="listpage4">
+											
+										</div>
+									</div>
+									<!-- <div class="slidecont">
+										<div class="article-content">
+											<ul id="grid3">
+											</ul>
+										</div>
+										<div id="listpage3">
+											
+										</div>
+									</div> -->
+									<div class="slidecont">
+										<div class="article-content">
+											<ul id="grid1">
+											</ul>
+										</div>
+										<div id="listpage1">
+											
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+			<script type="text/javascript" src="/theme/gxwz/js/base.menu.js"></script>
+			<script type="text/javascript" src="/theme/gxwz/js/jquery.SuperSlide.2.1.1.js" charset="utf-8"></script>			
+		<script type="text/javascript">
+			$(".article-tab").slide({
+				trigger: "click",
+				defaultIndex:1
+			})
+		</script>
+		<script type="text/javascript" src="/theme/gxwz/ajaxSetup.js"></script>

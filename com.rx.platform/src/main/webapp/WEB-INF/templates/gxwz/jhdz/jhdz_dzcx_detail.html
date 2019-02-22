@@ -1,0 +1,64 @@
+<div class="table-form mg-t6">
+	<table>
+		<colgroup>
+			<col width="160" />
+			<col width="420" />
+			<col width="160" />
+		</colgroup>
+		<!-- <tr>
+			<th class="f-tar">查询方式</th>
+			<td colspan="3">
+				<input class="f-vam" type="radio" name="way" id="way1" value="1" checked="checked"  />
+				<label class="ipt-label mg-r2" for="way1">发送</label>
+				<input class="f-vam" type="radio" name="way" id="way2" value="2" />
+				<label class="ipt-label" for="way2">接收</label>
+			</td>
+		</tr> -->
+		<tr>
+			<th class="f-tar">数据发送方</th>
+			<td>
+				<input type="hidden" id="fsfdeptcode" th:value="${fsfdept}"/>
+				<span th:text="${fsfdeptname}" id="fsfdeptname" ></span>
+				<span><a href="javascript:void(0)" onclick="getDeptIframePage()"><img
+								src="/theme/gxwz/images/insert_ico.png"
+								style="width: 16px; height: 16px;" /></a></span>
+			</td>
+			<th class="f-tar">数据接收方</th>
+			<td>
+				<input type="hidden" id="jsfdeptcode" th:value="${jsfdept}"/>
+				<span th:text="${jsfdeptname}" id="jsfdeptname"></span>
+				<span><a href="javascript:void(0)" onclick="getDeptIframePage()"><img
+								src="/theme/gxwz/images/insert_ico.png"
+								style="width: 16px; height: 16px;" /></a></span>
+			</td>
+		</tr>
+		<tr>
+			<th class="f-tar">查询区间</th>
+			<td>
+				<div class="ipt-datetime">
+					<input class="f-fwb" onClick="WdatePicker()" type="text" id="starttime" th:value="${starttime}" onFocus="WdatePicker({readOnly:true,maxDate:'#F{$dp.$D(\'endtime\')}'})" />
+				</div>
+				至
+				<div class="ipt-datetime">
+					<input class="f-fwb" onClick="WdatePicker()" type="text" id="endtime" th:value="${endtime}" onclick="WdatePicker({readOnly:true, minDate:'#F{$dp.$D(\'starttime\')}'})"/>
+				</div>
+			</td>
+			<th class="f-tar">数据状态</th>
+			<td>
+				<select id="status" class="ipt-select f-fwb">
+					<option value="2">全部数据 </option>
+					<option value="1" selected="selected">有效数据 </option>
+					<option value="0">无效数据 </option>
+				</select>
+			</td>
+		</tr>
+	</table>
+</div>
+<div class="f-tac mg-t8 mg-b8">
+	<a class="btn-submit mg-r8" href="javascript:void(0)" onclick="getDZCXList()">查&nbsp;&nbsp;&nbsp;&nbsp;询</a>
+	<a class="btn-submit bggrey" href="javascript:void(0)" onclick="dzcx()">重&nbsp;&nbsp;&nbsp;&nbsp;置</a>
+</div>
+<div id="dzpanelDiv">
+</div>
+
+<script src="/theme/gxwz/js/jhdz/jhdz_dzcx_detail.js"></script>

@@ -1,0 +1,163 @@
+	<div class="at-wrap fn-clear"
+		style="background: linear-gradient(to bottom, #f7f8fa, #ffffff);">
+		<h1 class="titstyle2 mg-b4">目录资源统计概况</h1>
+		<div class="f-cb">
+			<div class="tbqk-dt1 f-fl mg-r4 mg-b4" style="width: 420px;">
+				<table class="f-tac">
+					<colgroup>
+						<col width="33.33%" />
+						<col width="33.33%" />
+						<col width="33.33%" />
+					</colgroup>
+					<tr>
+						<td colspan="3" style="padding-bottom: 20px;"><span
+							class="tit">已报送目录情况</span></td>
+					</tr>
+					<tr>
+						<td class="bdr1"><span class="num" th:text="${data.bmcount}">0</span>
+							<p class="text1">累计（个）</p></td>
+						<td class="bdr1"><span class="num" th:text="${data.sjbmcount}">0</span>
+							<p class="text1">市级部门（个）</p></td>
+						<td class=""><span class="num" th:text="${data.dsbmcount}">0</span>
+							<p class="text1">区部门（个）</p></td>
+					</tr>
+				</table>
+			</div>
+			<div class="tbqk-dt1 f-fl mg-b4" style="width: 420px;">
+				<table class="f-tac">
+					<colgroup>
+						<col width="50%" />
+						<col width="50%" />
+					</colgroup>
+					<tr>
+						<td colspan="3" style="padding-bottom: 20px;"><span
+							class="tit">基础/主题信息资源目录情况</span></td>
+					</tr>
+					<tr>
+						<td class="bdr1"><span class="num" th:text="${data.jccount}">0</span>
+							<p class="text1">基础信息资源目录（个）</p></td>
+						<td class=""><span class="num" th:text="${data.ztcount}">0</span>
+							<p class="text1">主题信息资源目录（个）</p></td>
+					</tr>
+				</table>
+			</div>
+			<div class="tbqk-dt1 f-fl mg-r4 mg-b4" style="width: 420px;">
+				<table class="f-tac">
+					<colgroup>
+						<col width="50%" />
+						<col width="50%" />
+					</colgroup>
+					<tr>
+						<td colspan="2" style="padding-bottom: 20px;"><span
+							class="tit">市级部门目录提供情况</span></td>
+					</tr>
+					<tr>
+						<td class="bdr1"><span class="num" th:text="${data.sjtodaycount}">0</span>
+							<p class="text1">今日发布（条）</p></td>
+						<td class="bdr1"><span class="num" th:text="${data.sjcount}">0</span>
+							<p class="text1">累计发布（条）</p></td>
+						<!-- <td class=""><span class="num" th:text="${data.sjtotal}">0</span>
+							<p class="text1">累计已上线（条）</p></td> -->
+					</tr>
+				</table>
+			</div>
+			<div class="tbqk-dt1 f-fl mg-b4" style="width: 420px;">
+				<table class="f-tac">
+					<colgroup>
+						<col width="50%" />
+						<col width="50%" />
+					</colgroup>
+					<tr>
+						<td colspan="2" style="padding-bottom: 20px;"><span
+							class="tit">区部门目录提供情况</span></td>
+					</tr>
+					<tr>
+						<td class="bdr1"><span class="num" th:text="${data.dstodaycount}">0</span>
+							<p class="text1">今日发布（条）</p></td>
+						<td class="bdr1"><span class="num" th:text="${data.dscount}">0</span>
+							<p class="text1">累计发布（条）</p></td>
+						<!-- <td class=""><span class="num" th:text="${data.dstotal}">0</span>
+							<p class="text1">累计已上线（条）</p></td> -->
+					</tr>
+				</table>
+			</div>
+
+		</div>
+		<div class="f-cb">
+			<div class="f-fl mg-r4" style="width: 420px;">
+				<div class="f-cb">
+					<h1 class="titstyle1 f-fl">市级部门目录提供情况</h1>
+					<div class="f-fr">
+						<a href="javascript:void(0)" class="btn-more f-fr" onclick="getDeptCatalogMore('sj')">更多</a>
+					</div>
+				</div>
+				<div class=" mg-t6">
+					<div class="">
+						<div class="table-form3">
+							<table id="sjcataloglist">
+							</table>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="f-fl" style="width: 420px;">
+				<div class="f-cb">
+					<h1 class="titstyle1 f-fl">区目录提供情况</h1>
+					<div class="f-fr">
+						<a href="javascript:void(0)" class="btn-more f-fr" onclick="getDeptCatalogMore('ds')">更多</a>
+					</div>
+				</div>
+				<div class=" mg-t6">
+					<div class="">
+						<div class="table-form3">
+							<table id="dscataloglist">
+							</table>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="f-cb mg-t4">
+			<div class="f-fl mg-r4" style="width: 420px;">
+				<div class="f-cb">
+					<h1 class="titstyle1 f-fl">市级部门目录共享类型统计</h1>
+					<!--<div class="f-fr">
+											<a href="#" class="btn-more f-fr">更多</a>
+										</div>-->
+				</div>
+				<div class=" mg-t6" style="width: 400px; height: 304px;" id="sjdivChart"></div>
+			</div>
+			<div class="f-fl" style="width: 420px;">
+				<div class="f-cb">
+					<h1 class="titstyle1 f-fl">区目录共享类型统计</h1>
+					<!--<div class="f-fr">
+											<a href="#" class="btn-more f-fr">更多</a>
+										</div>-->
+				</div>
+				<div class=" mg-t6" style="width: 400px; height: 304px;" id="dsdivChart"></div>
+			</div>
+		</div>
+		<div class="f-cb mg-t4">
+			<div class="f-cb">
+				<h1 class="titstyle1 f-fl">日目录访问量统计</h1>
+				<div class="f-fr">
+					<div class="ipt-datetime">
+						<input class="f-fwb" onClick="WdatePicker()" type="text" th:value="${data.fwlbegin}" onFocus="WdatePicker({readOnly:true,maxDate:'#F{$dp.$D(\'fwlend\')}'})"
+							id="fwlbegin" />
+					</div>
+					<span class="mg-l1 mg-r1">至</span>
+					<div class="ipt-datetime mg-r2">
+						<input class="f-fwb" onClick="WdatePicker()" type="text" th:value="${data.fwlend}" onFocus="WdatePicker({readOnly:true,minDate:'#F{$dp.$D(\'fwlbegin\')}'})"
+							id="fwlend" />
+					</div>
+					<a class="btn-submit" href="javascript:void(0)"
+						style="width: 100px; height: 32px; line-height: 32px;" onclick="getCatalogVisit()">查询</a>
+				</div>
+			</div>
+			<div class=" mg-t6" style="width: 860px; height: 220px;" id="fwldivChart"></div>
+		</div>
+	</div>
+<script type="text/javascript" src="theme/gxwz/js/DatePicker/WdatePicker.js" charset="utf-8"></script>
+<script type="text/javascript" src="/theme/gxwz/js/gxcx/gxcx_mltbtj.js"></script>

@@ -1,0 +1,73 @@
+<div class="pagebanner fn-clear ">
+	<div class="pagebannerwrap fn-clear">
+		<div class="crumb"> 您的位置: 首 页 > 交换对账 > 交换操作  </div>
+	</div>
+	<div class="detail-wrap">
+		<div class="at-wrap f-cb">
+			<div class="pagetitle" id="cj_name" th:text="${listobj.cj_name}">场景名称</div>
+			<input type="hidden" id="cj_code" th:value="${listobj.cj_code}"/>
+			<div class="greypanel">
+				<div class="topdata-tb">
+					<table>
+						<colgroup>
+						</colgroup>
+						<tr>
+							<td>牵头部门：<span th:text="${listobj.dept_f}"></span></td>
+							<td>涉及部门总数：<span th:text="${listobj.dept_count}"></span></td>
+							<td>涉及信息类总数：<span th:text="${listobj.xxl_count}"></span></td>
+							<td></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="tab-normal fn-clear">
+				<ul>
+					<li class="active" id="sscxli">
+						<a href="javascript:void(0)" onclick="sscx()">实时查询</a>
+					</li>
+					<li id="dzcxli">
+						<a href="javascript:void(0)" onclick="dzcx()">对账查询</a>
+					</li>
+					<li id="tyshxydmli" th:if="${listobj.cj_code eq 'WZHY' || listobj.cj_code eq 'LZHY'}">
+						<a href="javascript:void(0)" onclick="uniscid()">统一社会信用代码查询</a>
+					</li>
+				</ul>
+			</div>
+			<div id="detailDiv">
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+var map={};
+
+function sscx(){
+	$("#sscxli").attr("class","active");
+	$("#dzcxli").attr("class","");
+	$("#tyshxydmli").attr("class","");
+	var ywlx=$("#cj_code").val();
+	var href="getSSCXPage?ywlx="+ywlx;
+	$("#detailDiv").load(href);
+}
+
+function dzcx(){
+	$("#sscxli").attr("class","");
+	$("#dzcxli").attr("class","active");
+	$("#tyshxydmli").attr("class","");
+	var ywlx=$("#cj_code").val();
+	var href="getDZCXPage?ywlx="+ywlx;
+	$("#detailDiv").load(href);
+}
+
+function uniscid(){
+	$("#sscxli").attr("class","");
+	$("#dzcxli").attr("class","");
+	$("#tyshxydmli").attr("class","active");
+	var ywlx=$("#cj_code").val();
+	var href="getUniscIdCXPage?ywlx="+ywlx;
+	$("#detailDiv").load(href);
+}
+sscx();
+
+</script>

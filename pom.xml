@@ -14,8 +14,7 @@
   <modules>
 	<module>com.rx.basejar</module>
 	<module>com.rx.generator</module>
+	<module>com.rx.platform</module>
   </modules>
-  
-  
   
 </project>

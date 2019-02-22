@@ -1,0 +1,156 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>海口市政务信息共享网站</title>
+<link href="theme/gxwz/css/base.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="theme/gxwz/css/function.css" />
+<link href="theme/gxwz/css/main_style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="theme/gxwz/css/detail_style.css" />
+</head>
+<!-- table 数据过长省略  需要给td列固定一个宽度生效  -->
+			<style>
+			.table-normal table {
+			table-layout: fixed;
+			}
+			.table-normal td {
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			}
+			</style>
+<body class="">
+	<!--pagebanner-->
+	<input type="hidden" id="type" th:value="${type}" />
+	<div class="pagebanner fn-clear " style="background: none">
+		<div class="pagebannerwrap fn-clear">
+			<div class="detail-wrap fn-clear">
+				<!--  = 内容区 =  -->
+				<div class="at-wrap" style="padding: 10px 10px;">
+					<div class="table-normal">
+						<table id="list">
+						</table>
+					</div>
+				 	<div class="pagination" id="listpage"></div>
+				</div>
+				<!--  ==========  -->
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="theme/gxwz/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="theme/gxwz/js/simpla.jquery.configuration.js"></script>
+<script type="text/javascript" src="theme/gxwz/js/base.menu.js"></script>
+<script src="/theme/gxwz/js/page.js"></script>
+<script type="text/javascript">
+	/*<![CDATA[*/
+	var map = {};
+	map.page=1;
+	map.pageSize=10;
+	map.type=$("#type").val();
+		
+	$(function() {
+		go(1);
+	});	
+		
+	function go(pages) {
+		map.page=pages;
+		$.ajax({
+			url : "getCatalogDistributionList",
+			dataType : "json",
+			data:{
+				models:JSON.stringify(map)
+			},
+			type : "post",
+			success : function(result) {
+				 
+				var list = result.list;
+				var grid = '';
+				console.log(list);
+				if(map.type == 'tj_sj' || map.type == 'tj_ds'  ){
+					grid = '<tr><th >序号</th><th   >名称</th><th   >无条件共享数量(条)</th><th   >有条件共享数量(条)</th><th   >不予共享数量(条)</th></tr>';
+					$.each( list, function(n,value){  
+						var name_ 	= value.name_;
+						var wgx_ 	= value.wgx;
+						var ygx_ 	= value.ygx;
+						var bygx_ 	= value.bygx;
+						var count_	= toThousands(value.COUNT_);
+						grid +='<tr> <td>'+(n+1)+'</td><td title="'+name_+'">'+name_+'</td><td title="'+wgx_+'">'+wgx_+'</td><td title="'+ygx_+'">'+ygx_+'</td><td title="'+bygx_+'">'+bygx_+'</td> </tr>'
+					});
+				}else{
+					grid = '<tr><th width="20%">序号</th><th  width="50%">名称</th><th width="30%"> 数量(条)</th></tr>';
+					$.each( list, function(n,value){  
+						var name_ 	= value.NAME_;
+						var count_	= toThousands(value.COUNT_);
+						grid +='<tr> <td>'+(n+1)+'</td><td title="'+name_+'">'+name_+'</td><td title="'+count_+'">'+count_+'</td> </tr>'
+					});
+				}
+				
+				
+				
+				$("#list").html(grid);	
+					//分页信息
+					var z = result.total%map.pageSize;
+					var pageNum;
+					if(z==0){
+						pageNum=result.total/map.pageSize;
+					}else{
+						pageNum=Math.floor(result.total/map.pageSize)+1;
+					}
+					map.pagenum=pageNum;
+					
+					var pageoption=PageButten(pages,pageNum);
+					$("#listpage").html(pageoption);
+					
+
+			},
+			error : function(result) {
+			}
+			
+		});
+	}
+	
+	
+	
+	
+	/**
+	 * 
+	 * @param tableId  要遍历数据的table的id
+	 * @param list	   需要遍历的数据
+	 * @returns
+	 */
+	function getBmfb_Bmml_list(tableId, list, pages){
+		var grid = '<tr><th width="20%">序号</th><th  width="50%">名称</th><th width="30%"> 数量(条)</th></tr>';
+		$.each( list, function(n,value){  
+			var name_ 	= value.NAME_;
+			var count_	= toThousands(value.count_);
+			grid +='<tr> <td>'+(n+1)+'</td><td title="'+name_+'">'+name_+'</td><td title="'+count_+'">'+count_+'</td> </tr>'
+		});
+		
+		$("#"+tableId).html(grid);	
+		
+			//分页信息
+			var z = result.total%map.pageSize;
+			totalCount = result.total;
+			$("#td_toalcount").html("共"+totalCount+"条"+map.name);
+			var pageNum;
+			if(z==0){
+				pageNum=result.total/map.pageSize;
+			}else{
+				pageNum=Math.floor(result.total/map.pageSize)+1;
+			}
+			map.pagenum=pageNum;
+			
+			var pageoption=PageButten(pages,pageNum);
+			$("#listpage").html(pageoption);
+		
+	}
+	
+
+	function toThousands(num) {
+		return (num || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
+	}
+	
+	/*]]>*/
+</script>
+</html>

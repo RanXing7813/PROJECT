@@ -1,0 +1,64 @@
+<div class="fn-clear">
+	<!--  = 内容区 =  -->
+	<div class="xtfx-dt1 size2">
+		<ul>
+			<li>
+				<div class="title">目录总数</div>
+				<div class="num mg-t2" th:text="${data.yfbCount}">0</div>
+			</li>
+			<li>
+				<div class="title">接口总数</div>
+				<div class="num mg-t2" th:text="${data.csbCount}">0</div>
+			</li>
+			<li>
+				<div class="title">整体挂接率</div>
+				<div class="num mg-t2" th:text="${data.ygjP}">0%</div>
+			</li>
+			<li>
+				<div class="title">交换数据总量</div>
+				<div class="num mg-t2" th:text="${data.ljjhCount}">0</div>
+			</li>
+		</ul>
+	</div>
+	<div class="at-wrap fn-clear mg-t3">
+		<h1 class="titstyle1">资源编目与挂接情况</h1>
+		<div class=" mg-t6">
+			<div class="f-cb">
+				<p class="textstyle1 f-fl">目录数与挂接数的对比（最多十五个部门）</p>
+				<a href="javascript:void(0)" class="btn-more f-fr" onclick="infoclassStaticsMore()">查看全部</a>
+			</div>
+			<div class="f-tac mg-t4" id="divChart_class" style="width: 860px; height: 208px;"></div>
+		</div>
+		<h1 class="titstyle1 mg-t6">接口注册与调用情况</h1>
+		<div class=" mg-t6">
+			<div class="f-cb">
+				<p class="textstyle1 f-fl">国家部委接口和市级接口发布情况对比</p>
+				<a href="javascript:void(0)" class="btn-more f-fr" onclick="listService()">查看全部</a>
+			</div>
+			<div class="f-cb mg-t4">
+				<div class="f-fl mg-r4" style="width: 360px; height: 304px;" id="divChart"></div>
+				<div class="table-form3 f-fl" style="width: 480px;">
+					<table id="serverinfolist">
+					</table>
+				</div>
+			</div>
+		</div>
+		<h1 class="titstyle1 mg-t6">共享申请与提供情况</h1>
+		<div class=" mg-t6">
+			<div class="f-cb">
+				<p class="textstyle1 f-fl">部门发布资源和申请资源对比</p>
+				<a href="javascript:void(0)" class="btn-more f-fr" onclick="listInfoClassMore()">查看全部</a>
+			</div>
+			<div class="f-cb mg-t4">
+				<div class="f-fl mg-r4" style="width: 360px; height: 283px;" id="divChart_shared"></div>
+				<div class="table-form3 f-fl" style="width: 480px;">
+					<table id="sharedinfolist">
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--  ==========  -->
+</div>
+
+<script type="text/javascript" src="/theme/gxwz/js/gxcx/gxcx_zysytj.js"></script>

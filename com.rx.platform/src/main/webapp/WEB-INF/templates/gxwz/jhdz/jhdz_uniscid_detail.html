@@ -1,0 +1,57 @@
+<div class="table-form mg-t6">
+	<table>
+		<colgroup>
+			<col width="160" />
+			<col width="420" />
+			<col width="160" />
+		</colgroup>
+		<tr>
+			<th class="f-tar">查询方式</th>
+			<td colspan="3" id="modeltd">
+				<label for="a">
+					<input type="radio" value="1"  checked="checked" name="model" id="model" />
+					企业信息
+				</label>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<label for="b" id="model1" th:if="${ywlx eq 'WZHY'}">
+					<input type="radio" name="model" id="model" value="2" /> 
+					年报信息
+				</label>
+			</td>
+			<th class="f-tar" id="search_year_th" style="display: none;">年份</th>
+			<td id="search_year_td" style="display: none;">
+				<div class="ipt-datetime">
+					<input id="search_year" type="text" runat="server" th:value="${search_year}"  onfocus="WdatePicker({skin:'default',dateFmt:'yyyy'})" class="f-fwb" style=" width:80px;"/>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<th class="f-tar">数据发送方</th>
+			<td>
+				<select id="fsfdept" class="ipt-select f-fwb">
+					<option th:each="fsfobj:${fsfdeptlist}" th:value="${fsfobj.dept}" th:text="${fsfobj.deptname}"></option>
+				</select>
+			</td>
+			<th class="f-tar">数据接收方</th>
+			<td>
+				<select id="jsfdept" class="ipt-select f-fwb">
+					<option th:each="jsfobj:${jsfdeptlist}" th:value="${jsfobj.dept}" th:text="${jsfobj.deptname}"></option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th class="f-tar">统一社会信用代码</th>
+			<td colspan="3">
+				<input type="text" class="ipt-select f-fwb" style="width: 50%;" id="uniscid"/>
+			</td>
+		</tr>
+	</table>
+</div>
+<div class="f-tac mg-t8 mg-b8">
+	<a class="btn-submit mg-r8" href="javascript:void(0)" onclick="getUniscIdCXList()">查&nbsp;&nbsp;&nbsp;&nbsp;询</a>
+	<a class="btn-submit bggrey" href="javascript:void(0)" onclick="uniscid()">重&nbsp;&nbsp;&nbsp;&nbsp;置</a>
+</div>
+<div id="dzpanelDiv">
+</div>
+
+<script src="/theme/gxwz/js/jhdz/jhdz_uniscid_detail.js"></script>

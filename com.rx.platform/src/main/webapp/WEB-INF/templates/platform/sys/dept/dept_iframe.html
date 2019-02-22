@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>组织机构</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=8" />
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-control" content="no-cache" />
+<meta http-equiv="Cache" content="no-cache" />
+<meta name="format-detection" content="telephone=no" />
+<link rel="stylesheet" href="/theme/layuiadmin/layui/css/layui.css" media="all" />
+<link rel="stylesheet" href="/theme/platform/css/user_defined.css" media="all" />
+</head>
+<body>
+	<!-- 左侧导航 -->
+	<div class="layui-side border-top-css" style="min-width: 300px; width: 300px;">
+		<div class="navBar layui-side-scroll" style="height: 98%; min-width: 300px; width: 100%; overflow: hidden;background-color: #ffffff;">
+			<iframe id="deptTree" src="/platform/sys/dept_tree_page?listtype=dept&amp;rootId=0" style="height: 100%; overflow: hidden; border: 0px;"></iframe>
+		</div>
+	</div>
+	<!-- 右侧内容 -->
+	<div class="layui-body layui-form" style="min-width: 520px; left: 310px;">
+		<div class="layui-tab marg0">
+			<div class="layui-tab-content clildFrame">
+				<div class="layui-tab-item layui-show">
+					<iframe id="deptList" src="/platform/sys/dept_list" style="height: 980%; overflow: hidden; border: 0px;"></iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/theme/layuiadmin/layui/layui.js"></script>
+	<script src="/theme/platform/js/jquery.min.js"></script>
+</body>
+</html>

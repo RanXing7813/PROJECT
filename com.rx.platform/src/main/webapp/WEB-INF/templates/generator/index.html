@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>组织机构</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=8" />
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-control" content="no-cache" />
+<meta http-equiv="Cache" content="no-cache" />
+<meta name="format-detection" content="telephone=no" />
+<link rel="stylesheet" href="/theme/layuiadmin/layui/css/layui.css" media="all" />
+  <link rel="stylesheet" href="/theme/layuiadmin/style/admin.css" media="all" />
+
+</head>
+<body>
+
+  <div class="layui-fluid layui-form">
+    <div class="layui-row layui-col-space15">
+	
+	  <div class="layui-col-sm12">
+        <div class="layui-card">
+          <div class="layui-card-header">按钮主题</div>
+          <div class="layui-card-body">
+            <div class="layui-btn-container">
+              <button class="layui-btn layui-btn-primary" lay-event="conn"  onclick="openConn()">数据库连接</button>
+              <button class="layui-btn">配置信息</button>
+              <button class="layui-btn layui-btn-normal">使用说明</button>
+              <button class="layui-btn layui-btn-warm">设置</button>
+              <button class="layui-btn layui-btn-danger">警告按钮</button>
+              <button class="layui-btn layui-btn-disabled">禁用按钮</button>
+            </div>
+          </div>
+        </div>
+      </div>
+	
+	<!-- 左侧导航 -->
+	<div class="layui-col-sm4">
+        <div class="layui-card">
+          <div class="layui-card-header">用户留言</div>
+          <div class="layui-card-body">
+            <ul class="layuiadmin-card-status layuiadmin-home2-usernote">
+              <li>
+                <h3>贤心</h3>
+                <p>作为 layui 官方推出的后台模板，从初版的饱受争议，到后续的埋头丰富，逐步占据了国内后台系统应用的主要市场。</p>
+                <span>5月30日 00:00</span>
+                <a href="javascript:;" layadmin-event="replyNote" data-id="7" class="layui-btn layui-btn-xs layuiadmin-reply">回复</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="layui-col-sm6">
+            <div class="layui-card">
+              <div class="layui-card-header">项目进展</div>
+              <div class="layui-card-body">
+                <div class="layui-tab-content">
+                  <div class="layui-tab-item layui-show">
+                    <table id="LAY-index-prograss"></table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+      </div></div>
+	<script src="/theme/layuiadmin/layui/layui.js"></script>
+	 <script>
+  layui.config({
+    base: '/theme/layuiadmin/' //静态资源所在路径
+  }).extend({
+    index: 'lib/index' //主入口模块
+  }).use(['index', 'sample','table', 'form'],function(){
+	  var admin = layui.admin
+	    ,form = layui.form
+	    ,table = layui.table;
+	    var time_ = 2000;
+	    var $ = layui;
+	  
+	    //监听行工具事件
+	    form.on('tool(Layui-table-toolbar)', function(obj){
+	      var data = obj.data;
+	      if(obj.event === 'detail'){
+	         // layer.msg('ID：'+ data.id + ' 的查看操作');
+	          opendgviewLook(data.id);
+	        } else if(obj.event === 'del'){
+	        	deleteById(data.id)
+	        } else if(obj.event === 'edit'){
+	        	opendgviewEdit(data.id)
+	        }
+	    });
+	   
+	  
+	  
+  });
+  function openConn(){
+  	var index = layer.open({
+          type: 2,
+          title:'通告管理',
+          content:  '/conn/initialize' ,
+          area: ['300px', '300px'],
+          maxmin: true,
+          cancel: function(index, layero) {
+          	 layer.close(index)
+          }
+        });
+        layer.full(index);
+  }
+  </script>
+</body>
+</html>

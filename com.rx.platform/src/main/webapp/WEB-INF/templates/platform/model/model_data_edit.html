@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<!-- <head th:include="thymeleaf/commonTemplates/common::commonHead"  ></head> -->
+<head>
+<title>信息列表</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-control" content="no-cache" />
+<meta http-equiv="Cache" content="no-cache" />
+<link rel="stylesheet" th:href="@{/theme/layuiadmin/layui/css/layui.css}" href="/theme/layuiadmin/layui/css/layui.css" media="all" />
+<link rel="stylesheet" th:href="@{/theme/layuiadmin/style/admin.css}" href="/theme/layuiadmin/style/admin.css" media="all" />
+<link rel="stylesheet" th:href="@{/theme/layuiadmin/layui/font/font_ali/iconfont.css}"  href="/theme/layuiadmin/layui/font/font_ali/iconfont.css" media="all"/>
+<script  type="text/javascript"  th:href="@{/theme/layuiadmin/layui/layui.js}"  src="/theme/layuiadmin/layui/layui.js"></script>
+
+<style>
+.layui-input-block {
+    margin-left: 200px;
+    min-height: 36px;
+}
+.layui-form-label {
+    float: left;
+    display: block;
+    width: 170px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: right;
+    padding: 9px 15px;
+}
+
+</style>
+</head>
+<body layadmin-themealias="default" style="">
+ 
+  <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+      <div class="layui-col-md12">
+        <div class="layui-card">
+          <div class="layui-card-header" > 
+          	<span   ><a style="padding-left: 10px;"><cite>当前位置：</cite><cite>模板管理</cite>
+          	<cite th:if="${ dto.model_zyid != null and dto.model_zyid != '' and dto.cread_id!=session.user.id}" style="color:red;" >     非本人新增数据,只能查看</cite></a>
+          	<cite th:if="${ dto.publish_status == 'Y' }" style="color:red;" >  只能编辑未发布的数据. </cite>
+				   	      </span>
+          </div>
+          <div class="layui-card-body">
+ 
+				<form class="layui-form" id="formInput"  lay-filter="example"
+						 action="/platform/model/data_edit_save" method="post">
+				
+				  <input type="hidden"  th:value="${dto.cread_id}"  id="cread_id" name="cread_id" />
+				  <input type="hidden"  th:value="${dto.model_id}"  id="model_id" name="model_id" />
+				
+				
+				  <div class="layui-form-item"  th:if="${dto.model_zyid != null and dto.model_zyid != '' }">
+				    <label class="layui-form-label">模板资源编号</label>
+				     <div class="layui-form-mid layui-word-aux"  th:text="${dto.model_zyid}"></div>
+					        <input type="hidden" name="model_zyid" th:value="${dto.model_zyid}"   lay-verify="model_zyid"  autocomplete="off" class="layui-input" />
+				  </div>
+				  
+				   <div class="layui-form-item"   >
+				    <label class="layui-form-label">模板资源名称</label>
+				    <div class="layui-input-block">
+				      <input type="text" name="model_zyname" th:value="${dto.model_zyname}"  lay-verify="required|model_zyname" autocomplete="off" placeholder="请输入模板资源名称" class="layui-input"/>
+				    </div>
+				  </div>
+				  
+				   <div class="layui-form-item"   th:if="${dto.model_zyid != null and dto.model_zyid != '' }" >
+				    <label class="layui-form-label">表名</label>
+				    <div class="layui-form-mid layui-word-aux"  th:text="${dto.model_info_table_name}"></div>
+				     <input type="hidden" name="model_info_table_name" th:value="${dto.model_info_table_name}"  readonly="readonly"   />
+				  </div>
+				  <div class="layui-form-item"    th:if="${dto.model_zyid == null or dto.model_zyid == '' }">
+				    <label class="layui-form-label">表名</label>
+				    <div class="layui-input-block">
+				        <input type="text" name="model_info_table_name" id="model_info_table_name" th:value="${dto.model_info_table_name}"   lay-verify="required|model_info_table_name" placeholder="请输入数据表表名称  注意区分大小写" autocomplete="off" class="layui-input" />
+				    </div>
+				  </div>
+				  
+				   <div class="layui-form-item"   >
+				    <label class="layui-form-label">表中文名</label>
+				    <div class="layui-input-block">
+				        <input type="text" name="model_info_table_cname" id="model_info_table_cname" th:value="${dto.model_info_table_cname}"   lay-verify="required|model_info_table_cname" placeholder="请输入" autocomplete="off" class="layui-input"/> 
+				    </div>
+				  </div>
+				
+				  <div class="layui-form-item">
+				    <label class="layui-form-label">期望导出模板时的名称</label>
+				    <div class="layui-input-block">
+				      <input type="text" name="model_name" th:value="${dto.model_name}" lay-verify="required|model_name" placeholder="请输入" autocomplete="off" class="layui-input"/>
+				    </div>
+				  </div>
+				  
+				  <div class="layui-form-item"> 
+				    <div class="layui-input-block" th:if="${ dto.model_zyid == null or dto.model_zyid == '' or dto.cread_id ==session.user.id}">
+				      <button class="layui-btn" lay-submit="" lay-filter="demo1"   th:if="${ dto.publish_status != 'Y' }"  >立即提交</button>
+				      <button type="reset" class="layui-btn layui-btn-primary" 	   th:if="${ dto.publish_status != 'Y' }">重置</button>
+				      <button type="button" class="layui-btn layui-btn-warm closeCurPage">关闭</button>
+				    </div>
+				  </div>
+				</form>
+			
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+          
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script th:inline="javascript" type="text/javascript">
+/*<![CDATA[*/  
+
+/*]]>*/
+</script>
+
+<script th:inline="javascript" type="text/javascript">
+/*<![CDATA[*/  
+//don't move this
+  var linkSubmitS = /*[[@{/platform/model/data_edit_save}]]*/ ;
+/*]]>*/
+</script>
+  <script  type="text/javascript"  th:href="@{/theme/platform/js/model/model_data_edit.js?v=1}"  src="/theme/platform/js/model/model_data_edit.js"></script>
+
+</body></html> 

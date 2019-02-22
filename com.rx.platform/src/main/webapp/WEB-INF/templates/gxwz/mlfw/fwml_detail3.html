@@ -1,0 +1,118 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>海口市政务信息共享网站</title>
+<link href="theme/gxwz/css/base.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="theme/gxwz/css/function.css" />
+<link href="theme/gxwz/css/main_style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="theme/gxwz/css/detail_style.css" />
+</head>
+
+<body class="">
+	<!--pagebanner-->
+	<input type="hidden" id="infoclass_id" th:value="${info.id}" />
+	<div class="pagebanner fn-clear " style="background: none">
+		<div class="pagebannerwrap fn-clear">
+			<div class="detail-wrap fn-clear">
+				<!--  = 顶部信息 =  -->
+				<div class="detail-topdata mg-b2 fn-clear">
+					<div class="topdata-pic f-fl mg-r4 pd-t1">
+						<img src="theme/gxwz/images/detail/topdata-pic.png" />
+					</div>
+					<h1 class="topdata-tit">
+						<span th:text="${info.infoname}"></span><em class="mg-l2">[<span
+							th:text="${info.sharetype}"></span>]
+						</em>
+					</h1>
+					<div class="topdata-cont f-fl mg-r2">
+						<div class="topdata-tb f-fl">
+							<table>
+								<colgroup>
+								</colgroup>
+								<tr>
+									<td>信息资源格式：<span th:text="${info.infoformat}"></span></td>
+									<td>共 享 方 式 ：<span th:text="${info.shareway}"></span></td>
+									<td>更 新 周 期 ：<span th:text="${info.updatecycle}"></span></td>
+								</tr>
+								<tr>
+									<td>资 源 状 态：<span style="color: #53bf8a;" th:text="${info.hitch_status}"></span></td>
+									<td>当 前 数 据 量：<span th:text="${info.exchange_count}"></span></td>
+									<td>最近更新时间：<span th:text="${info.catalog_table_lasttime}"></span></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div class="topdata-menu f-fl">
+						<a  href="javascript:;" onclick="changemlxt();" class="menublock s1 f-fl"><span>申请共享</span></a> 
+						<a href="javascript:;"  onclick="getSubscribe()" class="menublock s2 active f-fl"><span>订阅</span></a> 
+						<a href="files/download?file_id=39c98072c5754a8086a23e099779b6df" class="menublock s3 f-fl"><span>共享指南</span></a>
+					</div>
+				</div>
+				<!--  ==========  -->
+				<!--  = 内容区 =  -->
+				<div class="tab-normal fn-clear">
+					<ul>
+						<li><a href="javascript:void(0)" onclick="go()">基本信息</a></li>
+						<li><a href="javascript:void(0)" onclick="goitem()">信息项信息</a></li>
+						<li class="active" th:if="${info.sharemodetypeid=='5f61e7899866477bbc1c477aa76f9565'}"><a href="javascript:void(0)">接口信息</a></li>
+					</ul>
+				</div>
+				<div class="at-wrap">
+					<div class="table-normal">
+						<table>
+							
+						</table>
+					</div>
+				</div>
+				<!--  ==========  -->
+			</div>
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript" src="theme/gxwz/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="theme/gxwz/js/simpla.jquery.configuration.js"></script>
+<script type="text/javascript" src="theme/gxwz/js/base.menu.js"></script>
+<script type="text/javascript" src="/theme/gxwz/js/login/login.js"></script>
+<script type="text/javascript" src="theme/gxwz/js/layer/layer.js" charset="utf-8"></script>
+<script type="text/javascript" src="/theme/gxwz/js/iframe_alert.js"></script>
+<script type="text/javascript">
+	/*<![CDATA[*/
+	function go() {
+		var infoclass_id = $("#infoclass_id").val();
+		window.location.href = 'viewCatalog?nolog=1&id=' + infoclass_id;
+	}
+	function goitem() {
+		var infoclass_id = $("#infoclass_id").val();
+		window.location.href = 'viewCatalogItem?id=' + infoclass_id;
+	}
+	//订阅
+	function getSubscribe(){
+		var infoclassId = $("#infoclass_id").val();
+		var infoclassname = $("#infoclass_name").val();
+		$.ajax({
+			url : "getSubscribe",
+			dataType : "json",
+			data:{"infoclassId":infoclassId,"infoclassname":infoclassname},
+			type : "post",
+			success : function(result) {
+				if(result.istrue == "nologin"){
+					var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+					parent.layer.close(index);
+					alert("您尚未登录或者登录已超时，请重新登录！");
+					parent.login();
+				}else if(result.istrue == "true"){
+					alert("订阅成功！");
+				}else{
+					alert("该信息类已在目录系统成功订阅！");
+				}
+			},
+			error : function(result) {
+				console.log(result);
+			}
+		});
+	}
+	/*]]>*/
+</script>
+</html>

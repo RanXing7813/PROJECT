@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<!-- <head th:include="thymeleaf/commonTemplates/common::commonHead"  ></head> -->
+<head>
+<title>信息列表</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-control" content="no-cache" />
+<meta http-equiv="Cache" content="no-cache" />
+<link rel="stylesheet" th:href="@{/theme/layuiadmin/layui/css/layui.css}" href="/theme/layuiadmin/layui/css/layui.css" media="all" />
+<link rel="stylesheet" th:href="@{/theme/layuiadmin/style/admin.css}" href="/theme/layuiadmin/style/admin.css" media="all" />
+<link rel="stylesheet" th:href="@{/theme/layuiadmin/layui/font/font_ali/iconfont.css}"  href="/theme/layuiadmin/layui/font/font_ali/iconfont.css" media="all"/>
+<script  type="text/javascript"  th:href="@{/theme/layuiadmin/layui/layui.js}"  src="/theme/layuiadmin/layui/layui.js"></script>
+
+</head>
+<body layadmin-themealias="default" style="">
+  
+  <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+      <div class="layui-col-md12">
+        <div class="layui-card">
+          <div class="layui-card-header" >
+          	<span   ><a style="padding-left: 10px;"><cite>当前位置：</cite><cite>字段设置</cite><cite th:if="${ cread_id!=session.user.id}" style="color:red;" >     非本人新增数据,只能查看</cite></a>  
+          	          	<cite th:if="${publish_status == 'Y' }" style="color:red;" >  只能编辑未发布的数据. </cite>
+          	 </span>
+          </div>
+          <div class="layui-card-body">
+          
+          	<!--搜索div-->
+            <div class="test-table-reload-btn" style="margin-bottom: 10px;">
+                <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+ 					<input type="hidden" name="userid" id="userid" th:value="${session.user.id}"  class="layui-input" />
+ 					<input type="hidden" name="cread_id" id="cread_id" th:value="${cread_id}"  class="layui-input" />
+ 					<input type="hidden" name="model_id" id="model_id" th:value="${model_id}"  class="layui-input" />
+             	</div>
+            </div>
+           
+           <!--数据table-->
+           <table class="layui-hide" id="Layui-table-toolbar" lay-filter="Layui-table-toolbar"></table>
+           
+           <!--table工具栏-->
+           <script type="text/html" id="Layui-table-toolbar-toolbarDemo" th:if="${session.user.id == cread_id}">
+              <div class="layui-btn-container" th:if="${publish_status != 'Y'}">
+                <button class="layui-btn layui-btn-sm" lay-event="opendgviewAdd"><i class="layui-icon layui-icon-add-circle"></i>新增非主键</button>
+                <button class="layui-btn layui-btn-sm" lay-event="opendgviewAdd2"><i class="layui-icon layui-icon-add-circle"></i>新增主键</button>
+              </div>
+           </script>
+          
+           <!--table行按钮  -->
+           <script type="text/html" id="Layui-table-toolbar-barDemo" th:if="${session.user.id == cread_id}">
+				<a  th:if="${publish_status != 'Y'}" class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit">	 <i class="layui-icon  iconfont icon-tianxie "></i>编辑</a>
+          	 	 <a th:if="${publish_status != 'Y'}" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">	 <i class="layui-icon layui-icon-delete"></i>删除</a>
+ 			</script>
+            
+           <!--table数据模板-->
+           <script type="text/html" id="isreleaseTpl">
+		   </script>
+			
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<script th:inline="javascript" type="text/javascript">
+/*<![CDATA[*/  
+//don't move this
+  var linkListS = /*[[@{/platform/sys/column_list_json}]]*/ ;
+  var linkAddS = /*[[@{/platform/sys/column_old_list}]]*/ ;
+  var link2AddS = /*[[@{/platform/sys/data_edit}]]*/ ;
+  var linkEditS = /*[[@{/platform/sys/data_edit}]]*/ ;
+  var linkDelS  = /*[[@{/platform/sys/data_del}]]*/ ;
+  
+  /*]]>*/
+  </script>
+  
+  <script  type="text/javascript"  th:href="@{/theme/platform/js/model/model_sys_list.js?v=1}" 
+   src="/theme/platform/js/model/model_sys_list.js"></script>
+  
+</body></html> 
