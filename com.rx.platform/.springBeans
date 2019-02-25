@@ -9,9 +9,6 @@
 	<configs>
 	</configs>
 	<autoconfigs>
-		<config>src/main/resource/spring/mvc-core-config.xml</config>
-		<config>resource/spring/app-config.xml</config>
-		<config>src/main/resource/spring/mvc-view-config.xml</config>
 		<config>src/main/resource/spring/app-config.xml</config>
 	</autoconfigs>
 	<configSets>

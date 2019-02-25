@@ -132,4 +132,49 @@
 	</bean>
 	<tx:annotation-driven transaction-manager="transactionManager2" mode="proxy" />
 	<jpa:repositories base-package="cn.com.taiji.platform.repository.em2" transaction-manager-ref="transactionManager2" entity-manager-factory-ref="entityManagerFactory2" />
+
+
+	<bean id="generatorDataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+		<property name="url" value="jdbc:mysql://localhost:3306/generator?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false" />
+		<property name="username" value="root" />
+		<property name="password" value="" />
+<!-- 		<property name="url" value="jdbc:mysql://192.168.0.200:3306/hk_gxwz_new?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false" />
+		<property name="username" value="root" />
+		<property name="password" value="123456" /> -->
+
+		<property name="maxActive" value="20" />
+		<property name="initialSize" value="1" />
+		<property name="maxWait" value="60000" />
+		<property name="minIdle" value="1" />
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+		<property name="minEvictableIdleTimeMillis" value="300000" />
+		<property name="validationQuery" value="SELECT 'x'" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+		<property name="poolPreparedStatements" value="true" />
+		<property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+	</bean>
+
+
+	<bean id="jdbcTemplate_generator" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="generatorDataSource" />
+	</bean>
+
+	<!-- 整合mysql jpa 3 -->
+	<bean id="entityManagerFactory3" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="generatorDataSource" />
+		<property name="persistenceXmlLocation" value="classpath:META-INF/persistence-generator-mysql.xml" />
+		<property name="persistenceUnitName" value="generatorDB"></property><!-- persistence-mysql.xml 文件中的name属性 -->
+	</bean>
+	<bean id="transactionManager3" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory3" />
+		<qualifier value="generatorDB" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager3" mode="proxy" />
+	<jpa:repositories base-package="cn.com.taiji.generator.repository" transaction-manager-ref="transactionManager3" entity-manager-factory-ref="entityManagerFactory3" />
+
+
+
+
 </beans>

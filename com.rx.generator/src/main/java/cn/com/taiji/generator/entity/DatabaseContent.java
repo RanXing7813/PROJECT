@@ -1,20 +1,31 @@
-package com.szmirren.entity;
+package cn.com.taiji.generator.entity;
 
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.Id;
 
-/**
+/**a
  * 数据库配置信息
  * 
  * @author <a href="http://szmirren.com">Mirren</a>
  *
  */
-public class DatabaseContent {
+@Entity
+@Table(name = "databaseconfig")
+@NamedQuery(name = "DatabaseContent.findAll", query = " SELECT r FROM DatabaseContent r ")
+public class DatabaseContent  implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public DatabaseContent(){
+		
+	}
 	
 	/** 首页显示的名字 */
 	private String displayName;
@@ -27,6 +38,7 @@ public class DatabaseContent {
 	/** 密码 */
 	private String userPwd;
 	/** 数据库名称 */
+	@Id
 	private String dbName;
 	/** 数据库类型 */
 	private String dbType;
@@ -98,10 +110,5 @@ public class DatabaseContent {
 		this.encoding = encoding;
 	}
 
-	@Override
-	public String toString() {
-		return "DatabaseContent [displayName=" + displayName + ", host=" + host + ", port=" + port + ", userName=" + userName + ", userPwd="
-				+ userPwd + ", dbName=" + dbName + ", dbType=" + dbType + ", encoding=" + encoding + "]";
-	}
 
 }
