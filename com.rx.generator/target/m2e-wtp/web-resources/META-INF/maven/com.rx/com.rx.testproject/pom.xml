@@ -6,8 +6,8 @@
 		<artifactId>King_rx</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-  <artifactId>com.rx.testproject</artifactId>
-  <name>com.rx.testproject</name>
+  <artifactId>com.rx.generator</artifactId>
+  <name>com.rx.generator</name>
   <packaging>war</packaging>
   <url>http://maven.apache.org</url>
 

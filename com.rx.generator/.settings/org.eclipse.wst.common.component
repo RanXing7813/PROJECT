@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="com.rx.generator-0.0.1-SNAPSHOT">
+    <wb-module deploy-name="com.rx.generator">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resource"/>
+        <wb-resource deploy-path="/WEB-INF/lib" source-path="/target/lib"/>
         <property name="java-output-path" value="/com.rx.generator/target/classes"/>
         <property name="context-root" value="com.rx.generator"/>
     </wb-module>
