@@ -42,8 +42,6 @@
 	<!-- 当设置多个拦截器时，先按顺序调用preHandle方法，然后逆序调用每个拦截器的postHandle和afterCompletion方法 -->
 
 	<!--src/main/webapp/resources资源映射 -->
-	<mvc:resources mapping="/resources/**" location="classpath" />
-	<mvc:resources mapping="/resources/**" location="theme/" />
 	<mvc:resources mapping="/**"  		   location="theme/"  />
 	<!-- 静态资源处理 -->
 	<mvc:default-servlet-handler />
