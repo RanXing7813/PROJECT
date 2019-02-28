@@ -33,13 +33,13 @@ public class DatabaseContent  implements Serializable {
 	private String host;
 	/** 端口号 */
 	private String port;
+	/** 数据库名称 */
+	@Id
+	private String dbName;
 	/** 用户名 */
 	private String userName;
 	/** 密码 */
 	private String userPwd;
-	/** 数据库名称 */
-	@Id
-	private String dbName;
 	/** 数据库类型 */
 	private String dbType;
 	/** 字符编码 */

@@ -39,6 +39,7 @@ public class DBUtil {
 	public static Connection getConnection(DatabaseConfig config) throws ClassNotFoundException, SQLException {
 		DriverManager.setLoginTimeout(DB_CONNECTION_TIMEOUTS_SECONDS);
 		DBType dbType = DBType.valueOf(config.getDbType());
+//		Class.forName("com.mysql.jdbc.Driver");
 		Class.forName(dbType.getDriverClass());
 		String url = getConnectionURL(config);
 		if (dbType == DBType.Oracle) {

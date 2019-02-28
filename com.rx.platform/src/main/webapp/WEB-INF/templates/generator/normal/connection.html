@@ -19,7 +19,7 @@
   <legend>表单集合演示</legend>
 </fieldset>
  
-<form class="layui-form" action="">
+<form class="layui-form" action="/generator/normal/saveConnectionPage" method="post" lay-filter="example">
   <div class="layui-form-item">
     <label class="layui-form-label">连接名称:</label>
     <div class="layui-input-block">
@@ -46,7 +46,7 @@
     <div class="layui-input-block">
       <select name="dbType" lay-filter="aihao">
         <option value=""  ></option>
-        <option  th:each="cf, cfstatu:{DatabaseTypeNames}">写作</option>
+        <option  th:each="cf, cfstatu : ${DatabaseTypeNames}"  th:text="${cf}" th:value="${cf}"   th:selected="${cf =='MySQL'}">写作</option>
       </select>
     </div>
   </div>
@@ -82,8 +82,6 @@
     </div>
   </div>
   
-  </div>
-  
   <div class="layui-form-item">
     <div class="layui-input-block">
       <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
@@ -103,7 +101,7 @@
   ,layer = layui.layer
   ,layedit = layui.layedit
   ,laydate = layui.laydate;
-  
+  var $ = layui.$;
   //日期
   laydate.render({
     elem: '#date'
@@ -125,21 +123,23 @@
   
   //监听提交
   form.on('submit(demo1)', function(data){
-    layer.alert(JSON.stringify(data.field), {
+	  
+  /*   layer.alert(JSON.stringify(data.field), {
       title: '最终的提交信息'
-    })
+    }) */
+	//var index = layer.load();
+  	layer.close(); 
+ 	$('.layui-form').submit();
     return false;
   });
  
   //表单初始赋值
   form.val('example', {
-    "username": "贤心" // "name": "value"
-    ,"password": "123456"
-    ,"interest": 1
-    ,"like[write]": true //复选框选中状态
-    ,"close": true //开关状态
-    ,"sex": "女"
-    ,"desc": "我爱 layui"
+     "userName": "root" // "name": "value"
+    ,"host": 'localhost'
+    ,"port":'3306'
+    ,"dbName":'hk_gxwz_new'
+    ,"displayName":'hk_gxwz_new测试'
   })
   
   

@@ -39,45 +39,103 @@
         <div class="layui-card">
           <div class="layui-card-header">用户留言</div>
           <div class="layui-card-body">
-            <ul class="layuiadmin-card-status layuiadmin-home2-usernote">
-              <li>
-                <h3>贤心</h3>
-                <p>作为 layui 官方推出的后台模板，从初版的饱受争议，到后续的埋头丰富，逐步占据了国内后台系统应用的主要市场。</p>
-                <span>5月30日 00:00</span>
-                <a href="javascript:;" layadmin-event="replyNote" data-id="7" class="layui-btn layui-btn-xs layuiadmin-reply">回复</a>
-              </li>
-            </ul>
+            
+			            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+						  <legend>常规折叠面板</legend>
+						</fieldset>
+						<div class="layui-collapse" lay-filter="test">
+						  <div class="layui-colla-item" th:each="sf,statuSf:${list}" th:onclick="'javascript:getTableNames(\''+${sf.dbName}+'\' )'"      >
+						    <h2 class="layui-colla-title" th:text="${sf.dbName}">为什么前端工程师多不愿意用 Bootstrap 框架？</h2>
+						    <div class="layui-colla-content" style="height: 400px;  overflow: scroll;  background-color: white;">
+									<ul th:id="${sf.dbName + '_id'}"  th:name="${sf.dbName}"></ul> 
+						     </div>
+						  </div>
+						</div>
           </div>
         </div>
       </div>
       
+      <!-- 右侧路径数据项 -->
       <div class="layui-col-sm6">
             <div class="layui-card">
               <div class="layui-card-header">项目进展</div>
               <div class="layui-card-body">
                 <div class="layui-tab-content">
                   <div class="layui-tab-item layui-show">
-                    <table id="LAY-index-prograss"></table>
+                    		<table id="LAY-index-prograss"></table>
+                    		<table id="Layui-table-toolbar" lay-filter='Layui-table-toolbar'></table>
+                    		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+							  <legend>方框风格的表单集合</legend>
+							</fieldset>
+							<!-- <form class="layui-form layui-form-pane" action=""  lay-filter="example">
+							   <div class="layui-form-item">
+							    <div class="layui-inline">
+							      <label class="layui-form-label">实体类包名</label>
+							      <div class="layui-input-block">
+							        <input type="text" name="date" id="date1" autocomplete="off" class="layui-input">
+							      </div>
+							    </div>
+							    <div class="layui-inline">
+							      <label class="layui-form-label">实体类名</label>
+							      <div class="layui-input-inline">
+							        <input type="text" name="number" autocomplete="off" class="layui-input">
+							      </div>
+							    </div>
+							  </div>
+							  
+							  
+							  <div class="layui-form-item">
+							    <button class="layui-btn" lay-submit="" lay-filter="demo2">跳转式提交</button>
+							  </div>
+							</form> -->
+                    
+                    
+                    
+                    
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+      </div>
       
       </div></div>
 	<script src="/theme/layuiadmin/layui/layui.js"></script>
+	<script src="/theme/gxwz/js/jquery-1.11.0.min.js"></script>
 	 <script>
   layui.config({
     base: '/theme/layuiadmin/' //静态资源所在路径
   }).extend({
     index: 'lib/index' //主入口模块
-  }).use(['index', 'sample','table', 'form'],function(){
+  }).use(['index', 'table', 'sample','table', 'form'],function(){
 	  var admin = layui.admin
 	    ,form = layui.form
 	    ,table = layui.table;
 	    var time_ = 2000;
 	    var $ = layui;
 	  
+	    table.render({
+	        elem: '#Layui-table-toolbar'
+	       ,id:'Layui-table-toolbar'
+	       ,url: '/generator/normal/setTableNameText.json'
+	    //   ,toolbar: '#Layui-table-toolbar-toolbarDemo'
+	       ,autoSort: false
+	       ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+	       ,title: '用户数据表'
+	       ,cols: [[
+	         {type: 'checkbox', fixed: 'left'}
+	         ,{type: 'numbers', title:'序号', fixed: 'left'}
+	        ,{field:'dataPath', title:'文件说明', fixed: 'left', sort: true}
+	        ,{field:'dataValue',title:'文件路径', fixed: 'left', sort: true}
+	        ,{field:'codeName',title:'实体文件名', fixed: 'left', sort: true}
+	    //  ,{fixed: 'right', title:'操作', fixed: 'right',width:200, align: 'center', toolbar: '#Layui-table-toolbar-barDemo'}
+	       ]]
+	       ,limit:10
+	       ,limits:[10,30,50,100,1000]
+	       ,page:{
+	     	  layout:['prev','page','next','skip' ,'count','refresh','limit']   
+	       }
+	     });
+	    
 	    //监听行工具事件
 	    form.on('tool(Layui-table-toolbar)', function(obj){
 	      var data = obj.data;
@@ -91,14 +149,40 @@
 	        }
 	    });
 	   
-	  
+	    //监听指定开关
+	    form.on('switch(switchTest)', function(data){
+	      layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
+	        offset: '6px'
+	      });
+	      layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+	    });
+	    
+	    //监听提交
+	    form.on('submit(demo2)', function(data){
+	      layer.alert(JSON.stringify(data.field), {
+	        title: '最终的提交信息'
+	      })
+	      return false;
+	    });
+	   
+	    //表单初始赋值
+	    form.val('example', {
+	      "username": "贤心" // "name": "value"
+	      ,"password": "123456"
+	      ,"interest": 1
+	      ,"like[write]": true //复选框选中状态
+	      ,"close": true //开关状态
+	      ,"sex": "女"
+	      ,"desc": "我爱 layui"
+	    })
+	    
 	  
   });
   function openConn(){
   	var index = layer.open({
           type: 2,
           title:'通告管理',
-          content:  '/conn/initialize' ,
+          content:  '/generator/normal/toConnectionPage' ,
           area: ['300px', '300px'],
           maxmin: true,
           cancel: function(index, layero) {
@@ -107,6 +191,58 @@
         });
         layer.full(index);
   }
+  
+  function getTableNames(dbName){
+	  if($('#'+dbName+'_id').text()==''){
+		  $.ajax({
+				async:false,
+				type:"get",
+				url: '/generator/normal/getTableNames.json',
+				data:{
+					"dbName": dbName,
+				},
+				dataType: 'json',
+				success:function(result){
+					console.log(result);
+					var html_ = '';
+					$.each(result.list,function(index,value){
+						html_+='<li onclick="setTableNameText(\''+value+'\',this)" >'+value+'</li>';
+					});
+					 $('#'+dbName+'_id').html(html_);
+				}
+				});
+	  }
+	  
+  }
+  
+  function setTableNameText(tabeName,obj){
+	  
+	  
+	  console.log(tabeName);
+	  console.log($(obj).parent().attr('name'));
+	  
+	 /*  if($('#'+dbName+'_id').text()==''){
+		  $.ajax({
+				async:false,
+				type:"get",
+				url: '/generator/normal/getTableNames.json',
+				data:{
+					"dbName": dbName,
+				},
+				dataType: 'json',
+				success:function(result){
+					console.log(result);
+					var html_ = '';
+					$.each(result.list,function(index,value){
+						html_+='<li onclick="">'+value+'</li>';
+					});
+					 $('#'+dbName+'_id').html(html_);
+				}
+				});
+	  } */
+	  
+  }
+  
   </script>
 </body>
 </html>
