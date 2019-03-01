@@ -6,6 +6,15 @@ import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
+/** 
+ * 数据返回公共类
+* @ClassName: Pagination 
+* @Description: TODO 
+* @author ranxing 
+* @date 2019年3月1日 下午3:08:53 
+* 
+* @param <T> 
+*/
 public class Pagination<T> {
 
 	public Pagination(int currentpage, int pagesize) {
@@ -16,16 +25,24 @@ public class Pagination<T> {
 
 	public Pagination() {
 	}
-
 	/*
 	 * 每页显示数据的条数
 	 */
 	private int pagesize;
-
 	/*
 	 * 当前页 页码
 	 */
 	private int currentpage;
+	/**
+	 * 排序字段
+	 */
+	private String field;
+	/**
+	 * 排序方式  
+	 */
+	private String order;
+	
+	
 	/*
 	 * 总条数
 	 */
@@ -34,7 +51,6 @@ public class Pagination<T> {
 	 * 总页数
 	 */
 	private int pagecount;
-
 	/*
 	 * 开始
 	 */
@@ -160,7 +176,21 @@ public class Pagination<T> {
 	public void setStartno(int startno) {
 		this.startno = startno;
 	}
+	public String getField() {
+		return field;
+	}
 
+	public void setField(String field) {
+		this.field = field;
+	}
+
+	public String getOrder() {
+		return order;
+	}
+
+	public void setOrder(String order) {
+		this.order = order;
+	}
 	public List<T> getBlanklist() {
 		List<T> list = new ArrayList<T>();
 		for (int i = 0; i < pagesize - datalist.size(); i++) {

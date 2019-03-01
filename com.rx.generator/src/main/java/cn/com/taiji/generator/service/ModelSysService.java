@@ -1,4 +1,4 @@
-package cn.com.taiji.platform.service;
+package cn.com.taiji.generator.service;
 
 import java.util.List;
 import java.util.Map;
@@ -6,7 +6,6 @@ import java.util.Map;
 import cn.com.taiji.platform.entity.ModelSysExport;
 import cn.com.taiji.platform.entity.SysUser;
 import cn.com.taiji.util.page.Pagination;
-import cn.com.taiji.util.page.PaginationUtil;
 
 /** 
 * 
@@ -15,7 +14,7 @@ import cn.com.taiji.util.page.PaginationUtil;
 * @date 2019年1月16日 上午11:15:26
 */
 public interface ModelSysService {
-	public PaginationUtil<ModelSysExport> getListJson  (  Map<String, Object> searchParameters , ModelSysExport dto , PaginationUtil<ModelSysExport> pag )throws Exception    ;
+	public Pagination<ModelSysExport> getListJson  (  Map<String, Object> searchParameters , ModelSysExport dto , Pagination<ModelSysExport> pag )throws Exception    ;
 
 
 	/**
