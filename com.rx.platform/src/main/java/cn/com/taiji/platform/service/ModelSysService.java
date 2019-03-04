@@ -15,7 +15,7 @@ import cn.com.taiji.util.page.PaginationUtil;
 * @date 2019年1月16日 上午11:15:26
 */
 public interface ModelSysService {
-	public PaginationUtil<ModelSysExport> getListJson  (  Map<String, Object> searchParameters , ModelSysExport dto , PaginationUtil<ModelSysExport> pag )throws Exception    ;
+	public Pagination <ModelSysExport> getListJson  (  Map<String, Object> searchParameters , ModelSysExport dto , Pagination<ModelSysExport> pag )throws Exception    ;
 
 
 	/**

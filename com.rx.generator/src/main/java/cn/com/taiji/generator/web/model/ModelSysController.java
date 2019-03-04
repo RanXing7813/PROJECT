@@ -17,12 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.com.taiji.generator.entity.ModelSysExport;
+import cn.com.taiji.generator.service.ModelSysService;
 import cn.com.taiji.gxwz.web.BaseAction;
 import cn.com.taiji.platform.entity.ModelData;
-import cn.com.taiji.platform.entity.ModelSysExport;
 import cn.com.taiji.platform.entity.SysUser;
-import cn.com.taiji.platform.service.ModelSysService;
-import cn.com.taiji.util.page.Pagination;
 import cn.com.taiji.util.page.PaginationUtil;
 
 /** 
@@ -41,7 +40,7 @@ public class ModelSysController  extends BaseAction {
 	ModelSysService modelSysService;
 	
 	/**
-	 * 弹出页面   模板信息类列表页面
+	 * 加载页面  列表
 	 * @param model
 	 * @return
 	 */
@@ -51,10 +50,11 @@ public class ModelSysController  extends BaseAction {
 	}
 	
 	/**
-	 * 模板信息类列表数据
+	 * 加载数据  列表
 	 * @param model
 	 * @param models
 	 */
+	@SuppressWarnings("static-access")
 	@RequestMapping(value = "getListJson", method = { RequestMethod.POST, RequestMethod.GET })
 	@ResponseBody  
 	public Object getListJson(HttpServletRequest request, ModelSysExport dto,
@@ -63,104 +63,39 @@ public class ModelSysController  extends BaseAction {
 		    //* 信息类编目表名
 		    Map<String, Object> searchParameters = new HashMap<String, Object>();
 		    searchParameters = init(models);
-//			searchParameters.put("field", request.getParameter("field"));
-//			searchParameters.put("order", request.getParameter("order"));
-//			int currentPageStr = Integer.parseInt(request.getParameter("pagecurrentnum"));//currentpage
-//			int pagesize = Integer.parseInt(request.getParameter("selectlimitnum"));//pagesize
-//			Pagination<ModelSysExport> page = new Pagination<ModelSysExport>(currentPageStr, pagesize);
 			try {
-				page = modelSysService.getListJson(searchParameters, dto, page);
-				searchParameters.put("code", 0);
-				searchParameters.put("msg", "操作正常!");
-				searchParameters.put("list", page.getDatalist());
-				searchParameters.put("totle", page.getDatacount());
+				searchParameters = modelSysService.getListJson(searchParameters, dto, page);
+//				searchParameters.put("code", 0);
+//				searchParameters.put("msg", "操作正常!");
+//				searchParameters.put("list", page.getDataList());
+//				searchParameters.put("totle", page.getDataCount());
 			} catch (Exception e) {
-				searchParameters.put("code", -1);
-				searchParameters.put("msg", "操作异常!");
-				searchParameters.put("list",  page.getDatalist());
-				searchParameters.put("totle", page.getDatacount());
+				searchParameters.put("code", page.RETURN_ERROR_CODE);
+				searchParameters.put("msg",	 page.RETURN_ERROR_MSG);
 				e.printStackTrace();
 			}
 	  		return searchParameters;  
 	}
 	
-	
 	/**
-	 * 弹出页面   模板原始字段列表
+	 * 弹出页面   模板信息类  新增
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "column_old_list", method = {RequestMethod.GET })
-	public String toColumnListPage(Model model, String model_id){
-		model.addAttribute("model_id", model_id);
-		
-		List<Map<String,Object>> list = modelSysService.getOldColumnList(model_id);
-		model.addAttribute("list", list);
-		return "/platform/model/model_old_column_list3";
-	}
-	
-	
-	/**
-	 * 弹出页面   模板字段 保存
-	 * @param model
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping(value ="column_save", method = { RequestMethod.POST })
-	public Object  pushSave(Model model, String  model_id , String [] ids, String [] names, String [] types, HttpServletRequest request){
-	    	try {
-				  SysUser user = (SysUser) request.getSession().getAttribute("user");
-
-				  modelSysService.saveOne(model_id,ids,names,types,user);
-				  Map<String, Object> searchParameters = new HashMap<String, Object>();
-				  searchParameters.put("code", "Y");
-				  return searchParameters;
-			} catch (Exception e) {
-				e.printStackTrace();
-				return "N";
-			}
-	}
-	
-	
-	/**
-	 * 弹出页面   模板原始字段列表
-	 * @param model
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping(value = "column_old_list_json", method = {RequestMethod.GET })
-	public Object toColumnListJson(Model model, String model_id){
-		List<Map<String,Object>> list = modelSysService.getOldColumnList(model_id);
-		
-	    Map<String, Object> searchParameters = new HashMap<String, Object>();
-		searchParameters.put("code", 0);
-		searchParameters.put("msg", 0);
-		searchParameters.put("data", list);
-		searchParameters.put("count", list.size());
-		return searchParameters;  
-	}
-	
-	/**
-	 * 弹出页面   模板信息类  新增/编辑
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "data_edit", method = {RequestMethod.GET })
-	public String toEditPage(Model model, ModelSysExport dto){
-		try {
-			if(dto.getCol_id()!=null && !dto.getCol_id().isEmpty()){
-				model.addAttribute("dto", modelSysService.findSomeOne(dto));
-			}else{
-				dto.setIndex_(1);
+	@RequestMapping(value = "toAddPage", method = {RequestMethod.GET })
+	public String toAddPage(Model model, ModelSysExport dto){
 				model.addAttribute("dto", dto);
-			}
-			//非自增的主键列表
-			model.addAttribute("pri", modelSysService.priList(dto));
-			
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		return "/platform/model/model_sys_edit";
+	}
+	
+	/**
+	 * 弹出页面   模板信息类  编辑
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "toEditPage{id}", method = {RequestMethod.GET })
+	public String toEditPage(Model model, @PathVariable("id")String id, ModelSysExport dto){
+				model.addAttribute("dto", modelSysService.findSomeOne(dto));
 		return "/platform/model/model_sys_edit";
 	}
 	
@@ -169,7 +104,7 @@ public class ModelSysController  extends BaseAction {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value ="data_edit_save", method = { RequestMethod.POST })
+	@RequestMapping(value ="saveData", method = { RequestMethod.POST })
 	public String  saveData (Model model,  ModelSysExport dto, HttpServletRequest request){
 			SysUser user = (SysUser) request.getSession().getAttribute("user");
 	    	try {
@@ -186,7 +121,7 @@ public class ModelSysController  extends BaseAction {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value ="data_del", method = { RequestMethod.POST })
+	@RequestMapping(value ="delData", method = { RequestMethod.POST })
 	public Object  delDatas(Model model,  ModelData dto, String [] ids, HttpServletRequest request){
 	    	try {
 	    		modelSysService.delSomeData(ids);
@@ -199,14 +134,6 @@ public class ModelSysController  extends BaseAction {
 			}
 	}
 	
-	/**
-	 * 信息类  检查表名唯一
-	 * @param model
-	 * @param table_name
-	 * @param id
-	 * @param request
-	 * @return methods
-	 */
 	@ResponseBody
 	@RequestMapping(value = "data_check{type}", method = { RequestMethod.POST })
 	public Object  checkTableName (Model model, @PathVariable("type")String type, HttpServletRequest request,

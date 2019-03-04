@@ -13,11 +13,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
-import cn.com.taiji.platform.entity.ModelSysExport;
+import cn.com.taiji.generator.entity.ModelSysExport;
+import cn.com.taiji.generator.repository.ModelSysExportRepository;
+import cn.com.taiji.generator.service.ModelSysService;
+
 import cn.com.taiji.platform.entity.SysUser;
-import cn.com.taiji.platform.repository.ModelSysExportRepository;
-import cn.com.taiji.platform.service.ModelSysService;
-import cn.com.taiji.util.page.Pagination;
 import cn.com.taiji.util.page.PaginationUtil;
 import cn.com.taiji.util.tools.lang.StringTool;
 
@@ -44,10 +44,11 @@ public class ModelSysImpl  implements ModelSysService{
 	/* (non-Javadoc)
 	 * @see cn.com.taiji.platform.service.ModelSysService#getModelTableList(java.util.Map, cn.com.taiji.gxwz.dto.ModelSysTableDto, cn.com.taiji.util.page.Pagination) overriding methods
 	 */
+	@SuppressWarnings("static-access")
 	@Override   
-	public PaginationUtil<ModelSysExport> getListJson  (  Map<String, Object> searchParameters , ModelSysExport dto , PaginationUtil<ModelSysExport> pag )throws Exception    {
+	public  Map<String,Object> getListJson  (  Map<String, Object> searchParameters , ModelSysExport dto , PaginationUtil<ModelSysExport> pag )throws Exception    {
 
-			StringBuffer sql=new StringBuffer("  select col_id,col_name,col_comment,column_type,is_uuid,model_id from model_sys_export   where model_id = ? "); 
+			StringBuffer sql=new StringBuffer("  select col_id,col_name,col_comment,column_type,is_uuid,model_id from model_sys_export t1   where model_id = ? "); 
 			  
 			
 			  //where
@@ -98,8 +99,13 @@ public class ModelSysImpl  implements ModelSysService{
 				     return info;   
 		            }   
 			  },jdbcTemplate,"mysql");
+			      
+			        searchParameters.put("code", pag.RETURN_SUCCESS_CODE );
+					searchParameters.put("msg",  pag.RETURN_SUCCESS_MSG);
+					searchParameters.put("list", pag.getDataList());
+					searchParameters.put("totle", pag.getDataCount());
 			  
-		 return pag;
+		 return searchParameters;
 	}
 
 
@@ -291,5 +297,6 @@ public class ModelSysImpl  implements ModelSysService{
 		
 		return listColumOriginal;
 	}
+
 
 }

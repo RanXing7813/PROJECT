@@ -17,6 +17,17 @@ import org.springframework.jdbc.core.RowMapper;
 */
 public class PaginationUtil<T> {
 
+	
+	/**  数据返回正常状态常量   */
+	public static final  int RETURN_SUCCESS_CODE = 0;
+	/**  数据返回异常状态常量   */
+	public static final  int RETURN_ERROR_CODE = -1 ;
+	/**  数据返回正常消息   */
+	public static final  String RETURN_SUCCESS_MSG = "操作正常!";
+	/**  数据返回异常消息   */
+	public static final  String RETURN_ERROR_MSG = "数据操作异常!";
+	
+	
 	public PaginationUtil(int currentPage, int pageSize) {
 		this.setPageSize(pageSize);
 		this.setCurrentPage(currentPage);
