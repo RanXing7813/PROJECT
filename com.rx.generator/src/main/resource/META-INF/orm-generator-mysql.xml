@@ -3,4 +3,5 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm/orm_2_1.xsd">
 
 	<entity class="cn.com.taiji.generator.entity.DatabaseContent" />
+	<entity class="cn.com.taiji.generator.entity.ModelSysExport2" />
 </entity-mappings>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+		<!-- ***********启用spring mvc************************************** -->
+			<context:annotation-config />
+	<!-- **************************************************************** -->
+	<!-- RESOURCE FOLDERS CONFIGURATION -->
+	<!-- Dispatcher configuration for serving static resources -->
+	<!-- **************************************************************** -->
+	<mvc:resources location="/images/" mapping="/images/**" />
+	<mvc:resources location="/css/" mapping="/css/**" />
+	<!-- **************************************************************** -->
+	<!-- SPRING ANNOTATION PROCESSING -->
+	<!-- **************************************************************** -->
+	<!--<mvc:annotation-driven conversion-service="conversionService" />-->
+	<!-- <context:component-scan base-package="cn.com.taiji.*.*.web" /> -->
+	<!-- **************************************************************** -->
+	<!-- MESSAGE EXTERNALIZATION/INTERNATIONALIZATION -->
+	<!-- Standard Spring MessageSource implementation -->
+	<!-- **************************************************************** -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="Messages" />
+	</bean>
+	
+	<!-- **************************************************************** -->
+	<!-- json service -->
+	<!-- json 转换 -->
+	<!-- **************************************************************** -->
+	<bean id="demoObjectMapper" class="cn.com.taiji.util.json.DemoObjectMapper" ></bean>
+		<bean id="contentNegotiationManager"
+		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+		<property name="favorPathExtension" value="true" />
+		<property name="ignoreAcceptHeader" value="true" />
+		<property name="defaultContentType" value="text/html" />
+		<property name="mediaTypes">
+			<map>
+				<entry key="json" value="application/json" />
+				<entry key="jsonp" value="application/javascript" />
+				<entry key="xml" value="application/xml" />
+			</map>
+		</property>
+	</bean>
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="contentNegotiationManager" ref="contentNegotiationManager" />
+			<property name="viewResolvers">
+			<list>
+				<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+					<property name="characterEncoding" value="UTF-8" />
+					<property name="templateEngine" ref="templateEngine" />
+					<property name="order" value="1" />
+					<property name="excludedViewNames" value="*.html" />
+				</bean>
+
+			</list>
+		</property>
+		<property name="defaultViews">
+			<list>
+				<!-- use jackson 2 or 1, both OK, -->
+				<!-- <bean
+					class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+					<property name="objectMapper" ref="demoObjectMapper" />
+					<property name="prettyPrint" value="true" />
+				</bean> -->
+				<bean class="cn.com.taiji.util.json.MappingJackson2JsonpView">
+					<property name="objectMapper" ref="demoObjectMapper" />
+					<property name="prettyPrint" value="false" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<!-- **************************************************************** -->
+	<!-- CONVERSION SERVICE -->
+	<!-- Standard Spring formatting-enabled implementation -->
+	<!-- **************************************************************** -->
+	<!--<bean id="conversionService"
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="formatters">
+			<set>
+				<bean class="cn.com.platform.conversion.DateFormatter" />
+			</set>
+		</property>
+	</bean>-->
+	<!-- **************************************************************** -->
+	<!-- THYMELEAF-SPECIFIC ARTIFACTS -->
+	<!-- TemplateResolver <- TemplateEngine <- ViewResolver -->
+	<!-- **************************************************************** -->
+	<bean id="templateResolver"
+		class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+		<property name="prefix" value="/WEB-INF/templates/" />
+		<property name="suffix" value=".html" />
+		<property name="templateMode" value="HTML5" />
+		 <property name="cacheable"  value="false" />    
+        <property name="characterEncoding" value="UTF-8"/>
+	</bean>
+	<bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+		<property name="templateResolver" ref="templateResolver" />
+	</bean>
+	<bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+		<property name="templateEngine" ref="templateEngine" />
+	</bean>
+</beans>
